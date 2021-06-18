@@ -4,6 +4,11 @@ const path = require('path');
 const router = express.Router();
 
 router.get('/',function(req,res){
+    res.sendFile(path.join(__dirname+'/adjustment_display.html'));
+    //__dirname : It will resolve to your project folder.
+});
+
+router.get('/index.html',function(req,res){
     res.sendFile(path.join(__dirname+'/www/index.html'));
     //__dirname : It will resolve to your project folder.
 });
