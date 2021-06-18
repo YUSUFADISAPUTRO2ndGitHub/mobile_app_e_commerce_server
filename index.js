@@ -297,6 +297,11 @@ router.get('/www/css/home_css_desktop_screen.css',function(req,res){
     //__dirname : It will resolve to your project folder.
 });
 
+router.get('/www/css/style.css',function(req,res){
+    res.sendFile(path.join(__dirname+'/www/css/style.css'));
+    //__dirname : It will resolve to your project folder.
+});
+
 /* 
     img
 */
@@ -501,5 +506,29 @@ router.get('/www/img/CATEGORY_ICONS/customer-service.png',function(req,res){
     //__dirname : It will resolve to your project folder.
 });
 
+router.get('/www/img/SAMPLE/terms.jpg',function(req,res){
+    res.sendFile(path.join(__dirname+'/www/img/SAMPLE/terms.jpg'));
+    //__dirname : It will resolve to your project folder.
+});
+
+/*
+    rating stars
+*/
+
+router.get('/rating-stars/index.html',function(req,res){
+    res.sendFile(path.join(__dirname+'/www/rating-stars/index.html'));
+    //__dirname : It will resolve to your project folder.
+});
+
+router.get('/rating-stars/star.png',function(req,res){
+    res.sendFile(path.join(__dirname+'/www/rating-stars/star.png'));
+    //__dirname : It will resolve to your project folder.
+});
+
+router.get('/rating-stars/star_empty.png',function(req,res){
+    res.sendFile(path.join(__dirname+'/www/rating-stars/star_empty.png'));
+    //__dirname : It will resolve to your project folder.
+});
+
 app.use('/', router);
-app.listen(3344);
+app.listen(3044);
