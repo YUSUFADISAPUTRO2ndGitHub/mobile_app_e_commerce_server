@@ -502,4 +502,4 @@ router.get('/www/img/CATEGORY_ICONS/customer-service.png',function(req,res){
 });
 
 app.use('/', router);
-app.listen(process.env.port || 3000);
+app.listen(3344);
