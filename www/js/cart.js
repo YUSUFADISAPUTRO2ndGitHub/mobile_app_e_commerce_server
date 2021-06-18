@@ -2,15 +2,20 @@ $(document).ready(async function(){
     console.log("localStorage.getItem(\"itemsInCart\") " + localStorage.getItem("itemsInCart"));
     var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
     var i = 0;
-    if(cartToJson.length != 0){
-        loadingMessage(cartToJson.length);
+    if(cartToJson != undefined){
+        if(cartToJson.length != 0){
+            loadingMessage(cartToJson.length);
+        }else{
+            loadingMessage(1);
+        }
+        for(i; i < cartToJson.length; i ++){
+            await loadcart(cartToJson[i].productNo, cartToJson[i].quantity);
+        }
     }else{
-        loadingMessage(1);
+        var emptyArray = [];
+        var emptyArrayString = JSON.stringify(emptyArray);
+        localStorage.setItem("itemsInCart", emptyArrayString);
     }
-    for(i; i < cartToJson.length; i ++){
-        await loadcart(cartToJson[i].productNo, cartToJson[i].quantity);
-    }
-
     checkboxCounter = 0;
     var requestArrayForItemsToCheckout = [];
     var productToBeAddedStringify = JSON.stringify(requestArrayForItemsToCheckout);

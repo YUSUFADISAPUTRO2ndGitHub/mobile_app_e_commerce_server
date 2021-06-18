@@ -331,7 +331,7 @@ function submitRatingReview(x){
     // $(x).css("display", "none");
     // $(".rating-bar").css("display", "none");
     // alert("here");
-    $("#love").attr("src", "./img/Additional_icons/liked.png");
+    $("#love").attr("src", "./www/img/Additional_icons/liked.png");
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const productid = urlParams.get('productid');
