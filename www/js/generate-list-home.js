@@ -8,10 +8,10 @@ function generatehomeOneByOne(product_row, data, dataLength){
         var product_row = product_row - 1;
         console.log("product_row inside -1 " + product_row);
         // right
-        $("#product-highlights" + product_row).append("<th id=\"right"+ product_row +"\">");
-        $("#right" + product_row).append("<div class=\"notification product-card\" id=\"product-card-right"+ product_row +"\">");
-        $("#product-card-right" + product_row).append("<div class=\"card\" id=\"card-right"+ product_row +"\" style=\"width: 100%;\">");
-        $("#card-right" + product_row).append("<img onclick=\"redirectProductDetails(this, \'" + data.Product_Code + "\', \'" + data.Name + "\')\" class=\"card-img-top\" src=\"" + data.Picture_1 + "\">");
+        $("#product-highlights" + product_row).append("<th class=\"th-home-search\" id=\"right"+ product_row +"\">");
+        $("#right" + product_row).append("<div class=\"notification product-card product-card-home-and-search\" id=\"product-card-right"+ product_row +"\">");
+        $("#product-card-right" + product_row).append("<div class=\"card product-card-home-and-search\" id=\"card-right"+ product_row +"\" style=\"width: 100%;\">");
+        $("#card-right" + product_row).append("<img onclick=\"redirectProductDetails(this, \'" + data.Product_Code + "\', \'" + data.Name + "\')\" class=\"card-img-top product-card-images-home-and-search\" src=\"" + data.Picture_1 + "\">");
         $("#card-right" + product_row).append("<div class=\"card-body small-padding\" id=\"card-body-right"+ product_row +"\">");
         $("#card-body-right" + product_row).append("<div class=\"card-title\">" + data.Name ); // + "</div><span class=\"dots\">..</span><br><br>");
         $("#card-body-right" + product_row).append("<div class=\"card-text\" id=\"card-text-right"+ product_row +"\">");
@@ -31,10 +31,10 @@ function generatehomeOneByOne(product_row, data, dataLength){
         console.log("product_row inside 2 " + product_row);
         // left
         $("#product-highlights").append("<tr id=\"product-highlights"+ product_row +"\">");
-        $("#product-highlights" + product_row).append("<th id=\"left"+ product_row +"\">");
-        $("#left" + product_row).append("<div class=\"notification product-card\" id=\"product-card-left"+ product_row +"\">");
-        $("#product-card-left" + product_row).append("<div class=\"card\" id=\"card-left"+ product_row +"\" style=\"width: 100%;\">");
-        $("#card-left" + product_row).append("<img onclick=\"redirectProductDetails(this, \'" + data.Product_Code + "\', \'" + data.Name + "\')\" class=\"card-img-top\" src=\"" + data.Picture_1 + "\">");
+        $("#product-highlights" + product_row).append("<th class=\"th-home-search\" id=\"left"+ product_row +"\">");
+        $("#left" + product_row).append("<div class=\"notification product-card product-card-home-and-search\" id=\"product-card-left"+ product_row +"\">");
+        $("#product-card-left" + product_row).append("<div class=\"card product-card-home-and-search\" id=\"card-left"+ product_row +"\" style=\"width: 100%;\">");
+        $("#card-left" + product_row).append("<img onclick=\"redirectProductDetails(this, \'" + data.Product_Code + "\', \'" + data.Name + "\')\" class=\"card-img-top product-card-images-home-and-search\" src=\"" + data.Picture_1 + "\">");
         $("#card-left" + product_row).append("<div class=\"card-body small-padding\" id=\"card-body-left"+ product_row +"\">");
         $("#card-body-left" + product_row).append("<div class=\"card-title\">" + data.Name ); // + "</div><span class=\"dots\">..</span><br><br>");
         $("#card-body-left" + product_row).append("<div class=\"card-text\" id=\"card-text-left"+ product_row +"\">");
@@ -194,10 +194,10 @@ function generatehomeleftOnly(product_row, leftdata, dataLength){
     console.log(leftdata);
     // left
     $("#product-highlights").append("<tr id=\"product-highlights"+ product_row +"\">");
-    $("#product-highlights" + product_row).append("<th id=\"left"+ product_row +"\">");
-    $("#left" + product_row).append("<div class=\"notification product-card\" id=\"product-card-left"+ product_row +"\">");
-    $("#product-card-left" + product_row).append("<div class=\"card\" id=\"card-left"+ product_row +"\" style=\"width: 100%;\">");
-    $("#card-left" + product_row).append("<img onclick=\"redirectProductDetails(this, \'" + leftdata.Product_Code + "\', \'" + leftdata.Name + "\')\" class=\"card-img-top\" src=\"" + leftdata.Picture_1 + "\">");
+    $("#product-highlights" + product_row).append("<th class=\"th-home-search\" id=\"left"+ product_row +"\">");
+    $("#left" + product_row).append("<div class=\"notification product-card product-card-home-and-search\" id=\"product-card-left"+ product_row +"\">");
+    $("#product-card-left" + product_row).append("<div class=\"card product-card-home-and-search\" id=\"card-left"+ product_row +"\" style=\"width: 100%;\">");
+    $("#card-left" + product_row).append("<img onclick=\"redirectProductDetails(this, \'" + leftdata.Product_Code + "\', \'" + leftdata.Name + "\')\" class=\"card-img-top product-card-images-home-and-search\" src=\"" + leftdata.Picture_1 + "\">");
         $("#card-left" + product_row).append("<div class=\"card-body small-padding\" id=\"card-body-left"+ product_row +"\">");
         $("#card-body-left" + product_row).append("<div class=\"card-title\">" + leftdata.Name );
         $("#card-body-left" + product_row).append("<div class=\"card-text\" id=\"card-text-left"+ product_row +"\">");
@@ -209,10 +209,10 @@ function generatehomeleftOnly(product_row, leftdata, dataLength){
             $("#badge-left" + product_row).append("<img src=\"../www/img/Additional_icons/new.png\" class=\"category-icon\" >");
         }
         // right
-        $("#product-highlights" + product_row).append("<th id=\"right"+ product_row +"\">");
-        $("#right" + product_row).append("<div class=\"notification product-card\" id=\"product-card-right"+ product_row +"\">");
+        $("#product-highlights" + product_row).append("<th class=\"th-home-search\" id=\"right"+ product_row +"\">");
+        $("#right" + product_row).append("<div class=\"notification product-card product-card-home-and-search\" id=\"product-card-right"+ product_row +"\">");
         $("#product-card-right" + product_row).append("<div class=\"card card-hidden\" id=\"card-right"+ product_row +"\" style=\"width: 100%;\">");
-        $("#card-right" + product_row).append("<img onclick=\"redirectProductDetails(this, \'" + leftdata.Product_Code + "\')\" class=\"card-img-top\" src=\"" + leftdata.itemMainImage + "\">");
+        $("#card-right" + product_row).append("<img onclick=\"redirectProductDetails(this, \'" + leftdata.Product_Code + "\')\" class=\"card-img-top product-card-images-home-and-search\" src=\"" + leftdata.itemMainImage + "\">");
         $("#card-right" + product_row).append("<div class=\"card-body small-padding\" id=\"card-body-right"+ product_row +"\">");
         $("#card-body-right" + product_row).append("<div class=\"card-title\">" + leftdata.Name );
         $("#card-body-right" + product_row).append("<div class=\"card-text\" id=\"card-text-right"+ product_row +"\">");

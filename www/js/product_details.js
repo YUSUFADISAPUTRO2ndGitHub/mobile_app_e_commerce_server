@@ -154,13 +154,13 @@ function getProducts(){
 function generateListOneByOne(product_row, data1, data2){
     $(".other-product-area").append("<ul class=\"list-group list-group-horizontal\" id=\"list-group-" + product_row + "\"></ul>");
     $("#list-group-" + product_row).append("<li onclick=\"redirectProductDetails(this, '" + data1.Product_Code + "', '" + data1.Name + "')\" class=\"list-group-item\" id=\"list-group-item-" + product_row + "\">");
-    $("#list-group-item-" + product_row).append("<div class=\"product-card\" id=\"product-card-" + product_row + "\">");
+    $("#list-group-item-" + product_row).append("<div class=\"product-card product-card-suggestion\" id=\"product-card-" + product_row + "\">");
     $("#product-card-" + product_row).append("<img class=\"product-card-images\" src=\"" + data1.Picture_1 + "\">");
     $("#product-card-" + product_row).append("<div class=\"product-card-name\">" + data1.Name + "</div>");
     
     if(data2 != undefined){
         $("#list-group-" + product_row).append("<li onclick=\"redirectProductDetails(this, '" + data2.Product_Code + "', '" + data2.Name + "')\" class=\"list-group-item\" id=\"list-group-item-" + (product_row + 1) + "\">");
-        $("#list-group-item-" + (product_row + 1)).append("<div class=\"product-card\" id=\"product-card-" + (product_row + 1) + "\">");
+        $("#list-group-item-" + (product_row + 1)).append("<div class=\"product-card product-card-suggestion\" id=\"product-card-" + (product_row + 1) + "\">");
         $("#product-card-" + (product_row + 1)).append("<img class=\"product-card-images\" src=\"" + data2.Picture_1 + "\">");
         $("#product-card-" + (product_row + 1)).append("<div class=\"product-card-name\">" + data2.Name + "</div>");
     }

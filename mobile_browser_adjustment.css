@@ -1,13 +1,82 @@
 @media screen and (max-width: 1000px) {
-    div, span, table, li, td, label, button, input {
-        font-size: 28px !important;
+    div, span, table, li, td, label, button, input, h5 {
+        font-size: 34px !important;
     }
+    /* label {
+        font-size: 28px !important;
+    } */
     #search-input{
-        height: 44px !important;
+        height: 68px !important;
         width: 90% !important;
+        /* #search-input{
+            display: table;
+            margin: auto;
+            height: 26px;
+            width: 90%;
+            border: solid 1px #217384;
+            border-radius: 0;
+            background-color: #d4dee8;
+            color: #217384 !important;
+        } */
     }
     small {
-        font-size: 22px !important;
+        font-size: 24px !important;
+    }
+
+    .big-category-list{
+        height: 150px !important;
+    }
+    .product-card-small-cat{
+        height: 360px !important;
+    }
+    .product-card-small-cat-text{
+        height: auto !important;
+    }
+    .product-card-small-cat-img{
+        height: 250px !important;
+        width: 250px !important;
+    }
+    .product-card-suggestion{
+        height: 100% !important;
+    }
+    .product-card-images{
+        width: 100% !important;
+    }
+    .product-card-images-home-and-search{
+        height: 400px !important;
+        width: 400px !important;
+        display: table !important;
+        margin: auto !important;
+    }
+    .product-card-home-and-search{
+        width: 100% !important;
+        border: none !important;
+        display: table !important;
+        margin: auto !important;
+        justify-content: center !important;
+    }
+    .th-home-search{
+        border: solid 0.5px black !important;
+    }
+    .independent-cart-icon{
+        width: 60px !important;
+    }
+    .category-icon-index{
+        width: 60px !important;
     }
     
+    .content_iframe_floating{
+        left: 50% !important;
+        margin-left: -40% !important;
+        width: 80% !important;
+    }
+
+    .dropdown-item{
+        max-width: 60% !important;
+    }
+    /* .middle-structure-product-details{
+        position: absolute;
+        top: 500% !important;
+        height: 7% !important;
+    } */
 }

@@ -51,20 +51,20 @@ function generatehomeOneByOneSubCategorySelection(product_row, data, dataLength)
         // right
         $("#product-highlights" + product_row).append("<th id=\"right"+ product_row +"\">");
         $("#right" + product_row).append("<div class=\"notification product-card\" id=\"product-card-right"+ product_row +"\">");
-        $("#product-card-right" + product_row).append("<div class=\"card\" id=\"card-right"+ product_row +"\" style=\"width: 100%;\">");
-        $("#card-right" + product_row).append("<img onclick=\"redirectProductDetails(this, \'" + data.Product_Code + "\', \'" + data.Name + "\')\" class=\"card-img-top\" src=\"" + data.Picture_1 + "\">");
+        $("#product-card-right" + product_row).append("<div class=\"card product-card-small-cat\" id=\"card-right"+ product_row +"\" style=\"width: 100%;\">");
+        $("#card-right" + product_row).append("<img onclick=\"redirectProductDetails(this, \'" + data.Product_Code + "\', \'" + data.Name + "\')\" class=\"card-img-top product-card-small-cat-img\" src=\"" + data.Picture_1 + "\">");
         $("#card-right" + product_row).append("<div class=\"card-body small-padding\" id=\"card-body-right"+ product_row +"\">");
-        $("#card-body-right" + product_row).append("<div class=\"card-title\">" + data.Name );
+        $("#card-body-right" + product_row).append("<div class=\"card-title product-card-small-cat-text\">" + data.Name );
     }else{
         console.log("product_row inside 2 " + product_row);
         // left
         $("#small-category-list").append("<tr id=\"product-highlights"+ product_row +"\">");
         $("#product-highlights" + product_row).append("<th id=\"left"+ product_row +"\">");
         $("#left" + product_row).append("<div class=\"notification product-card\" id=\"product-card-left"+ product_row +"\">");
-        $("#product-card-left" + product_row).append("<div class=\"card\" id=\"card-left"+ product_row +"\" style=\"width: 100%;\">");
-        $("#card-left" + product_row).append("<img onclick=\"redirectProductDetails(this, \'" + data.Product_Code + "\', \'" + data.Name + "\')\" class=\"card-img-top\" src=\"" + data.Picture_1 + "\">");
+        $("#product-card-left" + product_row).append("<div class=\"card product-card-small-cat\" id=\"card-left"+ product_row +"\" style=\"width: 100%;\">");
+        $("#card-left" + product_row).append("<img onclick=\"redirectProductDetails(this, \'" + data.Product_Code + "\', \'" + data.Name + "\')\" class=\"card-img-top product-card-small-cat-img\" src=\"" + data.Picture_1 + "\">");
         $("#card-left" + product_row).append("<div class=\"card-body small-padding\" id=\"card-body-left"+ product_row +"\">");
-        $("#card-body-left" + product_row).append("<div class=\"card-title\">" + data.Name );
+        $("#card-body-left" + product_row).append("<div class=\"card-title product-card-small-cat-text\">" + data.Name );
     }
 }
 
