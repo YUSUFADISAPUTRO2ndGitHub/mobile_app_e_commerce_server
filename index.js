@@ -307,6 +307,11 @@ router.get('/www/css/style.css',function(req,res){
     //__dirname : It will resolve to your project folder.
 });
 
+router.get('/mobile_browser_adjustment.css',function(req,res){
+    res.sendFile(path.join(__dirname+'/mobile_browser_adjustment.css'));
+    //__dirname : It will resolve to your project folder.
+});
+
 /* 
     img
 */

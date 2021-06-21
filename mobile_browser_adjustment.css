@@ -1,0 +1,13 @@
+@media screen and (max-width: 1000px) {
+    div, span, table, li, td, label, button, input {
+        font-size: 28px !important;
+    }
+    #search-input{
+        height: 44px !important;
+        width: 90% !important;
+    }
+    small {
+        font-size: 22px !important;
+    }
+    
+}
