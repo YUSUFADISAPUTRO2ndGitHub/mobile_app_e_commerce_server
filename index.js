@@ -541,4 +541,10 @@ router.get('/rating-stars/star_empty.png',function(req,res){
 });
 
 app.use('/', router);
+
+
+
+app.use(function(req, res) {
+    res.sendFile(path.join(__dirname+'/www/img/notfound.png'));
+});
 app.listen(3044);
