@@ -339,9 +339,9 @@ function getAllSubCategories(Get_ALL_Sub_Category_Based_On_Category){
     return $.ajax(settings);
 }
 
-function getforgotpasswordrequest(Email, ktp, PrimaryContactNumber, requestedNewPassword){
+function getforgotpasswordrequest(Email, ktp, PrimaryContactNumber, requestedNewPassword, otp){
     var settings = {
-        "url": "http://customers.sold.co.id/customer-forgot-password-request?Email=" + Email + "&ktp=" + ktp + "&PrimaryContactNumber=" + PrimaryContactNumber + "&requestedNewPassword=" + requestedNewPassword,
+        "url": "http://customers.sold.co.id/customer-forgot-password-request?Email=" + Email + "&ktp=" + ktp + "&PrimaryContactNumber=" + PrimaryContactNumber + "&requestedNewPassword=" + requestedNewPassword + "&otp=" + otp,
         "method": "POST",
         "timeout": 10000,
     };

@@ -419,11 +419,12 @@ function forgotpasswordrequest(){
     if($("#forgot-email").val().length != 0 
     && $("#forgot-telp").val().length != 0 
     && $("#forgot-ktp").val().length != 0 
+    && $("#forgot-otp").val().length != 0 
     // && $("#forgot-db-month").val().length != 0
     // && $("#forgot-db-day").val().length != 0
     && $("#forgot-new-password").val().length != 0 ){
         // var Birthday = $("#forgot-db-year").val() + "/" + $("#forgot-db-month").val() + "/" + $("#forgot-db-day").val();
-        getforgotpasswordrequest($("#forgot-email").val(), $("#forgot-ktp").val(), $("#forgot-telp").val(), $("#forgot-new-password").val()).done(function (response) {
+        getforgotpasswordrequest($("#forgot-email").val(), $("#forgot-ktp").val(), $("#forgot-telp").val(), $("#forgot-new-password").val(), $("#forgot-otp").val()).done(function (response) {
             console.log(response);
             if(response != false){
                 console.log(response);
