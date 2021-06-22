@@ -348,6 +348,15 @@ function getforgotpasswordrequest(Email, ktp, PrimaryContactNumber, requestedNew
     
     return $.ajax(settings);
 }
+function getOTP(Email){
+    var settings = {
+        "url": "http://customers.sold.co.id/get-otp?Email=" + Email,
+        "method": "POST",
+        "timeout": 10000,
+    };
+    
+    return $.ajax(settings);
+}
 function encryptPassword(Password){
     var settings = {
         "url": "http://customers.sold.co.id/password-generator?Password=" + Password,

@@ -443,3 +443,13 @@ function forgotpasswordrequest(){
         swal.fire("Please fill all in", "", "warning");
     }
 }
+
+function get_otp(){
+    if($("#forgot-get-email-otp").val().length > 0){
+        getOTP($("#forgot-get-email-otp").val()).done(function (response) {
+            swal.fire("OTP terkirim", "Mohon periksa email Anda", "success");
+        });
+    }else{
+        swal.fire("Tolong berikan email Anda untuk OTP", "", "warning");
+    }
+}
