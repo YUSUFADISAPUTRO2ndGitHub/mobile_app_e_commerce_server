@@ -111,7 +111,16 @@ var googleClientSecret = 'iJGwsXBZUiqKMYECHqdu2AxA';
 
 
 function get_live_chat(){
-    $(".content_iframe").attr("src","http://147.139.168.202:3045/");
-    $(".content_iframe_floating").css("display", "none");
-    $("#customer-service-help-line-icon").css("display", "none");
+    if(localStorage.getItem("token") != ""){
+        getCustomersWithCustomerNo(localStorage.getItem("token")).done(function (response) {
+            console.log(response);
+            $(".content_iframe").attr("src","http://147.139.168.202:3045/?user_name=" + (response.First_Name + " " + response.Last_Name));
+            $(".content_iframe_floating").css("display", "none");
+            $("#customer-service-help-line-icon").css("display", "none");
+        });
+    }else{
+        $(".content_iframe").attr("src","http://147.139.168.202:3045/");
+        $(".content_iframe_floating").css("display", "none");
+        $("#customer-service-help-line-icon").css("display", "none");
+    }
 }
