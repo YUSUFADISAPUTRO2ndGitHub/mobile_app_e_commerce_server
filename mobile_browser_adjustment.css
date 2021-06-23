@@ -49,15 +49,16 @@
         margin: auto !important;
     }
     .product-card-home-and-search{
+        box-shadow: 5px 5px 20px #217283;
         width: 100% !important;
         border: none !important;
         display: table !important;
         margin: auto !important;
         justify-content: center !important;
     }
-    .th-home-search{
+    /* .th-home-search{
         border: solid 0.5px black !important;
-    }
+    } */
     .independent-cart-icon{
         width: 60px !important;
     }
