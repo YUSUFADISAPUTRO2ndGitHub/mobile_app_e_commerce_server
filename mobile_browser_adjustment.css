@@ -59,6 +59,13 @@
     /* .th-home-search{
         border: solid 0.5px black !important;
     } */
+    .floating-button-icon{
+        width: 90px !important;
+    }
+    .customer-service-information{
+        top: 100px !important;
+        width: 300px !important;
+    }
     .independent-cart-icon{
         width: 60px !important;
     }

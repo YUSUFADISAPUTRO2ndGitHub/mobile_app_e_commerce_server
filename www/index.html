@@ -191,13 +191,13 @@
         width: 30px;
     }
     .customer-service-information{
-        width: 190px !important;
+        width: 190px;
         border-radius: 10px;
         position: relative;
         display: none;
         top: 45px;
         right: 0;
-        background-image: linear-gradient(to bottom right, #217384, #37ced5);
+        background-color: #217384;
         border: solid 1px white;
         padding: 5px;
         color:white;
@@ -273,6 +273,10 @@
         background-color: #d4dee8;
         color: #217384 !important;
     }
+    .btn-live-customer-service{
+        width: 100%;
+        color: white;
+    }
     
 </style>
 <body onload="update()">
@@ -285,6 +289,7 @@
         <div class="customer-service-information">
             <div class="customer-service-information-number">Hubungi Kami di:</div>
             <div class="customer-service-information-number"><span class="customer-service-number">0853-1580-1777</span>, bisa whatsapp juga loh</div>
+            <button type="button" class="btn btn-info btn-live-customer-service" onclick="get_live_chat()">Live chat</button>
         </div>
     </div>
 

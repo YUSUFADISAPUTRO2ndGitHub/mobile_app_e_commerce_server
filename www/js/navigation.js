@@ -108,3 +108,10 @@ var googleAPIKey = 'AIzaSyAxtQWK_PHCs2LzHpChoEi-hd0LVmLsvi4';
 var googleClientID = '1062711655963-6vujo123a8obkbo25dfg6dviouc5gqap.apps.googleusercontent.com';
 
 var googleClientSecret = 'iJGwsXBZUiqKMYECHqdu2AxA';
+
+
+function get_live_chat(){
+    $(".content_iframe").attr("src","http://147.139.168.202:3045/");
+    $(".content_iframe_floating").css("display", "none");
+    $("#customer-service-help-line-icon").css("display", "none");
+}
