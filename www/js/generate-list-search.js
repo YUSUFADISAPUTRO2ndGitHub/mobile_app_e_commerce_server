@@ -16,7 +16,7 @@ function loadingMessage(interval){
     Swal.fire({
     title: 'Loading Your Request',
     html: '',
-    timer: interval*300,
+    timer: interval*100,
     timerProgressBar: true,
     allowOutsideClick: false,
     didOpen: () => {
@@ -39,19 +39,26 @@ function loadingMessage(interval){
 function searchUp(keywords, conditionPrice, conditionAlphabet){
     getAllProductsWithoutPaginationWithFilter("", "", "", "", keywords).done(function (response) {
         console.log(response);
-        if(response.length == 0){
-            loadingMessage(1);
-            searchUpBasedOnCategory(keywords);
-        }else if(response.length == 1){
-            loadingMessage(response.length);
-            generatehomeleftOnly(response.length, response[0], response.length);
-        }else{
-            // condition works for more than 1 product
-            loadingMessage(response.length);
-            var product_row = 0;
-            for(product_row; product_row < response.length; product_row++){
-                generatehomeOneByOne(product_row, response[product_row], response.length);
+        if(response[0] != false){
+            if(response.length == 0){
+                loadingMessage(1);
+                searchUpBasedOnCategory(keywords);
+            }else if(response.length == 1){
+                loadingMessage(response.length);
+                generatehomeleftOnly(response.length, response[0], response.length);
+            }else{
+                // condition works for more than 1 product
+                loadingMessage(response.length);
+                var product_row = 0;
+                for(product_row; product_row < response.length; product_row++){
+                    generatehomeOneByOne(product_row, response[product_row], response.length);
+                }
             }
+        }else{
+            Swal.fire("Item not found", "Mungkin saya bisa menunjukkan hasil pencarian yang berbeda", "warning");
+            setTimeout(() => {
+                searchUp(keywords.substring(1, 2), "", "");
+            }, 3000);
         }
     });
 }
