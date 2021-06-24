@@ -3,8 +3,8 @@ $(document).ready(function(){
         getCustomersWithCustomerNo(localStorage.getItem("token")).done(function (response) {
             console.log(response);
             if(response.Birthday != undefined){
-                if(response.Birthday.length > 0){
-                    if(response.Birthday.toUpperCase() != "UNDEFINED"){
+                if(response.Birthday.length > 0 && response.User_Type != undefined){
+                    if(response.User_Type == "Customer"){
                         var bday = response.Birthday.split("/");
                         $("#profile-owner-firstname").val(response.First_Name);
                         $("#profile-owner-lastname").val(response.Last_Name);
@@ -16,7 +16,6 @@ $(document).ready(function(){
                         $("#profile-db-month").val(bday[1]);
                         $("#profile-db-day").val(bday[2]);
                     }else{
-                        var bday = response.Birthday.split("/");
                         $("#profile-owner-firstname").val(response.First_Name);
                         $("#profile-owner-lastname").val(response.Last_Name);
                         $("#profile-email").val(response.Email);
@@ -121,7 +120,7 @@ function editProfile(){
                 Customer_Code: localStorage.getItem("token"),
                 First_Name: $("#profile-owner-firstname").val(),
                 Last_Name: $("#profile-owner-lastname").val(),
-                User_Password: $("#signup-password").val(),
+                // User_Password: $("#signup-password").val(),
                 Birthday:$("#profile-db-year").val() + "/" + $("#profile-db-month").val() + "/" + $("#profile-db-day").val(),
                 Created_Date: "CURRENT_TIMESTAMP()",
                 Last_Login: "CURRENT_TIMESTAMP()",
@@ -134,7 +133,7 @@ function editProfile(){
                 Address_4: $("#profile-address-local-4").val(),
                 Address_5: $("#profile-address-local-5").val(),
                 Status: "Approved",
-                User_Type: "Customer"
+                User_Type: response.User_Type
             }
         }
         console.log(data);
