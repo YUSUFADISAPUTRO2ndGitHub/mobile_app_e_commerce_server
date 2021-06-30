@@ -521,6 +521,11 @@ router.get('/www/img/SAMPLE/terms.jpg',function(req,res){
     //__dirname : It will resolve to your project folder.
 });
 
+router.get('/www/img/about_page.png',function(req,res){
+    res.sendFile(path.join(__dirname+'/www/img/about_page.png'));
+    //__dirname : It will resolve to your project folder.
+});
+
 /*
     rating stars
 */

@@ -47,6 +47,21 @@
             border-radius: 0;
             text-align: center;
         }
+        .about_page_png{
+            width: 100%;
+        }
+        .modal-dialog{
+            max-width: 90% !important;
+        }
+        .button-about-page{
+            width: 100%;
+            background-color: #217384;
+            color: #d4dee8;
+        }
+        .button-about-page:hover{
+            background-color: #d4dee8;
+            color: #217384;
+        }
     </style>
 </head>
 <body>
@@ -120,6 +135,19 @@
     <div class="alert alert-info alert-dismissible fade show" role="alert">
         <strong>Untuk mengubah password Anda</strong> bisa log out lalu click forgot password. Terima kasih
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary button-about-page" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        ABOUT SOLD.CO.ID
+    </button>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <img src="../www/img/about_page.png" class="about_page_png">
+        </div>
+        </div>
     </div>
 </body>
 </html>
