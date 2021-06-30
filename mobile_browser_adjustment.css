@@ -49,9 +49,10 @@
         margin: auto !important;
     }
     .product-card-home-and-search{
-        box-shadow: 5px 5px 20px #217283;
+        /* box-shadow: 5px 5px 20px #217283; */
         width: 100% !important;
-        border: none !important;
+        border: solid 0.5px gray !important;
+        border-radius: 10px !important;
         display: table !important;
         margin: auto !important;
         justify-content: center !important;
