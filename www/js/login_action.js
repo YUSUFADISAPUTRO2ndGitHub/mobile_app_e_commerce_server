@@ -157,9 +157,13 @@ function removeAddtionalAddresses(){
 }
 
 function get_otp_login(){
-    get_otp_api($("#login-email").val()).done(function (response) {
-        Swal.fire("OTP terkirim ke email", `${$("#login-email").val()}`, "success");
-    });
+    if($("#login-email").val().length > 0){
+        get_otp_api($("#login-email").val()).done(function (response) {
+            Swal.fire("OTP terkirim ke email", `${$("#login-email").val()}`, "success");
+        });
+    }else{
+        Swal.fire("Please give me your email", `${$("#login-email").val()}`, "warning");
+    }
 }
 
 var numberOfAddresses = -1;
