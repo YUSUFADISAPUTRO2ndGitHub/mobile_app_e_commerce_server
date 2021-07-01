@@ -67,6 +67,12 @@
                 <input type="password" id="login-password" class="form-control" placeholder="Password">
                 <small class="form-text text-muted">Tolong masukan password Anda dengan baik</small>
             </div>
+            <div class="form-group">
+                <label>OTP</label>
+                <input type="text" id="login-otp" class="form-control" placeholder="your otp, please click get otp or check your email">
+                <small class="form-text text-muted">Silahkan klik GET OTP atau cek email anda</small>
+                <button onclick="get_otp_login()" class="btn btn-primary">GET OTP</button>
+            </div>
         </div>
     </div>
     <div class="card sign-in-button-area" onclick="loginRequest()">

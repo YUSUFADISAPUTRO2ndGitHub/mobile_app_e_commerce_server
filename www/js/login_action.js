@@ -156,6 +156,12 @@ function removeAddtionalAddresses(){
     $(".clear-button-area").css("display", "none");
 }
 
+function get_otp_login(){
+    get_otp_api($("#login-email").val()).done(function (response) {
+        Swal.fire("OTP terkirim ke email", `${$("#login-email").val()}`, "success");
+    });
+}
+
 var numberOfAddresses = -1;
 function appendNewAddressField(){
     numberOfAddresses++;
@@ -365,7 +371,8 @@ function loginRequest(){
     if(checkIfInputNull()){
         console.log($("#login-email").val());
         console.log($("#login-password").val());
-        loginRequestAPI($("#login-email").val(), $("#login-password").val()).done(function (response) {
+        console.log($("#login-otp").val());
+        loginRequestAPI($("#login-email").val(), $("#login-password").val(), $("#login-otp").val()).done(function (response) {
             if(response != false){
                 console.log(response);
                 localStorage.setItem("token", response);
@@ -380,7 +387,7 @@ function loginRequest(){
 }
 
 function checkIfInputNull(){
-    if($("#login-email").val().length == 0 || $("#login-password").val().length == 0){
+    if($("#login-email").val().length == 0 || $("#login-password").val().length == 0 || $("#login-otp").val().length == 0){
         // email or password is empty
         return false;
     }else{

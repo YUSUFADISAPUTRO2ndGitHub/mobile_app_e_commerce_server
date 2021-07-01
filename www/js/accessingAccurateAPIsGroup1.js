@@ -54,9 +54,19 @@ function getAvailableReferralCodes(){
     return $.ajax(settings);
 }
 
-function loginRequestAPI(Email, Password){
+function loginRequestAPI(Email, Password, otp){
     var settings = {
-        "url": `http://customers.sold.co.id/customer-login-request?Email=${Email}&Password=${Password}`,
+        "url": `http://customers.sold.co.id/customer-login-request?Email=${Email}&Password=${Password}&otp=${otp}`,
+        "method": "POST",
+        "timeout": 0,
+    };
+    
+    return $.ajax(settings);
+}
+
+function get_otp_api(Email){
+    var settings = {
+        "url": `http://customers.sold.co.id/get-otp?Email=${Email}`,
         "method": "POST",
         "timeout": 0,
     };
