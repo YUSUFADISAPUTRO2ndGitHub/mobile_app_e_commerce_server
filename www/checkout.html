@@ -8,7 +8,7 @@
         <script src="../www/js/app_version_checks.js"></script>
         <script src="../www/js/time.js"></script>
         <script src="../www/js/checkout.js"></script>
-        <script src="../www/js/IndonesiaAddress.js"></script>
+        <!-- <script src="../www/js/IndonesiaAddress.js"></script> -->
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="../www/js/inputChecker.js"></script>
         <script src="../www/js/accessingAccurateAPIsGroup1.js"></script>
@@ -94,12 +94,6 @@
         width: 50px;
         border-radius: 0% !important;
     }
-    .background-white{
-        background-color: #004883;
-        color: white;
-        border-radius: 10px;
-        padding: 5px;
-    }
 </style>
 <body class=".body">
     <div class="card header">
@@ -115,23 +109,20 @@
                 METODE PEMBAYARAN
             </div>
             <select class="form-control" id="payment-selection" onchange="periodOptionSelected(this)">
-                <!-- <option>COD</option> -->
-                <!-- <option>PERIOD</option> -->
-                <!-- <option>BCA VA TRANSFER</option>
-                <option>BCA TRANSFER</option> -->
             </select>
             <br>
             <div class="form-control" id="normal-transfer-selected">
-                <div class="card-body">
-                    <img class="independent-cart-icon" src="../www/img/Additional_icons/transfer_payment.png" class="category-icon" >
-                    <h5 class="background-white card-title">PAYMENT WITH BCA TRANSFER</h5>
-                    <p class="background-white card-text">No. Rek: 8650555717</p>
-                    <p class="background-white card-text">Nama Rekening: PT. Vantsing International Group</p>
-                    <p class="background-white card-text">Bank: BCA KCU PIK</p>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">PAYMENT WITH BCA TRANSFER</h5>
+                        <p class="card-text">No. Rek: 8650555717</p>
+                        <p class="card-text">Nama Rekening: PT. Vantsing International Group</p>
+                        <p class="card-text">Bank: BCA KCU PIK</p>
+                    </div>
                 </div>
                 <div class="alert alert-danger" role="alert">
-                    <p class="card-text">Don't forget to take a screenshot of above information to make your payment</p>
                     <p class="card-text">Jangan lupa untuk simpan informasi diatas, untuk melakukan pembayaran</p>
+                    <p class="card-text">Harap simpan foto bukti transfer Anda dan kirimkan ke customer service kami melalui WhatsApp termasuk Nomor Pesanan Anda, untuk membantu verifikasi</p>
                 </div>
             </div>
             <select class="form-control" id="period-selection">
@@ -158,27 +149,12 @@
                 </select>
             </div>
             <div class="form-group" id="new-address-section">
-
-                <!-- <div>
-                    <label>Province</label>
-                    <select class="form-control option-province" onchange="provinceSelected(this)">
-                    </select>
-                    <div class="city-selection">
-                        <label>City</label>
-                        <select class="form-control" id="option-city" onchange="citySelected(this)">
-                        </select>
-                    </div>
-                    <div class="district-selection">
-                        <label>District</label>
-                        <select class="form-control" id="option-district">
-                        </select>
-                    </div>
-                </div> -->
-
-                <!-- <label>Zip Code (Kode Pos)</label>
-                <input id="zipcode" type="text" class="form-control" placeholder="Type your zip code / kode pos here..." onchange="checkingSpecialCharacter(this)" required> -->
                 <label>Street (Alamat lengkap pengiriman)</label>
                 <textarea id="street" class="form-control" placeholder="Alamat lengkap pengiriman Anda" rows="3" onchange="checkingSpecialCharacter(this)" required></textarea>
+            </div>
+            <br>
+            <div class="alert alert-primary delivery-cost" role="alert">
+                Biaya pengiriman saat ini gratis
             </div>
             <br>
             <div class="alert alert-primary" role="alert">

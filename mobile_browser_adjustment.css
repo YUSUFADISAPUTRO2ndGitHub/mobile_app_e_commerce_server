@@ -1,5 +1,5 @@
 @media screen and (max-width: 1000px) {
-    div, span, table, li, td, label, button, input, h5 {
+    div, span, table, li, td, label, button, input, h5, select {
         font-size: 34px !important;
     }
     /* label {

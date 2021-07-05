@@ -23,6 +23,59 @@ $(document).ready(async function(){
     listPaymentMethods();
 });
 
+setInterval(() => {
+    var addressSelection = $("#address-selection").children("option:selected").val();
+    var street = $("#street").val();
+    address = street;
+    if(addressSelection == "TO SAVED ADDRESS"){
+        if($("#sub-saved-address").children("option:selected").val() != undefined){
+            if($("#sub-saved-address").children("option:selected").val().length > 0){
+                if($("#sub-saved-address").children("option:selected").val().toUpperCase().includes("JAKARTA".toUpperCase())){
+                    $(".delivery-cost").html("Biaya pengiriman: 0");
+                }else if(
+                    $("#sub-saved-address").children("option:selected").val().toUpperCase().includes("TANGERANG".toUpperCase())
+                    || $("#sub-saved-address").children("option:selected").val().toUpperCase().includes("BANTEN".toUpperCase())
+                ){
+                    $(".delivery-cost").html("Biaya pengiriman: 15000");
+                }else if(
+                    $("#sub-saved-address").children("option:selected").val().toUpperCase().includes("DEPOK".toUpperCase())
+                ){
+                    $(".delivery-cost").html("Biaya pengiriman: 20000");
+                }else if(
+                    $("#sub-saved-address").children("option:selected").val().toUpperCase().includes("BOGOR".toUpperCase())
+                ){
+                    $(".delivery-cost").html("Biaya pengiriman: 25000");
+                }else{
+                    $(".delivery-cost").html("Biaya pengiriman: 50000");
+                }
+            }
+        }
+    }else{
+        if(street != undefined){
+            if(street.length > 0){
+                if(street.toUpperCase().includes("JAKARTA".toUpperCase())){
+                    $(".delivery-cost").html("Biaya pengiriman: 0");
+                }else if(
+                    street.toUpperCase().includes("TANGERANG".toUpperCase())
+                    || street.toUpperCase().includes("BANTEN".toUpperCase())
+                ){
+                    $(".delivery-cost").html("Biaya pengiriman: 15000");
+                }else if(
+                    street.toUpperCase().includes("DEPOK".toUpperCase())
+                ){
+                    $(".delivery-cost").html("Biaya pengiriman: 20000");
+                }else if(
+                    street.toUpperCase().includes("BOGOR".toUpperCase())
+                ){
+                    $(".delivery-cost").html("Biaya pengiriman: 25000");
+                }else{
+                    $(".delivery-cost").html("Biaya pengiriman: 50000");
+                }
+            }
+        }
+    }
+}, 1000);
+
 function loadingMessage(timer){
     let timerInterval
     Swal.fire({
@@ -123,7 +176,6 @@ function loadCheckoutFinalConfirmationTable(condition){
         }
     }
 }
-
 function periodOptionSelected(x){
     if($(x).children("option:selected").val().toUpperCase() == "TRANSFER"){
         swal.fire("Compare to Virtual Account Transfer, Normal Transfer may take longer time to process", "make sure you make the payment as soon as possible for your order to be processed","warning");
@@ -135,6 +187,16 @@ function periodOptionSelected(x){
         $("#normal-transfer-selected").css("display", "none");
     }
 }
+
+setInterval(() => {
+    if($("#payment-selection").children("option:selected").val().toUpperCase() == "TRANSFER"){
+        // swal.fire("Compare to Virtual Account Transfer, Normal Transfer may take longer time to process", "make sure you make the payment as soon as possible for your order to be processed","warning");
+        $("#normal-transfer-selected").css("display", "block");
+    }else{
+        loadCheckoutFinalConfirmationTable("COD");
+        $("#normal-transfer-selected").css("display", "none");
+    }
+}, 1000);
 
 function addressOptionSelected(x){
     if($(x).children("option:selected").val() == "DELIVER TO NEW ADDRESS"){

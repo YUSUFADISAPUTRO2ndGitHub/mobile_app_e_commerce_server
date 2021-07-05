@@ -32,6 +32,59 @@ $(document).ready(function(){
     check_if_user_has_unpaid_sales_order();
 });
 
+setInterval(() => {
+    var addressSelection = $("#address-selection").children("option:selected").val();
+    var street = $("#street").val();
+    address = street;
+    if(addressSelection == "TO SAVED ADDRESS"){
+        if($("#sub-saved-address").children("option:selected").val() != undefined){
+            if($("#sub-saved-address").children("option:selected").val().length > 0){
+                if($("#sub-saved-address").children("option:selected").val().toUpperCase().includes("JAKARTA".toUpperCase())){
+                    $(".delivery-cost").html("Biaya pengiriman: 0");
+                }else if(
+                    $("#sub-saved-address").children("option:selected").val().toUpperCase().includes("TANGERANG".toUpperCase())
+                    || $("#sub-saved-address").children("option:selected").val().toUpperCase().includes("BANTEN".toUpperCase())
+                ){
+                    $(".delivery-cost").html("Biaya pengiriman: 15000");
+                }else if(
+                    $("#sub-saved-address").children("option:selected").val().toUpperCase().includes("DEPOK".toUpperCase())
+                ){
+                    $(".delivery-cost").html("Biaya pengiriman: 20000");
+                }else if(
+                    $("#sub-saved-address").children("option:selected").val().toUpperCase().includes("BOGOR".toUpperCase())
+                ){
+                    $(".delivery-cost").html("Biaya pengiriman: 25000");
+                }else{
+                    $(".delivery-cost").html("Biaya pengiriman: 50000");
+                }
+            }
+        }
+    }else{
+        if(street != undefined){
+            if(street.length > 0){
+                if(street.toUpperCase().includes("JAKARTA".toUpperCase())){
+                    $(".delivery-cost").html("Biaya pengiriman: 0");
+                }else if(
+                    street.toUpperCase().includes("TANGERANG".toUpperCase())
+                    || street.toUpperCase().includes("BANTEN".toUpperCase())
+                ){
+                    $(".delivery-cost").html("Biaya pengiriman: 15000");
+                }else if(
+                    street.toUpperCase().includes("DEPOK".toUpperCase())
+                ){
+                    $(".delivery-cost").html("Biaya pengiriman: 20000");
+                }else if(
+                    street.toUpperCase().includes("BOGOR".toUpperCase())
+                ){
+                    $(".delivery-cost").html("Biaya pengiriman: 25000");
+                }else{
+                    $(".delivery-cost").html("Biaya pengiriman: 50000");
+                }
+            }
+        }
+    }
+}, 1000);
+
 function generate_options(product){
     // product-option-dropdown
     getProductsWithProductNo("", "", product).done(function (response) {
@@ -74,7 +127,7 @@ function listPaymentMethods(){
     getPaymentMethods().done(function (response) {
         var i = 0;
         for(i = 0; i < response.length; i++){
-            if(response[i].Payment_Method_Name.toUpperCase() == "BCA VA TRANSFER"){
+            if(response[i].Payment_Method_Name.toUpperCase() == "transfer".toUpperCase()){
                 $("#payment-selection").append("<option>" + response[i].Payment_Method_Name + "</option>");
             }
         }
@@ -101,20 +154,22 @@ function checkQuantityBuyLimit(x){
 function generateUserSavedAddress(){
     // sub-saved-address
     getCustomersWithCustomerNo(localStorage.getItem("token")).done(function (response) {
+        console.log(response);
         if(response != false){
-            if(response.Address_1 != "NULL" || response.Address_1 != null){
+            $("#sub-saved-address").empty();
+            if(response.Address_1 != "NULL"){
                 $("#sub-saved-address").append("<option value=\"" + response.Address_1 + "\">" + response.Address_1 + "</option>");
             }
-            if(response.Address_2 != "NULL" || response.Address_2 != null){
+            if(response.Address_2 != "NULL"){
                 $("#sub-saved-address").append("<option value=\"" + response.Address_2 + "\">" + response.Address_2 + "</option>");
             }
-            if(response.Address_3 != "NULL" || response.Address_3 != null){
+            if(response.Address_3 != "NULL"){
                 $("#sub-saved-address").append("<option value=\"" + response.Address_3 + "\">" + response.Address_3 + "</option>");
             }
-            if(response.Address_4 != "NULL" || response.Address_4 != null){
+            if(response.Address_4 != "NULL"){
                 $("#sub-saved-address").append("<option value=\"" + response.Address_4 + "\">" + response.Address_4 + "</option>");
             }
-            if(response.Address_5 != "NULL" || response.Address_5 != null){
+            if(response.Address_5 != "NULL"){
                 $("#sub-saved-address").append("<option value=\"" + response.Address_5 + "\">" + response.Address_5 + "</option>");
             }
         }
