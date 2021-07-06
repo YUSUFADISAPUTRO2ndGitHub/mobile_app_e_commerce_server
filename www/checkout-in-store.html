@@ -153,7 +153,7 @@
             </table>
         </div>
     </div>
-    <div class="card ">
+    <!-- <div class="card ">
         <div class="card-body centerized">
             <div class="alert alert-danger" role="alert">
                 Tunjukan Halaman ini Kepada Kasir Kami Sebelum Memencet Tombol dibawah
@@ -161,6 +161,41 @@
             <button type="submit" class="btn btn-primary" id="submitRequestFinalButton" onclick="requestToFinishInStore()">Submit</button>
             <br>
             <button type="submit" class="btn btn-danger" id="backtocartRequestFinalButton" onclick="redirectToCart()">Kembali Ke Keranjang</button>
+        </div>
+    </div> -->
+
+    <div class="card ">
+        <div class="card-body centerized">
+            <button type="submit" class="btn btn-primary" id="submitRequestFinalButton" data-toggle="modal" data-target="#exampleModalLong">Submit</button>
+            <br>
+            <button type="submit" class="btn btn-danger" id="backtocartRequestFinalButton" onclick="redirectToCart()">Kembali Ke Keranjang</button>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Diperlukan Verifikasi</h5>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="checkout-password">Password</label>
+                    <input type="password" class="form-control" id="checkout-password" placeholder="Enter password">
+                </div>
+                <div class="form-group">
+                    <label for="checkout-otp-number">OTP</label>
+                    <input type="text" class="form-control" id="checkout-otp-number" placeholder="Enter otp">
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary" onclick="get_otp_for_checkout()">GET OTP</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="requestToFinishInStore()">Submit</button>
+            </div>
+        </div>
         </div>
     </div>
 </body>
