@@ -14,17 +14,17 @@ $(document).ready(function(){
         vaNumber = vaNumber + "" + orderNumber;
     }
     if(status.Status == "pending"){
-        $("#indicator-received").attr("src","../www/img/CATEGORY_ICONS/checklist.png");
-        $("#indicator-approved").attr("src","../www/img/CATEGORY_ICONS/fast-delivery.png");
-        $("#indicator-delivered").attr("src","../www/img/CATEGORY_ICONS/fast-delivery.png");
+        $("#indicator-received").attr("src","./www/img/CATEGORY_ICONS/checklist.png");
+        $("#indicator-approved").attr("src","./www/img/CATEGORY_ICONS/fast-delivery.png");
+        $("#indicator-delivered").attr("src","./www/img/CATEGORY_ICONS/fast-delivery.png");
     }else if(status.status == "approving"){
-        $("#indicator-received").attr("src","../www/img/CATEGORY_ICONS/checklist.png");
-        $("#indicator-approved").attr("src","../www/img/CATEGORY_ICONS/checklist.png");
-        $("#indicator-delivered").attr("src","../www/img/CATEGORY_ICONS/checklist.png");
+        $("#indicator-received").attr("src","./www/img/CATEGORY_ICONS/checklist.png");
+        $("#indicator-approved").attr("src","./www/img/CATEGORY_ICONS/checklist.png");
+        $("#indicator-delivered").attr("src","./www/img/CATEGORY_ICONS/checklist.png");
     }else{
-        $("#indicator-received").attr("src","../www/img/CATEGORY_ICONS/rejected.png");
-        $("#indicator-approved").attr("src","../www/img/CATEGORY_ICONS/rejected.png");
-        $("#indicator-delivered").attr("src","../www/img/CATEGORY_ICONS/rejected.png");
+        $("#indicator-received").attr("src","./www/img/CATEGORY_ICONS/rejected.png");
+        $("#indicator-approved").attr("src","./www/img/CATEGORY_ICONS/rejected.png");
+        $("#indicator-delivered").attr("src","./www/img/CATEGORY_ICONS/rejected.png");
         Swal.fire("Order may have been cancelled or rejected", "Pesanan mungkin telah dibatalkan atau ditolak", "warning");
     }
     if(status.Payment_Method.toUpperCase() == "BCA VA TRANSFER".toUpperCase() && (status.Payment_Status == null || status.Payment_Status != "payment")){

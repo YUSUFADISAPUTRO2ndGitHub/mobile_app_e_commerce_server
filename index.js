@@ -533,6 +533,23 @@ router.get('/img/kementrian_perdagangan.png',function(req,res){
     res.sendFile(path.join(__dirname+'/www/img/kementrian_perdagangan.png'));
     //__dirname : It will resolve to your project folder.
 });
+router.get('/www/img/CATEGORY_ICONS/checklist.png',function(req,res){
+    res.sendFile(path.join(__dirname+'/www/img/CATEGORY_ICONS/checklist.png'));
+    //__dirname : It will resolve to your project folder.
+});
+router.get('/www/img/CATEGORY_ICONS/fast-delivery.png',function(req,res){
+    res.sendFile(path.join(__dirname+'/www/img/CATEGORY_ICONS/fast-delivery.png'));
+    //__dirname : It will resolve to your project folder.
+});
+router.get('/www/img/CATEGORY_ICONS/rejected.png',function(req,res){
+    res.sendFile(path.join(__dirname+'/www/img/CATEGORY_ICONS/rejected.png'));
+    //__dirname : It will resolve to your project folder.
+});
+router.get('/www/img/CATEGORY_ICONS/more.png',function(req,res){
+    res.sendFile(path.join(__dirname+'/www/img/CATEGORY_ICONS/more.png'));
+    //__dirname : It will resolve to your project folder.
+});
+
 
 /*
     rating stars
