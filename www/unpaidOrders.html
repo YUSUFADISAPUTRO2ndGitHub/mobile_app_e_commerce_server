@@ -21,10 +21,15 @@
         background-color: #edf1f4;
         text-transform: uppercase;
     }
-    td, tbody, table{
-        word-break: break-all;
+    /* tbody, table{
+        max-width: 100% !important;
+    } */
+    td{
+        /* word-break: break-all; */
+        max-width: 333.33px !important;
+        /* overflow: hidden;  */
         background-color: #217384 !important;
-        border-radius: 0 ;
+        /* border-radius: 0 ; */
         color: #d4dee8 !important;
     }
     button {
@@ -45,6 +50,14 @@
     }
     th{
         width: 10%;
+    }
+    .order_number{
+        max-width: 100% !important;
+        overflow: hidden; 
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100%;
+        height: 4rem;
     }
 </style>
 <body>

@@ -525,6 +525,14 @@ router.get('/www/img/about_page.png',function(req,res){
     res.sendFile(path.join(__dirname+'/www/img/about_page.png'));
     //__dirname : It will resolve to your project folder.
 });
+router.get('/img/bca_account_number.png',function(req,res){
+    res.sendFile(path.join(__dirname+'/www/img/bca_account_number.png'));
+    //__dirname : It will resolve to your project folder.
+});
+router.get('/img/kementrian_perdagangan.png',function(req,res){
+    res.sendFile(path.join(__dirname+'/www/img/kementrian_perdagangan.png'));
+    //__dirname : It will resolve to your project folder.
+});
 
 /*
     rating stars

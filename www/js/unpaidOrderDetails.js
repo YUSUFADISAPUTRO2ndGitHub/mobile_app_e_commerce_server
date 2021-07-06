@@ -8,6 +8,7 @@ $(document).ready(function(){
         $("#va-number-based-on-order-number").val(vaNumber);
     }else{
         $(".card").css("display", "none");
+        $(".bca_transfer").css("display", "block");
     }
 });
 

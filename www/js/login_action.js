@@ -31,6 +31,14 @@ $(document).ready(function(){
                             </div>
                             `
                         );
+                        $("#profile-info-details").append(
+                            `
+                            <div class="form-group">
+                                <label>NPWP Perusahaan</label>
+                                <input type="text" id="profile-company-npwp" class="form-control" value="${response.npwp}" disabled>
+                            </div>
+                            `
+                        );
                     }
                 }
             }
@@ -133,7 +141,8 @@ function editProfile(){
                 Address_4: $("#profile-address-local-4").val(),
                 Address_5: $("#profile-address-local-5").val(),
                 Status: "Approved",
-                User_Type: response.User_Type
+                User_Type: response.User_Type,
+                ktp: $("#profile-ktp").val()
             }
         }
         console.log(data);

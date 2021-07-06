@@ -13,8 +13,9 @@ $(document).ready(function(){
 });
 
 function generateBigCategoryList(bigcatlist, data){
-    $("#big-category-list").append("<tr onclick=\"generateSmallCatList(this)\" class=\"big-category-list\" id=\"big-category-list-tr" + data.Category + "\">");
-    $("#big-category-list-tr"+ data.Category).append("<td id=\"big-category-list-td" + bigcatlist + "\">" + data.Category);
+    $("#big-category-list").append("<tr onclick=\"generateSmallCatList(this)\" class=\"" + data.Category + "\" id=\"big-category-list-tr" + data.Category + "\">");
+    $("#big-category-list-tr"+ data.Category).append(`<td id=\"big-category-list-td${bigcatlist}\">
+        <div class=\"big-category-list\" id=\"${data.Category}\">${data.Category}<div>`);
 }
 
 function loadingMessage(timerMultiplier){
@@ -47,7 +48,7 @@ function generateSmallCatList(x){
     $('.pop-up-selection').css('display', 'none');
     loadingMessage(10000);
     clearData(x);
-    changeCssforActive(x);
+    changeCssforActive($(x).attr("class"));
     var categoryId = x.id.replace("big-category-list-tr", "");
     $(".loading-area").css("display", "table");
     getAllSubCategories(categoryId).done(function (response) {
@@ -140,6 +141,7 @@ function clearData(category){
 }
 
 function changeCssforActive(category){
+    // alert(category);
     $(".big-category-list").removeClass("active-local");
-    $(category).addClass("active-local");
+    $("#" + category).addClass("active-local");
 }

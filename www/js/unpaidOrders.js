@@ -32,7 +32,9 @@ function removeSpace( words ) {
 function generateUnpaidOrdersRow(i, datas){
     console.log(datas);
     $("#unpaid-orders").append("<tr id=\"" + datas.Order_Number + "\">");
-    $("#" + datas.Order_Number ).append("<button onclick=\"checkOrderDetails(\'" + datas.Order_Number + "\')\">" + datas.Order_Number + "</button>");
+    $("#" + datas.Order_Number ).append(`<td onclick=\"checkOrderDetails(\'${datas.Order_Number}\')\">
+        <div class=\"order_number\">${datas.Order_Number}</div>
+    </td>`);
     $("#" + datas.Order_Number ).append("<td class=\"total-price-per-order\" id=\"" + datas.Order_Number + "-details\">" + commafy( datas.Total_Price) + "</td>");
     if(datas.VA_Number != null && datas.VA_Number != "" ){
         $("#" + datas.Order_Number ).append("<td class=\"va-per-order\" id=\"" + datas.Order_Number + "-total-accountNumber\">" + datas.VA_Number + "</td>");
