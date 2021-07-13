@@ -254,61 +254,67 @@ function signupRequest(){
 function signupRequestSupplier(){
     if(checkIfSignUpSupplierInputNull()){
         loadingMessage();
-        createCustomerNo().done(function (response) {
-            console.log(response);
-            localStorage.setItem("token", response);
-            var shippingAddressList = [];
-            if(numberOfAddresses > -1){
-                var i = 0;
-                for(i; i <= numberOfAddresses; i ++){
-                    shippingAddressList.push(
-                        $("#signup-address-" + i).val()
-                    );
-                }
-            }
-            encryptPassword($("#signup-password").val()).done(function (response) {
-                if(response != false){
-                    var data = {
-                        customer_data : {
-                            Customer_Code : localStorage.getItem("token"),
-                            First_Name : $("#signup-owner-first-name").val(),
-                            Last_Name : $("#signup-owner-last-name").val(),
-                            User_Password : response,
-                            Created_Date : "CURRENT_TIMESTAMP()",
-                            Last_Login : "CURRENT_TIMESTAMP()",
-                            Email : $("#signup-email").val(),
-                            Contact_Number_1 : $("#signup-telp").val(),
-                            Contact_Number_2 : $("#signup-telp-2").val(),
-                            Address_1 : (typeof $("#signup-address").val() === 'undefined') ? "NULL" : $("#signup-address").val(),
-                            Address_2 : (typeof $("#signup-address-0").val() === 'undefined') ? "NULL" : $("#signup-address-0").val(),
-                            Address_3 : (typeof $("#signup-address-1").val() === 'undefined') ? "NULL" : $("#signup-address-1").val(),
-                            Address_4 : (typeof $("#signup-address-2").val() === 'undefined') ? "NULL" : $("#signup-address-2").val(),
-                            Address_5 : (typeof $("#signup-address-3").val() === 'undefined') ? "NULL" : $("#signup-address-3").val(),
-                            Status : "pending",
-                            User_Type : "Customer",
-                            account_number: $("#signup-account-number").val(),
-                            npwp: $("#signup-account-npwp").val(),
-                            ktp: (typeof $("#signup-id-number").val() === 'undefined') ? "NULL" : $("#signup-id-number").val(),
-                            nik: $("#signup-company-no-pic").val(),
-                            Nama_Perusahaan: $("#signup-company-name").val(),
+        if($("#signup-password").val() != undefined){
+            if($("#signup-password").val().length >= 10){
+                createCustomerNo().done(function (response) {
+                    console.log(response);
+                    localStorage.setItem("token", response);
+                    var shippingAddressList = [];
+                    if(numberOfAddresses > -1){
+                        var i = 0;
+                        for(i; i <= numberOfAddresses; i ++){
+                            shippingAddressList.push(
+                                $("#signup-address-" + i).val()
+                            );
                         }
-                    };
-                    console.log(data);
-                    createNewCustomerSupplier("", "", data).done(function (response) {
-                        console.log(response);
-                        if(response){
-                            Swal.fire("SIGN-UP SUCCESS", "", "success");
-                            window.location.href = "./profile-account.html";
+                    }
+                    encryptPassword($("#signup-password").val()).done(function (response) {
+                        if(response != false){
+                            var data = {
+                                customer_data : {
+                                    Customer_Code : localStorage.getItem("token"),
+                                    First_Name : $("#signup-owner-first-name").val(),
+                                    Last_Name : $("#signup-owner-last-name").val(),
+                                    User_Password : response,
+                                    Created_Date : "CURRENT_TIMESTAMP()",
+                                    Last_Login : "CURRENT_TIMESTAMP()",
+                                    Email : $("#signup-email").val(),
+                                    Contact_Number_1 : $("#signup-telp").val(),
+                                    Contact_Number_2 : $("#signup-telp-2").val(),
+                                    Address_1 : (typeof $("#signup-address").val() === 'undefined') ? "NULL" : $("#signup-address").val(),
+                                    Address_2 : (typeof $("#signup-address-0").val() === 'undefined') ? "NULL" : $("#signup-address-0").val(),
+                                    Address_3 : (typeof $("#signup-address-1").val() === 'undefined') ? "NULL" : $("#signup-address-1").val(),
+                                    Address_4 : (typeof $("#signup-address-2").val() === 'undefined') ? "NULL" : $("#signup-address-2").val(),
+                                    Address_5 : (typeof $("#signup-address-3").val() === 'undefined') ? "NULL" : $("#signup-address-3").val(),
+                                    Status : "pending",
+                                    User_Type : "Customer",
+                                    account_number: $("#signup-account-number").val(),
+                                    npwp: $("#signup-account-npwp").val(),
+                                    ktp: (typeof $("#signup-id-number").val() === 'undefined') ? "NULL" : $("#signup-id-number").val(),
+                                    nik: $("#signup-company-no-pic").val(),
+                                    Nama_Perusahaan: $("#signup-company-name").val(),
+                                }
+                            };
+                            console.log(data);
+                            createNewCustomerSupplier("", "", data).done(function (response) {
+                                console.log(response);
+                                if(response){
+                                    Swal.fire("SIGN-UP SUCCESS", "", "success");
+                                    window.location.href = "./profile-account.html";
+                                }else{
+                                    Swal.fire("SIGN-UP FAILED", "", "warning");
+                                    window.location.href = "./profile-account.html";
+                                }
+                            });
                         }else{
-                            Swal.fire("SIGN-UP FAILED", "", "warning");
-                            window.location.href = "./profile-account.html";
+                            Swal.fire("SIGN-UP FAIL", "", "error");
                         }
                     });
-                }else{
-                    Swal.fire("SIGN-UP FAIL", "", "error");
-                }
-            });
-        });
+                });
+            }else{
+                Swal.fire("SIGN-UP FAILED", "Your password is too short, minimum length is 10 characters", "warning");
+            }
+        }
     }else{
         swal.fire("","Tolong diisi data-data yang masih belum terisi atau isi dengan benar","warning");
     }

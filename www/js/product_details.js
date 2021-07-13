@@ -227,12 +227,17 @@ function fillingInInformations(productNo){
         console.log(response);
         if(!response){
             alert("Unfortunately this product is not available");
-        }else{
+        }else{ // main-available-stock
             $("#main-price").html("Rp. " + commafy(response.Sell_Price * 1) );
             $("#main-name").html(response.Name);
             $("#main-cod").html("Rp. " + commafy(response.Sell_Price * 1) );
             $("#main-period").html("Rp. " + commafy(response.GroupBuy_SellPrice));
             $("#main-period-2").html("Rp. Hidden | Tersembunyi");
+            if(response.stock_quantity != undefined){
+                if((response.stock_quantity * 1) > 0){
+                    $("#main-available-stock").html(response.stock_quantity + "tersisah");
+                }
+            }
             $("#main-details").html(response.Description + "<br><br>Specification:" + response.Specification + "<br>Color: " + response.Color);
             $("#product-id").val(response.Product_Code);
             $("#product-option-dropdown-name").val(response.Color);
