@@ -284,10 +284,10 @@ function personalDetailsWithStoreAddress(){
         var paymentMethodChosen = $("#payment-selection").children("option:selected").val();
         if(paymentMethodChosen == "BCA VA TRANSFER" ){
             setTimeout(function(){sendFinalRequestToEnquiryAndEnquiryDetailsWithoutGroupBuy(request);}, 2000);
-            setTimeout(function(){ clearStorage(); }, 3000);
+            // setTimeout(function(){ clearStorage(); }, 3000);
         }else{
             setTimeout(function(){sendFinalToAccurate(request);}, 2000);
-            setTimeout(function(){ clearStorage(); }, 3000);
+            // setTimeout(function(){ clearStorage(); }, 3000);
         }
     });
 }
@@ -329,10 +329,10 @@ function personalDetailsWithCurrentAddress(){
         var paymentMethodChosen = $("#payment-selection").children("option:selected").val();
         if(paymentMethodChosen == "BCA VA TRANSFER" ){
             setTimeout(function(){sendFinalRequestToEnquiryAndEnquiryDetailsWithoutGroupBuy(request);}, 2000);
-            setTimeout(function(){ clearStorage(); }, 3000);
+            // setTimeout(function(){ clearStorage(); }, 3000);
         }else{
             setTimeout(function(){sendFinalRequestToEnquiryAndEnquiryDetailsWithoutGroupBuyAndVA(request);}, 2000);
-            setTimeout(function(){ clearStorage(); }, 3000);
+            // setTimeout(function(){ clearStorage(); }, 3000);
         }
     });
 }
@@ -447,10 +447,10 @@ function personalDetailsWithNewAddress(address){
         var paymentMethodChosen = $("#payment-selection").children("option:selected").val();
         if(paymentMethodChosen == "BCA VA TRANSFER" ){
             setTimeout(() => {sendFinalRequestToEnquiryAndEnquiryDetailsWithoutGroupBuy(request);}, 2000);
-            setTimeout(() => { clearStorage(); }, 3000);
+            // setTimeout(() => { clearStorage(); }, 3000);
         }else{
             setTimeout(() => {sendFinalRequestToEnquiryAndEnquiryDetailsWithoutGroupBuyAndVA(request);}, 2000);
-            setTimeout(() => { clearStorage(); }, 3000);
+            // setTimeout(() => { clearStorage(); }, 3000);
         }
     });
 }
@@ -504,7 +504,7 @@ async function sendFinalRequestToEnquiryAndEnquiryDetailsWithoutGroupBuy(request
                 }
                 truncateCart();
                 await setTimeout(() => { clearStorage(); }, 2000);
-                await setTimeout(() => {window.location.href = "./home.html";}, 3000);
+                await setTimeout(() => {window.location.href = "./cart.html";}, 3000);
             });
         }
     });
@@ -540,7 +540,7 @@ async function sendFinalRequestToEnquiryAndEnquiryDetailsWithoutGroupBuyAndVA(re
                 }
                 truncateCart();
                 await setTimeout(() => { clearStorage(); }, 2000);
-                await setTimeout(() => {window.location.href = "./home.html";}, 3000);
+                await setTimeout(() => {window.location.href = "./cart.html";}, 3000);
             });
         }
     });

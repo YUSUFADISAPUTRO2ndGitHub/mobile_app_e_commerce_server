@@ -97,6 +97,10 @@
     .modal-dialog{
         max-width: 90% !important;
     }
+    .alert-primary{
+        background-color: #217384 !important;
+        color: white !important;
+    }
 </style>
 <body class=".body">
     <div class="card header">
@@ -149,12 +153,15 @@
                 </select>
             </div>
             <div class="form-group" id="new-address-section">
-                <label>Street (Alamat lengkap pengiriman)</label>
                 <textarea id="street" class="form-control" placeholder="Alamat lengkap pengiriman Anda" rows="3" onchange="checkingSpecialCharacter(this)" required></textarea>
             </div>
             <br>
-            <div class="alert alert-primary delivery-cost" role="alert">
-                Biaya pengiriman saat ini gratis
+            <div class="form-group">
+                <div class="alert alert-primary" role="alert">
+                    Delivery Courier
+                </div>
+                <select class="form-control" id="courier-selection" onchange="revise_delivery_fee()">
+                </select>
             </div>
             <br>
             <div class="alert alert-primary" role="alert">
