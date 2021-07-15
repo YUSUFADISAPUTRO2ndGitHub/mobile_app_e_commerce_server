@@ -127,6 +127,10 @@ router.get('/unpaidOrders.html',function(req,res){
     res.sendFile(path.join(__dirname+'/www/unpaidOrders.html'));
     //__dirname : It will resolve to your project folder.
 });
+router.get('/test_small_category.html',function(req,res){
+    res.sendFile(path.join(__dirname+'/www/test_small_category.html'));
+    //__dirname : It will resolve to your project folder.
+});
 
 
 /* 
