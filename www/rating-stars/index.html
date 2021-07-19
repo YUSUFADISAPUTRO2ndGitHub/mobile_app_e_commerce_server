@@ -126,31 +126,37 @@
         
         return $.ajax(settings);
     }
+    var firstDone = true;
     $( ".a-star" ).click(function() {
-        console.log(this.id)
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const product_code = urlParams.get('product_code');
-        if(this.id == 'a-star-1'){
-            setproductrating(product_code, '0').done(function (response) {
-                refresh_stars();
-            });
-        }else if(this.id == 'a-star-2'){
-            setproductrating(product_code, '25').done(function (response) {
-                refresh_stars();
-            });
-        }else if(this.id == 'a-star-3'){
-            setproductrating(product_code, '50').done(function (response) {
-                refresh_stars();
-            });
-        }else if(this.id == 'a-star-4'){
-            setproductrating(product_code, '75').done(function (response) {
-                refresh_stars();
-            });
-        }else if(this.id == 'a-star-5'){
-            setproductrating(product_code, '100').done(function (response) {
-                refresh_stars();
-            });
+        if(firstDone){
+            console.log(this.id)
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const product_code = urlParams.get('product_code');
+            if(this.id == 'a-star-1'){
+                setproductrating(product_code, '0').done(function (response) {
+                    refresh_stars();
+                });
+            }else if(this.id == 'a-star-2'){
+                setproductrating(product_code, '25').done(function (response) {
+                    refresh_stars();
+                });
+            }else if(this.id == 'a-star-3'){
+                setproductrating(product_code, '50').done(function (response) {
+                    refresh_stars();
+                });
+            }else if(this.id == 'a-star-4'){
+                setproductrating(product_code, '75').done(function (response) {
+                    refresh_stars();
+                });
+            }else if(this.id == 'a-star-5'){
+                setproductrating(product_code, '100').done(function (response) {
+                    refresh_stars();
+                });
+            }
+            firstDone = false;
+        }else{
+            console.log("You click twice");
         }
     });
 
