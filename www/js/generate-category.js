@@ -50,6 +50,9 @@ function generateSmallCatList(x){
     clearData(x);
     changeCssforActive($(x).attr("class"));
     var categoryId = x.id.replace("big-category-list-tr", "");
+    $('.product-highlights').css('display','block')
+    $('.product-highlights').attr('src',`./product_highlight.html?category=${categoryId}`)
+    
     $(".loading-area").css("display", "table");
     getAllSubCategories(categoryId).done(function (response) {
         console.log(response);
@@ -68,6 +71,7 @@ function generateSmallCatList(x){
             $(".card").css("max-width", "50%");
         }
     });
+
 }
 
 function generatehomeOneByOne(product_row, data, dataLength){

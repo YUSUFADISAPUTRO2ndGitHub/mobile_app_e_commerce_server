@@ -131,6 +131,10 @@ router.get('/test_small_category.html',function(req,res){
     res.sendFile(path.join(__dirname+'/www/test_small_category.html'));
     //__dirname : It will resolve to your project folder.
 });
+router.get('/product_highlight.html',function(req,res){
+    res.sendFile(path.join(__dirname+'/www/product_highlight.html'));
+    //__dirname : It will resolve to your project folder.
+});
 
 
 /* 

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../www/js/accessingAccurateAPIsGroup1.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- <script src="./js/accessingAccurateAPIsGroup1.js"></script>     -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <style>
+        .container-ph{
+            display: flex;
+            flex-direction: row;
+            width:100%;
+            height:100%;
+        }
+        .card-ph{
+            height:200px;
+            max-width:200px;
+            min-width:200px;
+            border: 0.5px solid #4071b9;
+            display: flex;
+            flex-direction: column;
+            border-radius:10px;
+            margin:10px;
+            box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+        .img-ph{
+            height:60%;
+            width:100%;
+            /* background-color: red; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .img-desc{
+            width:100%;
+            height:40%;
+            max-height:100px;
+            /* background-color: blue; */
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow:hidden;
+
+        }
+        .limited-text-short {
+            white-space: nowrap;
+            width: 180px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: 30px;
+            /* background-color: red; */
+        }
+        .img-logo{
+            height:100%;
+            width:70%;
+            /* max-width: 240px; */
+            /* min-width: 240px; */
+        }
+        #product_highlight_p {
+            font-size: 30px;
+            color:#217384;
+            margin-left:10px;
+        }
+        
+    </style>
+</head>
+<body>
+    <p id="product_highlight_p">Product Highlights</p>
+    <div class="container-ph">
+       
+
+       
+    </div>
+</body>
+<script>
+$( document ).ready(function() {
+    console.log( "ready!" );
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const category = urlParams.get('category');
+    console.log(category,'ini category 84')
+    // console.log(JSON.parse(subcategory),'subcategory')
+    // var arrCategory = JSON.parse(category)
+    // var arr = ["glue","kran","pintu"]
+
+    getAllSubCategories(category).done(function(response){
+        console.log(response,'ini hasil response')
+        response.map((val,index)=>{
+            getAllProductsBasedOnSubCategory(val.Subcategory).done(function (response){
+                console.log(response)
+                response.map((val,index)=>{
+                    $('.container-ph').append(`
+                        <div class="card-ph">
+                            <div class="img-ph">
+                                <img src="${val.Picture_1}" alt="error" class="img-logo">
+                            </div>
+                            <div class="img-desc card-text">
+                                <p class="limited-text-short">${val.Name}</p>
+                            </div>
+                        </div>
+                    `)
+                })
+            })     
+
+        })
+    })
+});
+
+</script>
+</html>
