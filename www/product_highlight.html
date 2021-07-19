@@ -94,7 +94,7 @@ $( document ).ready(function() {
                 console.log(response)
                 response.map((val,index)=>{
                     $('.container-ph').append(`
-                        <div class="card-ph">
+                        <div class="card-ph" onclick="display_product_detail('${val.Product_Code}')">
                             <div class="img-ph">
                                 <img src="${val.Picture_1}" alt="error" class="img-logo">
                             </div>
@@ -109,6 +109,11 @@ $( document ).ready(function() {
         })
     })
 });
+
+const display_product_detail=(product_code)=>{
+
+    window.location.href = "./product_details.html?productid="+product_code;
+}
 
 </script>
 </html>

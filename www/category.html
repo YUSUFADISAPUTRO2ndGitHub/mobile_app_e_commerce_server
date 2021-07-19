@@ -201,13 +201,21 @@
                                 </div>
                             </dib>
                         </table>
-                        <iframe class="product-highlights" src="www.google.com"></iframe>
                     </th>
                 </tr>
                 
                 <iframe class="pop-up-selection" src='./home.html'></iframe>
                 <!-- SMALL CATEGORY -->
             </table>
+            <iframe class="product-highlights" src="www.google.com"></iframe>
 
 </body>
+<script>
+    $( ".product-highlights" ).mouseover(function() {
+            $(".product-highlights").css("height", "100vh");
+        }).mouseout(function() {
+            $(".product-highlights").css("height", "300px");
+            $(".product-highlights").attr("src", "./test_small_category.html");
+        });
+</script>
 </html>
