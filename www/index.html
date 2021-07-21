@@ -403,6 +403,27 @@
     function showCustomerService(){
         $(".customer-service-information").toggle();
     }
+    var isHome = true
+    var setIsScroll = false
+    var element = document.getElementsByClassName("middle-structure")
+    document.addEventListener("scroll", e => {
+        let scrolled = document.scrollingElement.scrollTop
+        console.log(scrolled)
+        
+        if(isHome){
+            if (scrolled > 50) {
+                setIsScroll = true
+                $('.list-group').css('display','none')
+                $('.modals-lk').css('display','none')
+            } else {
+                
+                setIsScroll = false
+                $('.list-group').css('display','block')
+                }
+            }
+        })
+                
+    console.log('jalan 406')
 
     // dragElement(document.getElementById("customer-service-help-line-icon"));
 

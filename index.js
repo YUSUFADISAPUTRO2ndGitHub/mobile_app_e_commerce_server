@@ -483,6 +483,10 @@ router.get('/www/img/ADS_SLIDES/ads.png',function(req,res){
     res.sendFile(path.join(__dirname+'/www/img/ADS_SLIDES/ads.png'));
     //__dirname : It will resolve to your project folder.
 });
+router.get('/www/img/ADS_SLIDES/ads_new.png',function(req,res){
+    res.sendFile(path.join(__dirname+'/www/img/ADS_SLIDES/ads_new.png'));
+    //__dirname : It will resolve to your project folder.
+});
 
 router.get('/www/img/Brand/brand1.jpg',function(req,res){
     res.sendFile(path.join(__dirname+'/www/img/Brand/brand1.jpg'));
