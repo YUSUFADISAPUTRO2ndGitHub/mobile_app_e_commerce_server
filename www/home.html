@@ -260,6 +260,10 @@
         width: 100%;
         height: 300px;
     }
+    .small-cat-area-2{
+        width: 100%;
+        height: 450px;
+    }
     .instagram-ads-area{
         display: flex;
         flex-direction: row;
@@ -325,6 +329,10 @@
                             <tr>
                                 <iframe class="small-cat-area" src="./test_small_category.html"></iframe>
                             </tr>
+                            <tr>
+                                <iframe class="small-cat-area-2" src="./shock_highlights.html"></iframe>
+                                
+                            </tr>
                         </table>
                     </th>
                 </tr>
@@ -360,7 +368,48 @@
             $(".small-cat-area").css("height", "300px");
             $(".small-cat-area").attr("src", "./test_small_category.html");
         });
+        $( ".small-cat-area-2" ).mouseover(function() {
+            $(".small-cat-area-2").css("height", "100vh");
+        }).mouseout(function() {
+            $(".small-cat-area-2").css("height", "450px");
+            $(".small-cat-area-2").attr("src", "./shock_highlights.html");
+        });
     </script>
 </body>
+<script>
 
+$(document).ready(function(){
+
+$(window).resize(function(e){
+    console.log(e);                   
+});
+
+$(window).scroll(function (event) {
+    var sc = $(window).scrollTop();
+    console.log(sc);
+});
+
+})
+
+console.log('jalan 422')
+var isHome = true
+var setIsScroll = false
+var element = document.getElementsByClassName("main-structure")
+document.addEventListener("scroll", e => {
+let scrolled = document.scrollingElement.scrollTop
+console.log(scrolled)
+
+if(isHome){
+    if (scrolled > 50) {
+        setIsScroll = true
+        $("iframe").contents().find("#element").addClass("myClass");
+    } else {
+        
+        setIsScroll = false
+        $('.top-structure').css('background-color','transparent')
+        }
+    }
+})
+        
+</script>
 </html>

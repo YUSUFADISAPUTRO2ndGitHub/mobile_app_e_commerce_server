@@ -135,6 +135,10 @@ router.get('/product_highlight.html',function(req,res){
     res.sendFile(path.join(__dirname+'/www/product_highlight.html'));
     //__dirname : It will resolve to your project folder.
 });
+router.get('/shock_highlights.html',function(req,res){
+    res.sendFile(path.join(__dirname+'/www/shock_highlights.html'));
+    //__dirname : It will resolve to your project folder.
+});
 
 
 /* 
