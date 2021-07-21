@@ -328,19 +328,38 @@
         padding: 0;
         max-width: 50%;
     }
+    /* .other-product-area{
+        display: flex;
+        flex-direction: row;
+        overflow: auto;
+        overflow-x: scroll;
+        max-width:30%;
+    } */
+    /* .list-group-horizontal{
+        display: flex;
+        flex-direction: column;
+        min-width:100%;
+        max-height:100%;
+    } */
     .product-card{
-        height: auto;
         border: solid 1px grey;
         background-color: #ebf1f4;
         color:#217384;
-        height: 370px;
+        /* height:370px; */
+        max-height: 500px;
+        min-height: 500px;
     }
     .product-card-images{
         border-radius: 10px 10px 0 0;
         width: 100%;
+        max-height:90%;
+        min-height:90%;
     }
     .product-card-name{
-        padding: 10px;
+        /* padding: 10px; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .Highlighted-options{
         text-align: center;
@@ -370,6 +389,42 @@
     }
     #modal-group-purchase{
         z-index: 50;
+    }
+    .category-highlight{
+        height:300px;
+        width:100%;
+        /* border:5px solid ; */
+    }
+    .glowing-box{
+        height:300px;
+        width:100%;
+        /* border:10px solid; */
+    }
+    .glowing::before{
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: -2px;
+    background: linear-gradient(45deg, #e8f74d, #ff6600d9, #00ff66, #13ff13, #ad27ad, #bd2681, #6512b9, #ff3300de, #5aabde);
+    background-size: 400%;
+    width: calc(100% + 5px);
+    height: calc(100% + 5px);
+    z-index: -1;
+    animation: glower 20s linear infinite;
+    }
+
+    @keyframes glower {
+    0% {
+        background-position: 0 0;
+    }
+    
+    50% {
+        background-position: 400% 0;
+    }
+    
+    100% {
+        background-position: 0 0;
+    }
     }
 </style>
 <body>
@@ -594,6 +649,12 @@
                         </div>
                     </tr>
                     <tr>
+                        <div class=" glowing-box glowing">
+                            <iframe src="./test_small_category.html" class="category-highlight "></iframe>
+                        </div>
+                        
+                    </tr>
+                    <tr>
                         <div class="card-body" id="Highlighted-options">
                             <h5 class="card-title Highlighted-options">More Options</h5>
                         </div>
@@ -619,5 +680,28 @@
     span.onclick = function() {
         modal.style.display = "none";
     }
+
+    $( document ).ready(function() {
+    console.log( "ready!" );
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const productid = urlParams.get('productid');
+    console.log(productid,'ini product id 84')
+    // console.log(JSON.parse(subcategory),'subcategory')
+    // var arrCategory = JSON.parse(category)
+    // var arr = ["glue","kran","pintu"]
+
+    getProductsWithProductNo('', '', productid).done(function(response){
+       console.log(response.Category)
+       $('.category-highlight').attr('src',`./product_highlight.html?category=${response.Category}`)
+    })
+
+});
+    $(".category-highlight").mouseover(function() {
+            $(".category-highlight").css("height", "100vh");
+        }).mouseout(function() {
+            $(".category-highlight").css("height", "300px");
+            $(".category-highlight").attr("src", "./test_small_category.html");
+    });
 </script>
 </html>
