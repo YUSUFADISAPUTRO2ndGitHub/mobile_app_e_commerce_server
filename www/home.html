@@ -268,6 +268,12 @@
         display: flex;
         flex-direction: row;
     }
+    .active_highlight{
+        position:fixed;
+        top:0;
+        left:0;
+        z-index:100;
+    }
 </style>
 <body class="background_image">
     
@@ -368,11 +374,15 @@
             $(".small-cat-area").css("height", "300px");
             $(".small-cat-area").attr("src", "./test_small_category.html");
         });
+
+
         $( ".small-cat-area-2" ).mouseover(function() {
             $(".small-cat-area-2").css("height", "100vh");
+            $(".small-cat-area-2").addClass('active_highlight')
         }).mouseout(function() {
             $(".small-cat-area-2").css("height", "450px");
             $(".small-cat-area-2").attr("src", "./shock_highlights.html");
+            $(".small-cat-area-2").removeClass('active_highlight')
         });
     </script>
 </body>
