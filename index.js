@@ -566,6 +566,23 @@ router.get('/www/img/CATEGORY_ICONS/more.png',function(req,res){
     //__dirname : It will resolve to your project folder.
 });
 
+router.get('/www/img/kran_plastik.png',function(req,res){
+    res.sendFile(path.join(__dirname+'/www/img/kran_plastik.png'));
+    //__dirname : It will resolve to your project folder.
+});
+
+router.get('/www/img/helm_proyek.png',function(req,res){
+    res.sendFile(path.join(__dirname+'/www/img/helm_proyek.png'));
+    //__dirname : It will resolve to your project folder.
+});
+router.get('/www/img/floor_drain.png',function(req,res){
+    res.sendFile(path.join(__dirname+'/www/img/floor_drain.png'));
+    //__dirname : It will resolve to your project folder.
+});
+router.get('/www/img/kran_single.png',function(req,res){
+    res.sendFile(path.join(__dirname+'/www/img/kran_single.png'));
+    //__dirname : It will resolve to your project folder.
+});
 
 /*
     rating stars
