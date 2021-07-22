@@ -6,20 +6,19 @@ $(document).ready(async function(){
         if(cartToJson.length != 0){
             loadingMessage(cartToJson.length);
             save_cart(localStorage.getItem("token"), localStorage.getItem("itemsInCart")).done(function (response) {
-                alert("save_cart");
-                for(i; i < cartToJson.length; i ++){
-                    await loadcart(cartToJson[i].productNo, cartToJson[i].quantity);
-                }
             });
+            for(i; i < cartToJson.length; i ++){
+                await loadcart(cartToJson[i].productNo, cartToJson[i].quantity);
+            }
         }else{
             loadingMessage(1);
             get_cart(localStorage.getItem("token")).done(function (response) {
-                alert("get_cart");
+                // alert("get_cart");
                 if(response != undefined){
                     cartToJson = JSON.parse(response);
                     localStorage.setItem("itemsInCart", response);
                     for(i; i < cartToJson.length; i ++){
-                        await loadcart(cartToJson[i].productNo, cartToJson[i].quantity);
+                        loadcart(cartToJson[i].productNo, cartToJson[i].quantity);
                     }
                 }
             });
