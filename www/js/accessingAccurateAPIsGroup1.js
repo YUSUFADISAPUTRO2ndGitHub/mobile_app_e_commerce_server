@@ -74,6 +74,26 @@ function get_otp_api(Email){
     return $.ajax(settings);
 }
 
+function save_cart(customerNo, cart){
+    var settings = {
+        "url": `http://customers.sold.co.id/save-user-shopping-cart?Customer_Code=${customerNo}&cart=${cart}`,
+        "method": "POST",
+        "timeout": 0,
+    };
+    
+    return $.ajax(settings);
+}
+
+function get_cart(customerNo){
+    var settings = {
+        "url": `http://customers.sold.co.id/get-saved-user-shopping?Customer_Code=${customerNo}`,
+        "method": "POST",
+        "timeout": 0,
+    };
+    
+    return $.ajax(settings);
+}
+
 function createCustomerNo(){
     var settings = {
         "url": `http://customers.sold.co.id/get-customer-code`,
