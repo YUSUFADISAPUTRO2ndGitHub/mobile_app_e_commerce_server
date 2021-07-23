@@ -340,6 +340,27 @@ function personalDetailsWithCurrentAddress(){
 async function sendRequestFinal(paymentSelection){
     var itemsToCheckout = JSON.parse(localStorage.getItem("itemsToCheckout"));
     console.log("itemsToCheckout " + localStorage.getItem("itemsToCheckout"));
+
+    // var requestArrayForItemsToCheckout = [];
+    // var productToBeAddedStringify = JSON.stringify(requestArrayForItemsToCheckout);
+    // localStorage.setItem("finalStep", productToBeAddedStringify);
+    // var courier_information = $('#Courier-option').find(":selected").text().split("-");
+    // var Courier = courier_information[0];
+    // var Courier_Code = courier_information[1];
+    // object = {
+    //     name: "Estimated Shipping fee|" + Courier + "|" + Courier_Code,
+    //     productCode: Courier_Code,
+    //     quantity: 1,
+    //     pricePerItem: $("#estimated-price-courier-option").html(),
+    //     notes: "estimated shipping fee for this purchase",
+    //     totalPrice: $("#estimated-price-courier-option").html(),
+    //     GroupCode: ""
+    // };
+    // requestArrayForItemsToCheckout.push(object);
+    // var productToBeAddedStringify = JSON.stringify(requestArrayForItemsToCheckout);
+    // localStorage.setItem("finalStep", productToBeAddedStringify);
+
+
     var i = 0;
     for(i; i < itemsToCheckout.length; i ++){
         getProductsWithProductNo("", "", itemsToCheckout[i].productNo).done(function (response) {
@@ -348,19 +369,22 @@ async function sendRequestFinal(paymentSelection){
                 if(localStorage.getItem("finalStep") === null){
                     var requestArrayForItemsToCheckout = [];
 
-                    var courier_information = $('#Courier-option').find(":selected").text().split("-");
-                    var Courier = courier_information[0];
-                    var Courier_Code = courier_information[1];
-                    object = {
-                        name: "Estimated Shipping fee|" + Courier + "|" + Courier_Code,
-                        productCode: Courier_Code,
-                        quantity: 1,
-                        pricePerItem: $("#estimated-price-courier-option").html(),
-                        notes: "estimated shipping fee for this purchase",
-                        totalPrice: $("#estimated-price-courier-option").html(),
-                        GroupCode: ""
-                    };
-                    requestArrayForItemsToCheckout.push(object);
+                    // var courier_information = $('#Courier-option').find(":selected").text().split("-");
+                    // var Courier = courier_information[0];
+                    // var Courier_Code = courier_information[1];
+                    // object = {
+                    //     name: "Estimated Shipping fee|" + Courier + "|" + Courier_Code,
+                    //     productCode: Courier_Code,
+                    //     quantity: 1,
+                    //     pricePerItem: $("#estimated-price-courier-option").html(),
+                    //     notes: "estimated shipping fee for this purchase",
+                    //     totalPrice: $("#estimated-price-courier-option").html(),
+                    //     GroupCode: ""
+                    // };
+                    // alert("here1");
+                    // if(i == 0){
+                    //     requestArrayForItemsToCheckout.push(object);
+                    // }
 
                     var i =0;
                     for(i; i < itemsToCheckout.length; i ++){
@@ -383,19 +407,22 @@ async function sendRequestFinal(paymentSelection){
                     localStorage.setItem("finalStep", productToBeAddedStringify);
                 }else{
                     var finalStep = JSON.parse(localStorage.getItem("finalStep"));
-                    var courier_information = $('#Courier-option').find(":selected").text().split("-");
-                    var Courier = courier_information[0];
-                    var Courier_Code = courier_information[1];
-                    object = {
-                        name: "Estimated Shipping fee|" + Courier + "|" + Courier_Code,
-                        productCode: Courier_Code,
-                        quantity: 1,
-                        pricePerItem: $("#estimated-price-courier-option").html(),
-                        notes: "estimated shipping fee for this purchase",
-                        totalPrice: $("#estimated-price-courier-option").html(),
-                        GroupCode: ""
-                    };
-                    finalStep.push(object);
+                    // var courier_information = $('#Courier-option').find(":selected").text().split("-");
+                    // var Courier = courier_information[0];
+                    // var Courier_Code = courier_information[1];
+                    // object = {
+                    //     name: "Estimated Shipping fee|" + Courier + "|" + Courier_Code,
+                    //     productCode: Courier_Code,
+                    //     quantity: 1,
+                    //     pricePerItem: $("#estimated-price-courier-option").html(),
+                    //     notes: "estimated shipping fee for this purchase",
+                    //     totalPrice: $("#estimated-price-courier-option").html(),
+                    //     GroupCode: ""
+                    // };
+                    // alert(i);
+                    // if(i == 0){
+                    //     finalStep.push(object);
+                    // }
                     var i =0;
                     for(i; i < itemsToCheckout.length; i ++){
                         if(response.Product_Code == itemsToCheckout[i].productNo){
@@ -504,10 +531,32 @@ function redirectToCart(){
     window.location.href = "./cart.html";
 }
 
+function add_delivery_fee(productArr){
+    var courier_information = $('#Courier-option').find(":selected").text().split("-");
+    var Courier = courier_information[0];
+    var Courier_Code = courier_information[1];
+    object = {
+        name: "Estimated Shipping fee|" + Courier + "|" + Courier_Code,
+        productCode: Courier_Code,
+        quantity: 1,
+        pricePerItem: $("#estimated-price-courier-option").html(),
+        notes: "estimated shipping fee for this purchase",
+        totalPrice: $("#estimated-price-courier-option").html(),
+        GroupCode: ""
+    };
+    productArr.push(object);
+    return productArr;
+}
+
 async function sendFinalRequestToEnquiryAndEnquiryDetailsWithoutGroupBuy(request){
     var orderArr = JSON.stringify([request]);
     orderArr = JSON.parse(orderArr);
     var productArr = JSON.parse(localStorage.getItem("finalStep"));
+
+    productArr = add_delivery_fee(productArr);
+
+    console.log(productArr);
+
     var i = 0;
     var totalQuantity = 0;
     for(i; i < productArr.length; i ++){
@@ -542,6 +591,11 @@ async function sendFinalRequestToEnquiryAndEnquiryDetailsWithoutGroupBuyAndVA(re
     var orderArr = JSON.stringify([request]);
     orderArr = JSON.parse(orderArr);
     var productArr = JSON.parse(localStorage.getItem("finalStep"));
+
+    productArr = add_delivery_fee(productArr);
+    alert(productArr.length);
+    console.log(productArr);
+
     var i = 0;
     var totalQuantity = 0;
     for(i; i < productArr.length; i ++){

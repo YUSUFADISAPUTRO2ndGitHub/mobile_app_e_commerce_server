@@ -65,7 +65,7 @@ function commafy( num ) {
 }
 
 function theCaller(type){
-    loadingMessage(100);
+    loadingMessage(100000);
     $("#product-highlights").empty();
     console.log(type == "sale");
     if(type == "sale"){

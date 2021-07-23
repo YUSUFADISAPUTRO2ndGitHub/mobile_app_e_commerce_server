@@ -459,9 +459,12 @@
             console.log("itemsToCheckout " + localStorage.getItem("itemsToCheckout"));
             var i = 0;
             var estimated_weight = 0;
+            // alert(itemsToCheckout.length);
             for(i; i < itemsToCheckout.length; i ++){
                 await getProductsWithProductNo("", "", itemsToCheckout[i].productNo).done(function (response) {
-                    estimated_weight = response.Weight_KG * itemsToCheckout[i].quantity;
+                    // alert(response.Weight_KG);
+                    estimated_weight = estimated_weight + (response.Weight_KG * itemsToCheckout[i].quantity);
+                    // alert(estimated_weight);
                 });
             }
             // alert(Math.ceil(estimated_weight));
