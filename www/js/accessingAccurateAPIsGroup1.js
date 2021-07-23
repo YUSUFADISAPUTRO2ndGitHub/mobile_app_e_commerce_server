@@ -182,6 +182,73 @@ function getAllProductsWithoutPaginationWithFilter(access_token, session_id, sor
     
     return $.ajax(settings);
 }
+function get_all_couriers(){
+    var settings = {
+        "url": `http://products.sold.co.id/get-courier-data?Get_All_Couriers=true`,
+        "method": "POST",
+        "timeout": 0,
+    };
+    
+    return $.ajax(settings);
+}
+function get_all_province_from_courier(Courier, Courier_Code){
+    var settings = {
+        "url": `http://products.sold.co.id/get-courier-data?Courier=${Courier}&Courier_Code=${Courier_Code}&Get_All_Province=true`,
+        "method": "POST",
+        "timeout": 0,
+    };
+    
+    return $.ajax(settings);
+}
+function get_all_city_from_courier(Courier, Courier_Code, Province){
+    var settings = {
+        "url": `http://products.sold.co.id/get-courier-data?Courier=${Courier}&Courier_Code=${Courier_Code}&Province=${Province}`,
+        "method": "POST",
+        "timeout": 0,
+    };
+    
+    return $.ajax(settings);
+}
+function get_all_district_from_courier(Courier, Courier_Code, City){
+    var settings = {
+        "url": `http://products.sold.co.id/get-courier-data?Courier=${Courier}&Courier_Code=${Courier_Code}&City=${City}`,
+        "method": "POST",
+        "timeout": 0,
+    };
+    
+    return $.ajax(settings);
+}
+function get_all_subdistrict_from_courier(Courier, Courier_Code, District){
+    var settings = {
+        "url": `http://products.sold.co.id/get-courier-data?Courier=${Courier}&Courier_Code=${Courier_Code}&District=${District}`,
+        "method": "POST",
+        "timeout": 0,
+    };
+    
+    return $.ajax(settings);
+}
+function get_shipping_cost_informations(Courier, Courier_Code, Province, City, District, Sub_District){
+    var settings = {
+        "url": `http://products.sold.co.id/get-shipping-option-data?Get_Shipping_Fee=true&Courier=${Courier}&Courier_Code=${Courier_Code}&Province=${Province}&City=${City}&District=${District}&Sub_District=${Sub_District}`,
+        "method": "POST",
+        "timeout": 0,
+    };
+
+    console.log(settings.url);
+    
+    return $.ajax(settings);
+}
+function get_shipping_fee(Courier, Courier_Code, Province, City, District, Sub_District, delivery_time_in_days, Courier_Price_Code){
+    var settings = {
+        "url": `http://products.sold.co.id/get-courier-data?Get_Shipping_Fee=true&Courier=${Courier}&Courier_Code=${Courier_Code}&Province=${Province}&City=${City}&District=${District}&Sub_District=${Sub_District}&delivery_time_in_days=${delivery_time_in_days}&Courier_Price_Code=${Courier_Price_Code}`,
+        "method": "POST",
+        "timeout": 0,
+    };
+
+    console.log(settings.url);
+    
+    return $.ajax(settings);
+}
 
 function getAllProductsInGroupBuy(access_token, session_id){
     var settings = {

@@ -533,7 +533,6 @@
                     <div class="input-group mb-3">
                         <label class="input-group-text">Kurir</label>
                         <select class="form-select" id="Courier-option" onchange="updated_courier(this)">
-                            <option>Tiki</option>
                         </select>
                     </div>
                     <div class="input-group mb-3">
@@ -573,8 +572,13 @@
                         <input type="text" class="form-control" id="zipcode-courier-option">
                     </div>
                     <div class="input-group mb-3">
+                        <label class="input-group-text">Waktu</label>
+                        <select class="form-select" id="shipping-fee-courier-option" onchange="update_estimated_shipping_fee()">
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
                         <span class="input-group-text">Estimasi harga pengiriman Rp.</span>
-                        <span class="input-group-text" id="estimate-price-courier-option">0.00</span>
+                        <span class="input-group-text" id="estimated-price-courier-option">0.00</span>
                     </div>
                 </div>
             </div>
@@ -772,26 +776,200 @@
     }
 
     $( document ).ready(function() {
-    console.log( "ready!" );
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const productid = urlParams.get('productid');
-    console.log(productid,'ini product id 84')
-    // console.log(JSON.parse(subcategory),'subcategory')
-    // var arrCategory = JSON.parse(category)
-    // var arr = ["glue","kran","pintu"]
+        initial_render_courier();
+        console.log( "ready!" );
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const productid = urlParams.get('productid');
+        console.log(productid,'ini product id 84')
+        // console.log(JSON.parse(subcategory),'subcategory')
+        // var arrCategory = JSON.parse(category)
+        // var arr = ["glue","kran","pintu"]
 
-    getProductsWithProductNo('', '', productid).done(function(response){
-       console.log(response.Category)
-       $('.category-highlight').attr('src',`./product_highlight.html?category=${response.Category}`)
-    })
+        getProductsWithProductNo('', '', productid).done(function(response){
+        console.log(response.Category)
+        $('.category-highlight').attr('src',`./product_highlight.html?category=${response.Category}`)
+        })
 
-});
+    });
+    
     $(".category-highlight").mouseover(function() {
             $(".category-highlight").css("height", "100vh");
         }).mouseout(function() {
             $(".category-highlight").css("height", "300px");
             $(".category-highlight").attr("src", "./test_small_category.html");
     });
+    
+    function initial_render_courier(){
+        get_all_couriers().done(function (response) {
+            var i = 0;
+            for(i ; i < response.length;i++){
+                $("#Courier-option").append(`<option>${response[i].Courier}-${response[i].Courier_Code}</option>`);
+            }
+            reset_all_shipping_information(response);
+        });
+    }
+
+    function reset_all_shipping_information(response){
+        $("#province-courier-option").empty();
+        get_all_province_from_courier(response[0].Courier, response[0].Courier_Code).done(function (prov) {
+            var i = 0;
+            for(i ; i < prov.length;i++){
+                $("#province-courier-option").append(`<option>${prov[i].Province}</option>`);
+            }
+            $("#city-courier-option").empty();
+            get_all_city_from_courier(response[0].Courier, response[0].Courier_Code, prov[0].Province).done(function (cit) {
+                var i = 0;
+                for(i ; i < cit.length;i++){
+                    $("#city-courier-option").append(`<option>${cit[i].City}</option>`);
+                }
+                $("#district-courier-option").empty();
+                get_all_district_from_courier(response[0].Courier, response[0].Courier_Code, cit[0].City).done(function (dis) {
+                    var i = 0;
+                    for(i ; i < dis.length;i++){
+                        $("#district-courier-option").append(`<option>${dis[i].District}</option>`);
+                    }
+                    $("#subdistrict-courier-option").empty();
+                    get_all_subdistrict_from_courier(response[0].Courier, response[0].Courier_Code, dis[0].District).done(function (subdis) {
+                        var i = 0;
+                        for(i ; i < subdis.length;i++){
+                            $("#subdistrict-courier-option").append(`<option>${subdis[i].Sub_District}</option>`);
+                        }
+                        update_shipping_fee();
+                    });
+                });
+            });
+        });
+    }
+    
+    function updated_courier(x){
+        var courier_information = $('#' + x.id).find(":selected").text().split("-");
+        var Courier = courier_information[0];
+        var Courier_Code = courier_information[1];
+        var response = [{
+            Courier : courier_information[0],
+            Courier_Code : courier_information[1]
+        }]
+        reset_all_shipping_information(response);
+    }
+   
+    function updated_province_courier(x){
+        var courier_information = $('#Courier-option').find(":selected").text().split("-");
+        var Courier = courier_information[0];
+        var Courier_Code = courier_information[1];
+        var response = [{
+            Courier : courier_information[0],
+            Courier_Code : courier_information[1]
+        }]
+        $("#city-courier-option").empty();
+        get_all_city_from_courier(response[0].Courier, response[0].Courier_Code, $('#' + x.id).find(":selected").text()).done(function (cit) {
+            var i = 0;
+            for(i ; i < cit.length;i++){
+                $("#city-courier-option").append(`<option>${cit[i].City}</option>`);
+            }
+            $("#district-courier-option").empty();
+            get_all_district_from_courier(response[0].Courier, response[0].Courier_Code, cit[0].City).done(function (dis) {
+                var i = 0;
+                for(i ; i < dis.length;i++){
+                    $("#district-courier-option").append(`<option>${dis[i].District}</option>`);
+                }
+                $("#subdistrict-courier-option").empty();
+                get_all_subdistrict_from_courier(response[0].Courier, response[0].Courier_Code, dis[0].District).done(function (subdis) {
+                    var i = 0;
+                    for(i ; i < subdis.length;i++){
+                        $("#subdistrict-courier-option").append(`<option>${subdis[i].Sub_District}</option>`);
+                    }
+                    update_shipping_fee();
+                });
+            });
+        });
+    }
+    
+    function updated_city_courier(x){
+        var courier_information = $('#Courier-option').find(":selected").text().split("-");
+        var Courier = courier_information[0];
+        var Courier_Code = courier_information[1];
+        var response = [{
+            Courier : courier_information[0],
+            Courier_Code : courier_information[1]
+        }]
+            $("#district-courier-option").empty();
+            // alert($('#' + x.id).find(":selected").text());
+            get_all_district_from_courier(response[0].Courier, response[0].Courier_Code, $('#' + x.id).find(":selected").text()).done(function (dis) {
+                var i = 0;
+                for(i ; i < dis.length;i++){
+                    $("#district-courier-option").append(`<option>${dis[i].District}</option>`);
+                }
+                console.log(dis);
+                $("#subdistrict-courier-option").empty();
+                get_all_subdistrict_from_courier(response[0].Courier, response[0].Courier_Code, dis[0].District).done(function (subdis) {
+                    var i = 0;
+                    for(i ; i < subdis.length;i++){
+                        $("#subdistrict-courier-option").append(`<option>${subdis[i].Sub_District}</option>`);
+                    }
+                    update_shipping_fee();
+                });
+            });
+    }
+    
+    function updated_district_courier(x){
+        var courier_information = $('#Courier-option').find(":selected").text().split("-");
+        var Courier = courier_information[0];
+        var Courier_Code = courier_information[1];
+        var response = [{
+            Courier : courier_information[0],
+            Courier_Code : courier_information[1]
+        }]
+                $("#subdistrict-courier-option").empty();
+                get_all_subdistrict_from_courier(response[0].Courier, response[0].Courier_Code, $('#' + x.id).find(":selected").text()).done(function (subdis) {
+                    var i = 0;
+                    for(i ; i < subdis.length;i++){
+                        $("#subdistrict-courier-option").append(`<option>${subdis[i].Sub_District}</option>`);
+                    }
+                    update_shipping_fee();
+                });
+    }
+    
+    function updated_subdistrict_courier(x){
+        console.log("nothing");
+    }
+
+    function update_shipping_fee(){
+        var courier_information = $('#Courier-option').find(":selected").text().split("-");
+        var Courier = courier_information[0];
+        var Courier_Code = courier_information[1];
+        var Province = $('#province-courier-option').find(":selected").text();
+        var City = $('#city-courier-option').find(":selected").text();
+        var District = $('#district-courier-option').find(":selected").text();
+        var Sub_District = $('#subdistrict-courier-option').find(":selected").text();
+        get_shipping_cost_informations(Courier, Courier_Code, Province, City, District, Sub_District).done(function (response) {
+            $("#shipping-fee-courier-option").empty();
+            var i = 0;
+            for(i ; i < response.length;i++){
+                $("#shipping-fee-courier-option").append(`<option>${response[i].delivery_time_in_days}days-${response[i].Courier_Price_Code}</option>`);
+            }
+            $("#estimated-price-courier-option").empty();
+            $("#estimated-price-courier-option").html(`${response[0].Courier_Price_Per_Kg}-Harga/KG`);
+        });
+    }
+
+    function update_estimated_shipping_fee(){
+        var courier_information = $('#shipping-fee-courier-option').find(":selected").text().split("-");
+        var delivery_time_in_days = courier_information[0].split("days");
+        var Courier_Price_Code = courier_information[1];
+
+        var courier_information = $('#Courier-option').find(":selected").text().split("-");
+        var Courier = courier_information[0];
+        var Courier_Code = courier_information[1];
+        var Province = $('#province-courier-option').find(":selected").text();
+        var City = $('#city-courier-option').find(":selected").text();
+        var District = $('#district-courier-option').find(":selected").text();
+        var Sub_District = $('#subdistrict-courier-option').find(":selected").text();
+
+        get_shipping_fee(Courier, Courier_Code, Province, City, District, Sub_District, delivery_time_in_days[0], Courier_Price_Code).done(function (response) {
+            $("#estimated-price-courier-option").empty();
+            $("#estimated-price-courier-option").html(`${response[0].Courier_Price_Per_Kg}-Harga/KG`);
+        });
+    }
 </script>
 </html>
