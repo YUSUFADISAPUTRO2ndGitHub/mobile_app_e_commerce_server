@@ -314,7 +314,7 @@ function personalDetailsWithCurrentAddress(){
             customerId: localStorage.getItem("token"),
             paymentMethod: paymentSelection,
             paymentMethodDetailes: periodSelection,
-            address: $("#sub-saved-address").children("option:selected").val(),
+            address: $("#sub-saved-address").children("option:selected").val() + ". " + $("#subdistrict-courier-option").find(":selected").text() + ", " + $("#district-courier-option").find(":selected").text() + ", " + $("#city-courier-option").find(":selected").text() + ", " + $("#province-courier-option").find(":selected").text() + ", " + $("#zipcode-courier-option").find(":selected").text(),
             fullName: response.First_Name + " " + response.Last_Name,
             contactNumber: response.Contact_Number_1,
             email: response.Email,
@@ -347,6 +347,21 @@ async function sendRequestFinal(paymentSelection){
                 var itemsToCheckout = JSON.parse(localStorage.getItem("itemsToCheckout"));
                 if(localStorage.getItem("finalStep") === null){
                     var requestArrayForItemsToCheckout = [];
+
+                    var courier_information = $('#Courier-option').find(":selected").text().split("-");
+                    var Courier = courier_information[0];
+                    var Courier_Code = courier_information[1];
+                    object = {
+                        name: "Estimated Shipping fee|" + Courier + "|" + Courier_Code,
+                        productCode: Courier_Code,
+                        quantity: 1,
+                        pricePerItem: $("#estimated-price-courier-option").html(),
+                        notes: "estimated shipping fee for this purchase",
+                        totalPrice: $("#estimated-price-courier-option").html(),
+                        GroupCode: ""
+                    };
+                    requestArrayForItemsToCheckout.push(object);
+
                     var i =0;
                     for(i; i < itemsToCheckout.length; i ++){
                         if(response.Product_Code == itemsToCheckout[i].productNo){
@@ -368,6 +383,19 @@ async function sendRequestFinal(paymentSelection){
                     localStorage.setItem("finalStep", productToBeAddedStringify);
                 }else{
                     var finalStep = JSON.parse(localStorage.getItem("finalStep"));
+                    var courier_information = $('#Courier-option').find(":selected").text().split("-");
+                    var Courier = courier_information[0];
+                    var Courier_Code = courier_information[1];
+                    object = {
+                        name: "Estimated Shipping fee|" + Courier + "|" + Courier_Code,
+                        productCode: Courier_Code,
+                        quantity: 1,
+                        pricePerItem: $("#estimated-price-courier-option").html(),
+                        notes: "estimated shipping fee for this purchase",
+                        totalPrice: $("#estimated-price-courier-option").html(),
+                        GroupCode: ""
+                    };
+                    finalStep.push(object);
                     var i =0;
                     for(i; i < itemsToCheckout.length; i ++){
                         if(response.Product_Code == itemsToCheckout[i].productNo){
@@ -434,7 +462,7 @@ function personalDetailsWithNewAddress(address){
             customerId: localStorage.getItem("token"),
             paymentMethod: paymentSelection,
             paymentMethodDetailes: periodSelection,
-            address: address,
+            address: address  + ". " + $("#subdistrict-courier-option").find(":selected").text() + ", " + $("#district-courier-option").find(":selected").text() + ", " + $("#city-courier-option").find(":selected").text() + ", " + $("#province-courier-option").find(":selected").text() + ", " + $("#zipcode-courier-option").find(":selected").text(),
             fullName: response.First_Name + " " + response.Last_Name,
             contactNumber: response.Contact_Number_1,
             email: response.Email,
@@ -504,7 +532,7 @@ async function sendFinalRequestToEnquiryAndEnquiryDetailsWithoutGroupBuy(request
                 }
                 truncateCart();
                 await setTimeout(() => { clearStorage(); }, 2000);
-                await setTimeout(() => {window.location.href = "./cart.html";}, 3000);
+                // await setTimeout(() => {window.location.href = "./cart.html";}, 3000);
             });
         }
     });
@@ -618,7 +646,7 @@ async function reorderJSON(customerDetails, productArr){
                     Shipping_Address: customerDetails.address,
                     Shipping_Contact_Number: response.Contact_Number_1,
                     Payment_Method: customerDetails.paymentMethod,
-                    Shipping_Fee: "0",
+                    Shipping_Fee: $("#estimated-price-courier-option").html(),
                     Primary_Recipient_Name: response.First_Name + " " + response.Last_Name
                 });
             }

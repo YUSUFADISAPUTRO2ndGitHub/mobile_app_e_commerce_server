@@ -148,6 +148,7 @@ function checkQuantityBuyLimit(x){
             swal.fire("Kuantitas tidak sesuai", "", "info");
             $(x).val(1);
         } 
+        update_estimated_shipping_fee();
     });
 }
 
@@ -680,6 +681,7 @@ async function generateGroupBuy(x){
                 // Get the modal
                 var modal = document.getElementById("modal-group-purchase");
                 modal.style.display = "block";
+                initial_render_courier();
             }
         });
     }

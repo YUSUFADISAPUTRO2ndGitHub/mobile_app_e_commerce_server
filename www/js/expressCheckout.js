@@ -84,7 +84,7 @@ async function personalDetailsWithCurrentAddress(){
             customerId: localStorage.getItem("token"),
             paymentMethod: paymentSelection,
             paymentMethodDetailes: periodSelection,
-            address: $("#sub-saved-address").children("option:selected").val(),
+            address: $("#sub-saved-address").children("option:selected").val() + ". " + $("#subdistrict-courier-option").find(":selected").text() + ", " + $("#district-courier-option").find(":selected").text() + ", " + $("#city-courier-option").find(":selected").text() + ", " + $("#province-courier-option").find(":selected").text() + ", " + $("#zipcode-courier-option").find(":selected").text(),
             fullName: response.First_Name + " " + response.Last_Name,
             contactNumber: response.Contact_Number_1,
             email: response.Email,
@@ -124,7 +124,7 @@ async function personalDetailsWithNewAddress(address){
             customerId: localStorage.getItem("token"),
             paymentMethod: paymentSelection,
             paymentMethodDetailes: periodSelection,
-            address: address,
+            address: address + ". " + $("#subdistrict-courier-option").find(":selected").text() + ", " + $("#district-courier-option").find(":selected").text() + ", " + $("#city-courier-option").find(":selected").text() + ", " + $("#province-courier-option").find(":selected").text() + ", " + $("#zipcode-courier-option").find(":selected").text(),
             fullName: response.First_Name + " " + response.Last_Name,
             contactNumber: response.Contact_Number_1,
             email: response.Email,
@@ -173,6 +173,7 @@ async function reorderJSON(customerDetails, productArr){
     var total_quantity = 0;
     var i = 0;
     item_bought = [];
+    console.log(productArr);
     for (i = 0; i < productArr.length; i++){
         if(productArr[i].totalPrice.toUpperCase() != "NaN".toUpperCase() && productArr[i].quantity.toUpperCase() != "NaN".toUpperCase()){
             item_bought.push(
@@ -202,7 +203,7 @@ async function reorderJSON(customerDetails, productArr){
                     Shipping_Address: customerDetails.address,
                     Shipping_Contact_Number: response.Contact_Number_1,
                     Payment_Method: customerDetails.paymentMethod,
-                    Shipping_Fee: "0",
+                    Shipping_Fee: $("#estimated-price-courier-option").html(),
                     Primary_Recipient_Name: response.First_Name + " " + response.Last_Name
                 });
             }
@@ -224,7 +225,20 @@ async function sendRequestFinal(){
         }
         var object = {};
         var requestArrayForItemsToCheckout = [];
-        if(response.Product_Code == $("#product-id").val()){
+        var courier_information = $('#Courier-option').find(":selected").text().split("-");
+        var Courier = courier_information[0];
+        var Courier_Code = courier_information[1];
+        object = {
+            name: "Estimated Shipping fee|" + Courier + "|" + Courier_Code,
+            productCode: Courier_Code,
+            quantity: 1,
+            pricePerItem: $("#estimated-price-courier-option").html(),
+            notes: "estimated shipping fee for this purchase",
+            totalPrice: $("#estimated-price-courier-option").html(),
+            GroupCode: ""
+        };
+        requestArrayForItemsToCheckout.push(object);
+        // if(response.Product_Code == $("#product-id").val()){
             var deliveryFee = 0;
             object = {
                 name: response.Name,
@@ -236,7 +250,7 @@ async function sendRequestFinal(){
                 GroupCode: product
             };
             requestArrayForItemsToCheckout.push(object);
-        }
+        // }
         var productToBeAddedStringify = JSON.stringify(requestArrayForItemsToCheckout);
         localStorage.setItem("finalStep", productToBeAddedStringify);
         console.log(localStorage.getItem("finalStep"));

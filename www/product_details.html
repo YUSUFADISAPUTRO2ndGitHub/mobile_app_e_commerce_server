@@ -948,8 +948,7 @@
             for(i ; i < response.length;i++){
                 $("#shipping-fee-courier-option").append(`<option>${response[i].delivery_time_in_days}days-${response[i].Courier_Price_Code}</option>`);
             }
-            $("#estimated-price-courier-option").empty();
-            $("#estimated-price-courier-option").html(`${response[0].Courier_Price_Per_Kg}-Harga/KG`);
+            update_estimated_shipping_fee();
         });
     }
 
@@ -966,9 +965,20 @@
         var District = $('#district-courier-option').find(":selected").text();
         var Sub_District = $('#subdistrict-courier-option').find(":selected").text();
 
-        get_shipping_fee(Courier, Courier_Code, Province, City, District, Sub_District, delivery_time_in_days[0], Courier_Price_Code).done(function (response) {
+        get_shipping_fee(Courier, Courier_Code, Province, City, District, Sub_District, delivery_time_in_days[0], Courier_Price_Code).done(async function (response) {
             $("#estimated-price-courier-option").empty();
-            $("#estimated-price-courier-option").html(`${response[0].Courier_Price_Per_Kg}-Harga/KG`);
+            var itemsToCheckout = JSON.parse(localStorage.getItem("itemsToCheckout"));
+            console.log("itemsToCheckout " + localStorage.getItem("itemsToCheckout"));
+            var i = 0;
+            var estimated_weight = 0;
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const product = urlParams.get('productid');
+                await getProductsWithProductNo("", "", product).done(function (response) {
+                    // alert("weight " + response.Weight_KG);
+                    estimated_weight = response.Weight_KG * ($(".quantity-express-buy").val() * 1);
+                });
+            $("#estimated-price-courier-option").html(`${response[0].Courier_Price_Per_Kg * Math.ceil(estimated_weight)}`);
         });
     }
 
