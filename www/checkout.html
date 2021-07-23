@@ -238,7 +238,7 @@
                 <tr>
                     <th>PRODUCT NAME</th>
                     <th>QUANTITY</th>
-                    <th>TOTAL PRICE</th>
+                    <th>PRICE</th>
                 </tr>
             </table>
         </div>
@@ -436,8 +436,7 @@
             for(i ; i < response.length;i++){
                 $("#shipping-fee-courier-option").append(`<option>${response[i].delivery_time_in_days}days-${response[i].Courier_Price_Code}</option>`);
             }
-            $("#estimated-price-courier-option").empty();
-            $("#estimated-price-courier-option").html(`${response[0].Courier_Price_Per_Kg}-Harga/KG`);
+            update_estimated_shipping_fee();
         });
     }
 
@@ -454,11 +453,21 @@
         var District = $('#district-courier-option').find(":selected").text();
         var Sub_District = $('#subdistrict-courier-option').find(":selected").text();
 
-        get_shipping_fee(Courier, Courier_Code, Province, City, District, Sub_District, delivery_time_in_days[0], Courier_Price_Code).done(function (response) {
+        get_shipping_fee(Courier, Courier_Code, Province, City, District, Sub_District, delivery_time_in_days[0], Courier_Price_Code).done(async function (response) {
             $("#estimated-price-courier-option").empty();
-            $("#estimated-price-courier-option").html(`${response[0].Courier_Price_Per_Kg}-Harga/KG`);
+            var itemsToCheckout = JSON.parse(localStorage.getItem("itemsToCheckout"));
+            console.log("itemsToCheckout " + localStorage.getItem("itemsToCheckout"));
+            var i = 0;
+            var estimated_weight = 0;
+            for(i; i < itemsToCheckout.length; i ++){
+                await getProductsWithProductNo("", "", itemsToCheckout[i].productNo).done(function (response) {
+                    estimated_weight = response.Weight_KG * itemsToCheckout[i].quantity;
+                });
+            }
+            // alert(Math.ceil(estimated_weight));
+            $("#estimated-price-courier-option").html(`${response[0].Courier_Price_Per_Kg * Math.ceil(estimated_weight)}`);
         });
     }
-    
+
 </script>
 </html>

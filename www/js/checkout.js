@@ -124,7 +124,7 @@ function listPaymentMethods(){
 
 function loadCheckoutFinalConfirmationTable(condition){
     $(".final_checkout").empty();
-    $(".final_checkout").append("<tr><th>PRODUCT NAME</th><th>QUANTITY</th><th>TOTAL PRICE</th></tr>");
+    $(".final_checkout").append("<tr><th>PRODUCT NAME</th><th>QUANTITY</th><th>PRICE</th></tr>");
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const check_store_price = urlParams.get('check_store_price');
