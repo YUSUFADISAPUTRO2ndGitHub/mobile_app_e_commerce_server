@@ -61,12 +61,22 @@
     }
     #normal-transfer-selected{
         display: none;
-        background-image: url('../www/img/Additional_icons/bca.png');
-        background-repeat: no-repeat; 
-        background-size: 100%;
+        background-color: #37ced5;
     }
     .card{
-        border-radius: 0;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        background-color: #217384;
+    }
+    #estimate-price-courier-option{
+        background-color: #217384;
+        color: white;
+        font-weight: 700;
+    }
+    .card-img-top{
+        border: solid 1px #217384 !important;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
 
     .city-selection{
@@ -81,7 +91,10 @@
     }
 
     table, td, th {
-        border: 1px solid black;
+        border: none;
+        color: white;
+        background-color: #217384;
+        text-align: center;
     }
 
     table {
@@ -100,6 +113,13 @@
     .alert-primary{
         background-color: #217384 !important;
         color: white !important;
+        border: none;
+    }
+    .btn-primary{
+        width: 100% !important;
+        border: none;
+        background-color: white;
+        color: #217384;
     }
 </style>
 <body class=".body">
@@ -119,10 +139,8 @@
             </select>
             <br>
             <div class="form-control" id="normal-transfer-selected">
-                <div class="card">
-                    <div class="card-body">
-                        <img class="card-img-top" src="./img/bca_account_number.png">
-                    </div>
+                <div class="card-body">
+                    <img class="card-img-top" src="./img/bca_account_number.png">
                 </div>
                 <div class="alert alert-danger" role="alert">
                     <p class="card-text">Jangan lupa untuk simpan informasi diatas, untuk melakukan pembayaran</p>
@@ -156,13 +174,58 @@
                 <textarea id="street" class="form-control" placeholder="Alamat lengkap pengiriman Anda" rows="3" onchange="checkingSpecialCharacter(this)" required></textarea>
             </div>
             <br>
-            <div class="form-group">
-                <div class="alert alert-primary" role="alert">
-                    Delivery Courier
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text">Kurir</label>
+                        <select class="form-select" id="Courier-option" onchange="updated_courier(this)">
+                            <option>Tiki</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text">Provinsi</label>
+                        <select class="form-select" id="province-courier-option" onchange="updated_province_courier(this)">
+                            <option>One</option>
+                            <option>Two</option>
+                            <option>Three</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text">Kota/Kabupaten</label>
+                        <select class="form-select" id="city-courier-option" onchange="updated_city_courier(this)">
+                            <option>One</option>
+                            <option>Two</option>
+                            <option>Three</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text">Kecamatan</label>
+                        <select class="form-select" id="district-courier-option" onchange="updated_district_courier(this)">
+                            <option>One</option>
+                            <option>Two</option>
+                            <option>Three</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text">Kelurahan</label>
+                        <select class="form-select" id="subdistrict-courier-option" onchange="updated_subdistrict_courier(this)">
+                            <option>One</option>
+                            <option>Two</option>
+                            <option>Three</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Zipcode/Postal Code</span>
+                        <input type="text" class="form-control" id="zipcode-courier-option">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Estimasi harga pengiriman Rp.</span>
+                        <span class="input-group-text" id="estimate-price-courier-option">0.00</span>
+                    </div>
                 </div>
-                <select class="form-control" id="courier-selection" onchange="revise_delivery_fee()">
-                </select>
             </div>
+
             <br>
             <div class="alert alert-primary" role="alert">
                 BARANG-BARANG UNTUK DI BELI SEKARANG
@@ -216,4 +279,23 @@
         </div>
     </div>
 </body>
+<script>
+    function updated_courier(x){
+        alert($('#' + x.id).find(":selected").text());
+    }
+    function updated_province_courier(x){
+        alert($('#' + x.id).find(":selected").text());
+        $("#city-courier-option").empty();
+        $("#city-courier-option").append('<option>asdasdasdas</option>');
+    }
+    function updated_city_courier(x){
+        alert($('#' + x.id).find(":selected").text());
+    }
+    function updated_district_courier(x){
+        alert($('#' + x.id).find(":selected").text());
+    }
+    function updated_subdistrict_courier(x){
+        alert($('#' + x.id).find(":selected").text());
+    }
+</script>
 </html>

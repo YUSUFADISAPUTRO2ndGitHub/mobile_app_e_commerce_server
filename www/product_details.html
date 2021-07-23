@@ -200,7 +200,6 @@
         color: #37ced5;
     }
     #main-name{
-        font-weight:900;
         color: #217384;
         text-transform: uppercase;
     }
@@ -245,10 +244,10 @@
 
     /* The Close Button */
     .close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+        color: white;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
     }
 
 
@@ -430,6 +429,41 @@
         background-position: 0 0;
     }
     }
+
+
+    .modal-content{
+        border-radius: 10px !important;
+        background-color: #217384 !important;
+        color: white !important;
+    }
+    .alert-primary{
+        background-color: #217384;
+        color: white;
+        border: none;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 10px;
+    }
+    .form-control{
+         background-color: white;
+         color: #217384;
+         border: none;
+         border-radius: 10px;
+         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    .btn-primary{
+        background-color: white;
+        color: #217384;
+        border-radius: 30px;
+        border: none;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    .courier-area{
+        background-color: #217384;
+        color: white;
+        border-radius: 30px;
+        border: none;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
 </style>
 <body>
     <!-- The Modal -->
@@ -493,6 +527,56 @@
             <br>
             <div class="alert alert-primary delivery-cost" role="alert">
                 Biaya pengiriman saat ini gratis
+            </div>
+            <div class="card courier-area">
+                <div class="card-body">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text">Kurir</label>
+                        <select class="form-select" id="Courier-option" onchange="updated_courier(this)">
+                            <option>Tiki</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text">Provinsi</label>
+                        <select class="form-select" id="province-courier-option" onchange="updated_province_courier(this)">
+                            <option>One</option>
+                            <option>Two</option>
+                            <option>Three</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text">Kota/Kabupaten</label>
+                        <select class="form-select" id="city-courier-option" onchange="updated_city_courier(this)">
+                            <option>One</option>
+                            <option>Two</option>
+                            <option>Three</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text">Kecamatan</label>
+                        <select class="form-select" id="district-courier-option" onchange="updated_district_courier(this)">
+                            <option>One</option>
+                            <option>Two</option>
+                            <option>Three</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text">Kelurahan</label>
+                        <select class="form-select" id="subdistrict-courier-option" onchange="updated_subdistrict_courier(this)">
+                            <option>One</option>
+                            <option>Two</option>
+                            <option>Three</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Zipcode/Postal Code</span>
+                        <input type="text" class="form-control" id="zipcode-courier-option">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Estimasi harga pengiriman Rp.</span>
+                        <span class="input-group-text" id="estimate-price-courier-option">0.00</span>
+                    </div>
+                </div>
             </div>
             <br>
             <button type="button" class="btn btn-primary" onclick="confirmedPurchaseGroupBuy()">BUY NOW!</button>
@@ -559,6 +643,8 @@
                                 <button type="button" class="product-details-button-main product-details-button add-cart-button" onclick="addToCartDirectlyFromProductDetails()">
                                     Tambah <img class="independent-cart-icon" src="../www/img/Additional_icons/shopping-cart.png" class="category-icon" >
                                 </button>
+                                <br>
+                                <br>
                                 <h5 id="main-name"class="card-text">
                                 </h5>
                                 <h5 class="card-text">
