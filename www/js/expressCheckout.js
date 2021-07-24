@@ -139,6 +139,24 @@ async function personalDetailsWithNewAddress(address){
     });
 }
 
+
+function add_delivery_fee(productArr){
+    var courier_information = $('#Courier-option').find(":selected").text().split("-");
+    var Courier = courier_information[0];
+    var Courier_Code = courier_information[1];
+    object = {
+        name: "Estimated Shipping fee|" + Courier + "|" + Courier_Code,
+        productCode: Courier_Code,
+        quantity: 1,
+        pricePerItem: $("#estimated-price-courier-option").html(),
+        notes: "estimated shipping fee for this purchase",
+        totalPrice: $("#estimated-price-courier-option").html(),
+        GroupCode: ""
+    };
+    productArr.push(object);
+    return productArr;
+}
+
 async function sendFinalRequestToEnquiryAndEnquiryDetails(request){
     loadingMessage(10000);
     var orderArr = JSON.stringify([request]);
