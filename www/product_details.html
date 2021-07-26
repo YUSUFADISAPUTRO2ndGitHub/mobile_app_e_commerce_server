@@ -748,6 +748,7 @@
     
     function initial_render_courier(){
         get_all_couriers().done(function (response) {
+            $("#Courier-option").empty()
             var i = 0;
             for(i ; i < response.length;i++){
                 $("#Courier-option").append(`<option>${response[i].Courier}-${response[i].Courier_Code}</option>`);
