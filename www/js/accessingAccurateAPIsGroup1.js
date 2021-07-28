@@ -227,9 +227,13 @@ function get_all_subdistrict_from_courier(Courier, Courier_Code, District){
     
     return $.ajax(settings);
 }
-function get_shipping_cost_informations(Courier, Courier_Code, Province, City, District, Sub_District){
+function get_shipping_cost_informations(Courier_Price_Code_orig
+    , Courier_Price_Code_dest
+    , packing_type
+    , weight
+    , paket_value){
     var settings = {
-        "url": `http://products.sold.co.id/get-shipping-option-data?Get_Shipping_Fee=true&Courier=${Courier}&Courier_Code=${Courier_Code}&Province=${Province}&City=${City}&District=${District}&Sub_District=${Sub_District}`,
+        "url": `http://products.sold.co.id/get-shipping-option-data?Courier_Price_Code_orig=${Courier_Price_Code_orig}&Courier_Price_Code_dest=${Courier_Price_Code_dest}&packing_type=${packing_type}&weight=${weight}&paket_value=${paket_value}&Get_Shipping_Fee=true`,
         "method": "POST",
         "timeout": 0,
     };

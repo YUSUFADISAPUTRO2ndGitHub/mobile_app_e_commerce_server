@@ -276,17 +276,16 @@ function fillingInInformations(productNo){
                     // alert(response.targetGroupBuy);
                     $("#group-purchase-quantity-target").html(response.GroupBuy_SellQuantity);
                 }
-                getUnpaidOrderPerProduct(productCode, localStorage.getItem("token")).done(function (response) {
+                get_upaid_order_from_product_code_and_customer_code(localStorage.getItem("token"), productNo).done(function (response) {
+                // getUnpaidOrderPerProduct(productCode, localStorage.getItem("token")).done(function (response) {
                     console.log(response);
-                    $("#discount-code").css("display", "none");
-                    if(response.Payment_Status == "waitpay"){
+                    if(!response){
+                        $("#discount-code").css("display", "none");
                         $("#payment-not-received").css("display", "block");
-                        $("#va-number").html("12943" + response.orderNumber);
                     }else{
                         $("#discount-code").css("display", "block");
                     }
                 });
-                console.log("here");
                 //checkTotalQuantityGroupBuySoFarGrossFigure
                 getGroupBuyQuantitySoFarGross(productCode).done(function (response) {
                     console.log(response);

@@ -1,13 +1,15 @@
 $(document).ready(function(){
     getAllUnpaidOrdersForThisCustomer(localStorage.getItem("token"), "").done(function (response) {
-        if(response.length != 0){
-            Swal.fire({
-                icon: 'warning',
-                title: 'Kamu Memiliki pesanan yang belum dibayar',
-                // text: 'Segera bayar pesanan Anda',
-                footer: '<a href=\'./unpaidOrders.html\'>Click disini untuk memeriksa pesanan Anda yang belum dibayar</a>'
-            })
-        }
+        setTimeout(() => {
+            if(response.length != 0){
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Kamu Memiliki pesanan yang belum dibayar',
+                    // text: 'Segera bayar pesanan Anda',
+                    footer: '<a href=\'./unpaidOrders.html\'>Click disini untuk memeriksa pesanan Anda yang belum dibayar</a>'
+                })
+            }
+        }, 10000);
     });
 });
 

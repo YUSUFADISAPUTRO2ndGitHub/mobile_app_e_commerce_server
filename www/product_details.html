@@ -497,6 +497,13 @@
                         <select class="form-select" id="Courier-option" onchange="updated_courier(this)">
                         </select>
                     </div>
+                    <div class="mb-3">
+                        <label class="input-group-text">Pilihan tambahan packaging pengiriman</label>
+                        <select class="form-select" id="shipping-packaging-courier-option" onchange="pallet_packaging_request()">
+                            <option>NORMAL</option>
+                            <option>PACKING_KAYU</option>
+                        </select>
+                    </div>
                     <div class="input-group mb-3">
                         <label class="input-group-text">Provinsi</label>
                         <select class="form-select" id="province-courier-option" onchange="updated_province_courier(this)">
@@ -531,15 +538,24 @@
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text">Zipcode</span>
-                        <input type="text" class="form-control" id="zipcode-courier-option">
+                        <select class="form-select" id="zipcode-courier-option">
+                            <option>One</option>
+                            <option>Two</option>
+                            <option>Three</option>
+                        </select>
                     </div>
-                    <div class="input-group mb-3">
-                        <label class="input-group-text">Waktu</label>
+                    <div class="mb-3">
+                        <label class="input-group-text">Pilihan Harga Pengiriman</label>
                         <select class="form-select" id="shipping-fee-courier-option" onchange="update_estimated_shipping_fee()">
                         </select>
                     </div>
+                    <div class="mb-3">
+                        <label class="input-group-text">Pilihan asuransi pengiriman</label>
+                        <select class="form-select" id="shipping-insurance-courier-option" onchange="update_estimated_shipping_fee()">
+                        </select>
+                    </div>
                     <div class="input-group mb-3">
-                        <span class="input-group-text">Harga pengiriman:</span>
+                        <span class="input-group-text">Estimasi harga pengiriman:</span>
                         <span class="input-group-text" id="estimated-price-courier-option">0.00</span>
                     </div>
                     <div>Harga pengiriman diatas hanyalah estimasi, jika terjadi penyesuaian harga pengiriman maka customer service kami akan menghubungin Anda untuk melalukan process lebih lanjut.</div>
@@ -777,12 +793,14 @@
                         $("#district-courier-option").append(`<option>${dis[i].District}</option>`);
                     }
                     $("#subdistrict-courier-option").empty();
+                    $("#zipcode-courier-option").empty();
                     get_all_subdistrict_from_courier(response[0].Courier, response[0].Courier_Code, dis[0].District).done(function (subdis) {
                         var i = 0;
-                        for(i ; i < subdis.length;i++){
+                        for(i ; i < subdis.length;i++){//zipcode-courier-option
                             $("#subdistrict-courier-option").append(`<option>${subdis[i].Sub_District}</option>`);
+                            $("#zipcode-courier-option").append(`<option>${subdis[i].Zipcode}</option>`);
                         }
-                        update_shipping_fee();
+                        update_shipping_fee(subdis[0].Courier_Price_Code, "");
                     });
                 });
             });
@@ -821,12 +839,14 @@
                     $("#district-courier-option").append(`<option>${dis[i].District}</option>`);
                 }
                 $("#subdistrict-courier-option").empty();
+                $("#zipcode-courier-option").empty();
                 get_all_subdistrict_from_courier(response[0].Courier, response[0].Courier_Code, dis[0].District).done(function (subdis) {
                     var i = 0;
                     for(i ; i < subdis.length;i++){
                         $("#subdistrict-courier-option").append(`<option>${subdis[i].Sub_District}</option>`);
+                        $("#zipcode-courier-option").append(`<option>${subdis[i].Zipcode}</option>`);
                     }
-                    update_shipping_fee();
+                    update_shipping_fee(subdis[0].Courier_Price_Code, "");
                 });
             });
         });
@@ -849,12 +869,14 @@
                 }
                 console.log(dis);
                 $("#subdistrict-courier-option").empty();
+                $("#zipcode-courier-option").empty();
                 get_all_subdistrict_from_courier(response[0].Courier, response[0].Courier_Code, dis[0].District).done(function (subdis) {
                     var i = 0;
                     for(i ; i < subdis.length;i++){
                         $("#subdistrict-courier-option").append(`<option>${subdis[i].Sub_District}</option>`);
+                        $("#zipcode-courier-option").append(`<option>${subdis[i].Zipcode}</option>`);
                     }
-                    update_shipping_fee();
+                    update_shipping_fee(subdis[0].Courier_Price_Code, "");
                 });
             });
     }
@@ -868,12 +890,14 @@
             Courier_Code : courier_information[1]
         }]
                 $("#subdistrict-courier-option").empty();
+                $("#zipcode-courier-option").empty();
                 get_all_subdistrict_from_courier(response[0].Courier, response[0].Courier_Code, $('#' + x.id).find(":selected").text()).done(function (subdis) {
                     var i = 0;
                     for(i ; i < subdis.length;i++){
                         $("#subdistrict-courier-option").append(`<option>${subdis[i].Sub_District}</option>`);
+                        $("#zipcode-courier-option").append(`<option>${subdis[i].Zipcode}</option>`);
                     }
-                    update_shipping_fee();
+                    update_shipping_fee(subdis[0].Courier_Price_Code, "");
                 });
     }
     
@@ -881,52 +905,84 @@
         console.log("nothing");
     }
 
-    function update_shipping_fee(){
-        var courier_information = $('#Courier-option').find(":selected").text().split("-");
-        var Courier = courier_information[0];
-        var Courier_Code = courier_information[1];
-        var Province = $('#province-courier-option').find(":selected").text();
-        var City = $('#city-courier-option').find(":selected").text();
-        var District = $('#district-courier-option').find(":selected").text();
-        var Sub_District = $('#subdistrict-courier-option').find(":selected").text();
-        get_shipping_cost_informations(Courier, Courier_Code, Province, City, District, Sub_District).done(function (response) {
-            $("#shipping-fee-courier-option").empty();
-            var i = 0;
-            for(i ; i < response.length;i++){
-                $("#shipping-fee-courier-option").append(`<option>${response[i].delivery_time_in_days}days-${response[i].Courier_Price_Code}</option>`);
+    function update_shipping_fee(Courier_Price_Code_dest, packaging){
+        var estimated_weight = 0;
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const product = urlParams.get('productid');
+        getProductsWithProductNo("", "", product).done(function (response_product) {
+            estimated_weight = estimated_weight + (response_product.Weight_KG * ($(".quantity-express-buy").val() * 1));
+            if(estimated_weight <= 0){
+                estimated_weight = 0.1;
             }
-            update_estimated_shipping_fee();
+            get_shipping_cost_informations("CGK01.00"
+            , Courier_Price_Code_dest
+            , packaging
+            , `${estimated_weight}`
+            , "10000").done(function (response) {
+                $("#shipping-fee-courier-option").empty();
+                $("#shipping-insurance-courier-option").empty();
+                var i = 0;
+                if(response.service != undefined){
+                    $("#shipping-insurance-courier-option").append(`<option>type 0 tidak berasuransi</option>`);
+                    for(i ; i < response.service.length;i++){
+                        $("#shipping-fee-courier-option").append(`<option>${response.service[i].EST_DAY}days ${response.service[i].SERVICE} ${response.service[i].TARIFF} ${response.service[i].DESCRIPTION}</option>`);
+                        $("#shipping-insurance-courier-option").append(`<option>type ${response.insurance[i].INSURANCE_TYPE} ${response.insurance[i].INSURANCE_NAME} ${response.insurance[i].INSURANCE_COST}</option>`);
+                    }
+                }
+            });
         });
     }
 
+    function pallet_packaging_request(){
+        if($('#shipping-packaging-courier-option').find(":selected").text() == "PACKING_KAYU"){
+            var courier_information = $('#Courier-option').find(":selected").text().split("-");
+            var Courier = courier_information[0];
+            var Courier_Code = courier_information[1];
+            var response = [{
+                Courier : courier_information[0],
+                Courier_Code : courier_information[1]
+            }]
+            $("#subdistrict-courier-option").empty();
+            $("#zipcode-courier-option").empty();
+            get_all_subdistrict_from_courier(response[0].Courier, response[0].Courier_Code, $("#subdistrict-courier-option").find(":selected").text()).done(function (subdis) {
+                var i = 0;
+                for(i ; i < subdis.length;i++){
+                    $("#subdistrict-courier-option").append(`<option>${subdis[i].Sub_District}</option>`);
+                    $("#zipcode-courier-option").append(`<option>${subdis[i].Zipcode}</option>`);
+                }
+                update_shipping_fee(subdis[0].Courier_Price_Code, "PACKING_KAYU");
+            });
+        }else{
+            var courier_information = $('#Courier-option').find(":selected").text().split("-");
+            var Courier = courier_information[0];
+            var Courier_Code = courier_information[1];
+            var response = [{
+                Courier : courier_information[0],
+                Courier_Code : courier_information[1]
+            }]
+            $("#subdistrict-courier-option").empty();
+            $("#zipcode-courier-option").empty();
+            get_all_subdistrict_from_courier(response[0].Courier, response[0].Courier_Code, $("#subdistrict-courier-option").find(":selected").text()).done(function (subdis) {
+                var i = 0;
+                for(i ; i < subdis.length;i++){
+                    $("#subdistrict-courier-option").append(`<option>${subdis[i].Sub_District}</option>`);
+                    $("#zipcode-courier-option").append(`<option>${subdis[i].Zipcode}</option>`);
+                }
+                update_shipping_fee(subdis[0].Courier_Price_Code, "");
+            });
+        }
+    }
+
     function update_estimated_shipping_fee(){
-        var courier_information = $('#shipping-fee-courier-option').find(":selected").text().split("-");
-        var delivery_time_in_days = courier_information[0].split("days");
-        var Courier_Price_Code = courier_information[1];
-
-        var courier_information = $('#Courier-option').find(":selected").text().split("-");
-        var Courier = courier_information[0];
-        var Courier_Code = courier_information[1];
-        var Province = $('#province-courier-option').find(":selected").text();
-        var City = $('#city-courier-option').find(":selected").text();
-        var District = $('#district-courier-option').find(":selected").text();
-        var Sub_District = $('#subdistrict-courier-option').find(":selected").text();
-
-        get_shipping_fee(Courier, Courier_Code, Province, City, District, Sub_District, delivery_time_in_days[0], Courier_Price_Code).done(async function (response) {
-            $("#estimated-price-courier-option").empty();
-            var itemsToCheckout = JSON.parse(localStorage.getItem("itemsToCheckout"));
-            console.log("itemsToCheckout " + localStorage.getItem("itemsToCheckout"));
-            var i = 0;
-            var estimated_weight = 0;
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            const product = urlParams.get('productid');
-                await getProductsWithProductNo("", "", product).done(function (response) {
-                    // alert("weight " + response.Weight_KG);
-                    estimated_weight = estimated_weight + (response.Weight_KG * ($(".quantity-express-buy").val() * 1));
-                });
-            $("#estimated-price-courier-option").html(`${response[0].Courier_Price_Per_Kg * Math.ceil(estimated_weight)}`);
-        });
+        var courier_information = $('#shipping-fee-courier-option').find(":selected").text().split(" ");
+        var insurance_information = $('#shipping-insurance-courier-option').find(":selected").text().split(" ");
+        if(insurance_information[1] != "0"){
+            var total_fee = courier_information[2]*1 + insurance_information[insurance_information.length -1]*1;
+            $("#estimated-price-courier-option").html(`${total_fee}`);
+        }else{
+            $("#estimated-price-courier-option").html(`${courier_information[2]}`);
+        }
     }
     setInterval(() => {
         update_estimated_shipping_fee();

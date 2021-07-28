@@ -145,11 +145,11 @@ function add_delivery_fee(productArr){
     var Courier = courier_information[0];
     var Courier_Code = courier_information[1];
     object = {
-        name: "Estimated Shipping fee|" + Courier + "|" + Courier_Code,
+        name: $('#shipping-fee-courier-option').find(":selected").text() + " " + $('#shipping-insurance-courier-option').find(":selected").text() + " " + $('#shipping-packaging-courier-option').find(":selected").text(),
         productCode: Courier_Code,
         quantity: 1,
         pricePerItem: $("#estimated-price-courier-option").html(),
-        notes: "estimated shipping fee for this purchase",
+        notes: $('#shipping-fee-courier-option').find(":selected").text() + " " + $('#shipping-insurance-courier-option').find(":selected").text() + " " + $('#shipping-packaging-courier-option').find(":selected").text(),
         totalPrice: $("#estimated-price-courier-option").html(),
         GroupCode: ""
     };
@@ -261,11 +261,11 @@ async function sendRequestFinal(){
         var Courier = courier_information[0];
         var Courier_Code = courier_information[1];
         object = {
-            name: "Estimated Shipping fee|" + Courier + "|" + Courier_Code,
+            name: $('#shipping-fee-courier-option').find(":selected").text() + " " + $('#shipping-insurance-courier-option').find(":selected").text() + " " + $('#shipping-packaging-courier-option').find(":selected").text(),
             productCode: Courier_Code,
             quantity: 1,
             pricePerItem: $("#estimated-price-courier-option").html(),
-            notes: "estimated shipping fee for this purchase",
+            notes: $('#shipping-fee-courier-option').find(":selected").text() + " " + $('#shipping-insurance-courier-option').find(":selected").text() + " " + $('#shipping-packaging-courier-option').find(":selected").text(),
             totalPrice: $("#estimated-price-courier-option").html(),
             GroupCode: ""
         };
