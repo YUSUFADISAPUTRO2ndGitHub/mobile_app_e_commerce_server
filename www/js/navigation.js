@@ -6,6 +6,7 @@ $(document).ready(function(){
 
     // index.html
     $("#home").click(function(){
+        clearStorage();
         $(".navbar-bottom-icon").removeClass("active");
         $("#home-icon").toggleClass("active");
         $(".content_iframe").attr("src","./home.html");
@@ -13,6 +14,7 @@ $(document).ready(function(){
     });
 
     $("#categories").click(function(){
+        clearStorage();
         $(".navbar-bottom-icon").removeClass("active");
         $("#categories-icon").toggleClass("active");
         $(".content_iframe").attr("src","./category.html");
@@ -20,6 +22,7 @@ $(document).ready(function(){
     });
 
     $("#cart").click(function(){
+        clearStorage();
         $(".navbar-bottom-icon").removeClass("active");
         $("#cart-icon").toggleClass("active");
         $("#cart-icon-top").toggleClass("active");
@@ -29,6 +32,7 @@ $(document).ready(function(){
     });
 
     $("#cart-top").click(function(){
+        clearStorage();
         $(".navbar-bottom-icon").removeClass("active");
         $("#cart-icon").toggleClass("active");
         $("#cart-icon-top").toggleClass("active");
@@ -38,6 +42,7 @@ $(document).ready(function(){
     });
 
     $("#account").click(function(){
+        clearStorage();
         $(".content_iframe_floating").css("display", "none");
         $(".navbar-bottom-icon").removeClass("active");
         $("#account-icon").toggleClass("active");
@@ -50,6 +55,7 @@ $(document).ready(function(){
     });
 
     $("#scan-qr").click(function(){
+        clearStorage();
         $(".content_iframe_floating").css("display", "none");
         $(".navbar-bottom-icon").removeClass("active");
         $("#scan-qr-icon").toggleClass("active");
@@ -58,6 +64,7 @@ $(document).ready(function(){
 
     // delivery
     $("#delivery-icon").click(function(){
+        clearStorage();
         $(".content_iframe_floating").css("display", "none");
         $(".navbar-bottom-icon").removeClass("active");
         $("#delivery-icon").toggleClass("active");
@@ -72,7 +79,7 @@ $(document).ready(function(){
 
     // search 
     $("#search").click(function(){
-
+        clearStorage();
         // alert($("#search-input").val());
         $(".content_iframe_floating").css("display", "none");
         $(".content_iframe").attr("src","./search_results.html?input=" + $("#search-input").val());
@@ -80,26 +87,31 @@ $(document).ready(function(){
 
     // category from home.html
     $("#category-icon-from-home").click(function(){
+        clearStorage();
         window.location.href = "./category.html";
     });
     // contact us from delivery.html
     $("#contact-us").click(function(){
+        clearStorage();
         window.location.href = "./contact.html";
     });
 
     //live chat
     $("#live-chat").click(function(){
+        clearStorage();
         window.location.href = "./contact_us_now.html";
     });
 });
 
 // getting product details
 function redirectProductDetails(product, productid, productName){
+    clearStorage();
     window.location.href = "./product_details.html?productid="+productid+"&productName="+productName;
 }
 
 // getting list with condition from category
 function redirectToList(category){
+    clearStorage();
     window.location.href = "./search_results.html?category="+category; // sample
 }
 
@@ -111,6 +123,7 @@ var googleClientSecret = 'iJGwsXBZUiqKMYECHqdu2AxA';
 
 
 function get_live_chat(){
+    clearStorage();
     if(localStorage.getItem("token") != ""){
         getCustomersWithCustomerNo(localStorage.getItem("token")).done(function (response) {
             console.log(response);
@@ -124,4 +137,13 @@ function get_live_chat(){
         $(".content_iframe_floating").css("display", "none");
         $("#customer-service-help-line-icon").css("display", "none");
     }
+}
+
+function clearStorage(){
+    var requestArrayForItemsToCheckout = [];
+    var productToBeAddedStringify = JSON.stringify(requestArrayForItemsToCheckout);
+    localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
+    var requestArrayForItemsToCheckout = [];
+    var productToBeAddedStringify = JSON.stringify(requestArrayForItemsToCheckout);
+    localStorage.setItem("finalStep", productToBeAddedStringify);
 }
