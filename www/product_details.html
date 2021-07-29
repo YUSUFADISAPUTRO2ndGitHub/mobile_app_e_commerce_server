@@ -453,7 +453,7 @@
                 KUANTITAS BARANG
             </div>
             <div class="form-group">
-                <input type="number" class="form-control quantity-express-buy" value=1 onclick="checkQuantityBuyLimit(this)">
+                <input type="number" class="form-control quantity-express-buy" value=1 onchange="checkQuantityBuyLimit(this)">
             </div>
             <br>
             <div class="alert alert-primary" role="alert">
@@ -500,8 +500,6 @@
                     <div class="mb-3">
                         <label class="input-group-text">Pilihan tambahan packaging pengiriman</label>
                         <select class="form-select" id="shipping-packaging-courier-option" onchange="pallet_packaging_request()">
-                            <option>NORMAL</option>
-                            <option>PACKING_KAYU</option>
                         </select>
                     </div>
                     <div class="input-group mb-3">
@@ -914,15 +912,16 @@
         var estimated_volume_height = 0;
         var estimated_volume_length = 0;
         var estimated_total_price = 0;
-        getProductsWithProductNo("", "", product).done(function (response_product) {
-            estimated_weight = estimated_weight + (response_product.Weight_KG * ($(".quantity-express-buy").val() * 1));
+        loadingUpdateQuantity(10);
+        getProductsWithProductNo("", "", product).done(function (response) {
+            estimated_weight = estimated_weight + (response.Weight_KG * ($(".quantity-express-buy").val() * 1));
             if(estimated_weight <= 0 || estimated_weight == null || estimated_weight == undefined || Number.isNaN(estimated_weight)){
                 estimated_weight = 0.1*1.5;
             }else{
                 estimated_weight = estimated_weight*1*1.5;
             }
             if(response.Dimension_CM_CUBIC != null || response.Dimension_CM_CUBIC != "null" || response.Dimension_CM_CUBIC != undefined || Number.isNaN(response.Dimension_CM_CUBIC)){
-                var splitted_dimension = (response.Dimension_CM_CUBIC*1).split("*");
+                var splitted_dimension = (response.Dimension_CM_CUBIC).split("*");
                 estimated_volume_length = estimated_volume_length + (splitted_dimension[0] * ($(".quantity-express-buy").val() * 1));
                 estimated_volume_width = estimated_volume_length + (splitted_dimension[1] * ($(".quantity-express-buy").val() * 1));
                 estimated_volume_height = estimated_volume_length + (splitted_dimension[2] * ($(".quantity-express-buy").val() * 1));
@@ -932,6 +931,12 @@
                 estimated_volume_height = estimated_volume_length + (0.1*1.5 * ($(".quantity-express-buy").val() * 1));
             }
             estimated_total_price = estimated_total_price + (response.Sell_Price * 1 * ($(".quantity-express-buy").val() * 1)); 
+            // alert(estimated_weight);
+            // alert($(".quantity-express-buy").val() * 1);
+            loadingUpdateQuantity(5.5);
+            if(packaging == "PACKING KAYU"){
+                packaging = "PACKING_KAYU";
+            }
             get_shipping_cost_informations("CGK01.00"
             , Courier_Price_Code_dest
             , packaging
@@ -940,6 +945,7 @@
             , estimated_volume_width
             , estimated_volume_height
             , estimated_total_price).done(function (response) {
+                loadingUpdateQuantity(1);
                 $("#shipping-fee-courier-option").empty();
                 $("#shipping-insurance-courier-option").empty();
                 var i = 0;
@@ -947,15 +953,34 @@
                     $("#shipping-insurance-courier-option").append(`<option>type 0 tidak berasuransi</option>`);
                     for(i ; i < response.service.length;i++){
                         $("#shipping-fee-courier-option").append(`<option>${response.service[i].EST_DAY}days ${response.service[i].SERVICE} ${response.service[i].TARIFF} ${response.service[i].DESCRIPTION}</option>`);
-                        $("#shipping-insurance-courier-option").append(`<option>type ${response.insurance[i].INSURANCE_TYPE} ${response.insurance[i].INSURANCE_NAME} ${response.insurance[i].INSURANCE_COST}</option>`);
+                        if(response.insurance[i] != undefined){
+                            if(response.insurance[i].INSURANCE_TYPE != undefined
+                                && response.insurance[i].INSURANCE_NAME != undefined
+                                && response.insurance[i].INSURANCE_COST != undefined
+                            ){
+                                $("#shipping-insurance-courier-option").append(`<option>type ${response.insurance[i].INSURANCE_TYPE} ${response.insurance[i].INSURANCE_NAME} ${response.insurance[i].INSURANCE_COST}</option>`);
+                            }
+                        }
+                        $("#shipping-packaging-courier-option").empty();
+                        $("#shipping-packaging-courier-option").append(`<option>NORMAL</option>`);
+                        if(response.packing[i] != undefined){
+                            if(response.packing[i].PACKING_TYPE != undefined
+                                && response.packing[i].PACKING_FEE != undefined
+                            ){
+                                $("#shipping-packaging-courier-option").append(`<option>${response.packing[i].PACKING_TYPE} ${response.packing[i].PACKING_FEE}</option>`);
+                            }
+                        }
                     }
+                    update_estimated_shipping_fee();
                 }
             });
         });
     }
 
     function pallet_packaging_request(){
-        if($('#shipping-packaging-courier-option').find(":selected").text() == "PACKING_KAYU"){
+        loadingUpdateQuantity(10);
+        if($('#shipping-packaging-courier-option').find(":selected").text() == "PACKING KAYU"){
+            // alert("HERE KAYU");
             var courier_information = $('#Courier-option').find(":selected").text().split("-");
             var Courier = courier_information[0];
             var Courier_Code = courier_information[1];
@@ -971,7 +996,7 @@
                     $("#subdistrict-courier-option").append(`<option>${subdis[i].Sub_District}</option>`);
                     $("#zipcode-courier-option").append(`<option>${subdis[i].Zipcode}</option>`);
                 }
-                update_shipping_fee(subdis[0].Courier_Price_Code, "PACKING_KAYU");
+                update_shipping_fee(subdis[0].Courier_Price_Code, "PACKING KAYU");
             });
         }else{
             var courier_information = $('#Courier-option').find(":selected").text().split("-");
@@ -997,13 +1022,24 @@
     function update_estimated_shipping_fee(){
         var courier_information = $('#shipping-fee-courier-option').find(":selected").text().split(" ");
         var insurance_information = $('#shipping-insurance-courier-option').find(":selected").text().split(" ");
+        var packing_information = $('#shipping-packaging-courier-option').find(":selected").text().split(" ");
         if(insurance_information[1] != "0"){
             var total_fee = courier_information[2]*1 + insurance_information[insurance_information.length -1]*1;
+            if(packing_information[0] == "PACKING KAYU"){
+                total_fee = total_fee + (packing_information[1]*1);
+            }
             $("#estimated-price-courier-option").html(`${total_fee}`);
         }else{
-            $("#estimated-price-courier-option").html(`${courier_information[2]}`);
+            var total_fee = 0;
+            if(packing_information[0] == "PACKING KAYU"){
+                total_fee = total_fee + (courier_information[2]*1) + (packing_information[1]*1);
+            }else{
+                total_fee = total_fee + (courier_information[2]*1);
+            }
+            $("#estimated-price-courier-option").html(`${total_fee}`);
         }
     }
+    
     setInterval(() => {
         update_estimated_shipping_fee();
         update_total_price_of_group_buy();
@@ -1019,5 +1055,31 @@
             );
         });
     }
+
+    function loadingUpdateQuantity(timerMultiplier){
+        let timerInterval
+        Swal.fire({
+        title: 'Loading',
+        html: '',
+        timer: timerMultiplier*1000,
+        timerProgressBar: true,
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading()
+            timerInterval = setInterval(() => {
+            const content = Swal.getContent()
+            }, 100)
+        },
+        willClose: () => {
+            clearInterval(timerInterval)
+        }
+        }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+                console.log('I was closed by the timer')
+            }
+        })
+    }
+
 </script>
 </html>

@@ -148,7 +148,7 @@ function checkQuantityBuyLimit(x){
             swal.fire("Kuantitas tidak sesuai", "", "info");
             $(x).val(1);
         } 
-        update_estimated_shipping_fee();
+        pallet_packaging_request();
     });
 }
 
@@ -278,7 +278,7 @@ function fillingInInformations(productNo){
                 }
                 get_upaid_order_from_product_code_and_customer_code(localStorage.getItem("token"), productNo).done(function (response) {
                 // getUnpaidOrderPerProduct(productCode, localStorage.getItem("token")).done(function (response) {
-                    console.log(response);
+                    // alert(response);
                     if(!response){
                         $("#discount-code").css("display", "none");
                         $("#payment-not-received").css("display", "block");
