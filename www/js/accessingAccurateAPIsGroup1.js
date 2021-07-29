@@ -231,9 +231,12 @@ function get_shipping_cost_informations(Courier_Price_Code_orig
     , Courier_Price_Code_dest
     , packing_type
     , weight
+    , length
+    , width
+    , height
     , paket_value){
     var settings = {
-        "url": `http://products.sold.co.id/get-shipping-option-data?Courier_Price_Code_orig=${Courier_Price_Code_orig}&Courier_Price_Code_dest=${Courier_Price_Code_dest}&packing_type=${packing_type}&weight=${weight}&paket_value=${paket_value}&Get_Shipping_Fee=true`,
+        "url": `http://products.sold.co.id/get-shipping-option-data?Courier_Price_Code_orig=${Courier_Price_Code_orig}&Courier_Price_Code_dest=${Courier_Price_Code_dest}&packing_type=${packing_type}&weight=${weight}&paket_value=${paket_value}&Get_Shipping_Fee=true&length=${length}&width=${width}&height=${height}`,
         "method": "POST",
         "timeout": 0,
     };

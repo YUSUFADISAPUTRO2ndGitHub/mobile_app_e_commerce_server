@@ -910,16 +910,36 @@
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const product = urlParams.get('productid');
+        var estimated_volume_width = 0;
+        var estimated_volume_height = 0;
+        var estimated_volume_length = 0;
+        var estimated_total_price = 0;
         getProductsWithProductNo("", "", product).done(function (response_product) {
             estimated_weight = estimated_weight + (response_product.Weight_KG * ($(".quantity-express-buy").val() * 1));
-            if(estimated_weight <= 0){
-                estimated_weight = 0.1;
+            if(estimated_weight <= 0 || estimated_weight == null || estimated_weight == undefined || Number.isNaN(estimated_weight)){
+                estimated_weight = 0.1*1.5;
+            }else{
+                estimated_weight = estimated_weight*1*1.5;
             }
+            if(response.Dimension_CM_CUBIC != null || response.Dimension_CM_CUBIC != "null" || response.Dimension_CM_CUBIC != undefined || Number.isNaN(response.Dimension_CM_CUBIC)){
+                var splitted_dimension = (response.Dimension_CM_CUBIC*1).split("*");
+                estimated_volume_length = estimated_volume_length + (splitted_dimension[0] * ($(".quantity-express-buy").val() * 1));
+                estimated_volume_width = estimated_volume_length + (splitted_dimension[1] * ($(".quantity-express-buy").val() * 1));
+                estimated_volume_height = estimated_volume_length + (splitted_dimension[2] * ($(".quantity-express-buy").val() * 1));
+            }else{
+                estimated_volume_length = estimated_volume_length + (0.1*1.5 * ($(".quantity-express-buy").val() * 1));
+                estimated_volume_width = estimated_volume_length + (0.1*1.5 * ($(".quantity-express-buy").val() * 1));
+                estimated_volume_height = estimated_volume_length + (0.1*1.5 * ($(".quantity-express-buy").val() * 1));
+            }
+            estimated_total_price = estimated_total_price + (response.Sell_Price * 1 * ($(".quantity-express-buy").val() * 1)); 
             get_shipping_cost_informations("CGK01.00"
             , Courier_Price_Code_dest
             , packaging
             , `${estimated_weight}`
-            , "10000").done(function (response) {
+            , estimated_volume_length
+            , estimated_volume_width
+            , estimated_volume_height
+            , estimated_total_price).done(function (response) {
                 $("#shipping-fee-courier-option").empty();
                 $("#shipping-insurance-courier-option").empty();
                 var i = 0;
