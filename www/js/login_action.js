@@ -178,12 +178,12 @@ function get_otp_login(){
 var numberOfAddresses = -1;
 function appendNewAddressField(){
     numberOfAddresses++;
-    if(numberOfAddresses <= 4){
+    if(numberOfAddresses < 4){
         $(".clear-button-area").css("display", "block");
         $(".sign-up-form").append("<div id=\"" + numberOfAddresses + "\"></div>");
         $("#" + numberOfAddresses).append("<div class=\"form-group province-form-area-" + numberOfAddresses + "\">");
         $(".province-form-area-" + numberOfAddresses).append("<label>Alamat lengkap</label>");
-        $(".province-form-area-" + numberOfAddresses).append("<input type=\"text\" class=\"form-control\" id=\"signup-address-" + numberOfAddresses + "\">");
+        $(".province-form-area-" + numberOfAddresses).append("<input type=\"text\" class=\"form-control\" id=\"signup-address-" + numberOfAddresses + "\" onchange=\"check_address(this)\">");
     }else{
         numberOfAddresses--;
     }

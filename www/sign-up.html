@@ -116,8 +116,8 @@
                 <input type="text" id="signup-account-number" class="form-control" placeholder="rekening number for your commission of referral">
             </div>
             <div class="form-group">
-                <label>Alamat lengkap</label>
-                <input type="text" id="signup-address" class="form-control" placeholder="Alamat lengkap">
+                <label>Alamat lengkap anda</label>
+                <input type="text" id="signup-address" class="form-control" placeholder="Alamat lengkap" onchange="check_address(this)">
             </div>
             <div class="sign-up-form">
             </div>
@@ -196,5 +196,48 @@
             Kumpulkan
         </div>
     </div>
+    <script>
+        function check_address(x){
+            get_all_province_from_courier("tiki", "tiki").done(function (response) {
+                var i = 0;
+                var counter_found = 0;
+                var found_province = "";
+                for(i ; i < response.length; i ++){
+                    if( 
+                        $(x).val().toUpperCase().includes(
+                            (response[i].Province).toUpperCase()
+                            )
+                    ){
+                        found_province = response[i].Province;
+                        counter_found++;
+                    }
+                }
+                // alert(counter_found);
+                if(counter_found<1){
+                    Swal.fire("Alamat Anda tidak memiliki provinsi yang benar", "tolong perbaiki", "warning");
+                }else if(counter_found>1){
+                    Swal.fire("Alamat Anda memiliki lebih dari 1 provinsi", "tolong perbaiki", "warning");
+                }else{
+                    get_all_city_from_courier("tiki", "tiki", found_province).done(function (response) {
+                        counter_found = 0;
+                        for(i ; i < response.length; i ++){
+                            if( 
+                                $(x).val().toUpperCase().includes(
+                                    (response[i].City).toUpperCase()
+                                    )
+                            ){
+                                counter_found++;
+                            }
+                        }
+                        if(counter_found<1){
+                            Swal.fire("Alamat Anda tidak memiliki kota yang benar", "tolong perbaiki", "warning");
+                        }else if(counter_found>1){
+                            Swal.fire("Alamat Anda memiliki lebih dari 1 kota", "tolong perbaiki", "warning");
+                        }
+                    })
+                }
+            })
+        }
+    </script>
 </body>
 </html>
