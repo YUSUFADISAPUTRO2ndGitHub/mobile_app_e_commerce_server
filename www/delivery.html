@@ -72,6 +72,15 @@
     .emphasis{
         font-weight: bold;
     }
+    .details-area{
+        padding: 5%;
+        margin: 5%;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        background-color: #217384;
+        color: white;
+    }
 </style>
 <body>
     <div class="card header">
@@ -153,13 +162,21 @@
                 </div>
             </div>
 
+            <div class="details-area">
+
+            </div>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Jika Anda perlu membatalkan atau ada yang tidak beres dengan pesanan atau layanan pengiriman Anda, harap hubungi layanan pelanggan kami sesegera mungkin.</strong> Harap pastikan bahwa Anda selalu merekam diri Anda membuka kotak pesanan Anda untuk membantu Anda dengan pengembalian dana Anda jika sesuatu yang tidak disengaja terjadi selama pengiriman.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
             <div class="card-body centerized">
                 <button type="button" class="btn btn-primary" id="contact-us">Terms & Services</button>
             </div>
             <div class="card-body transfer-information">
                 <p class="card-text">Jika Anda <span class="emphasis">MERASA</span> pesanan ini <span class="emphasis">BELUM</span> dibayar, maka harap lakukan pembayaran Anda dengan mentransfer ke</p>
                 <!-- <p class="card-text">No. Rek: 8650555717</p> -->
-                <img src="./img/bca_account_number.png" alt="">
+                <img class="bca_account_number" src="./img/bca_account_number.png" alt="">
                 <p class="card-text">Jika Anda <span class="emphasis">MERASA</span> sudah membayar, harap memberikan photo bukti pembayaran kepada Customer Service kami, melalui WhatsApp di 0853-1580-1777.</p>
             </div>
         </div>

@@ -40,6 +40,7 @@ function populateOrdersTable(datas){
     getAllOrdersForThisCustomer("", datas.Order_Number).done(function (response) {
         console.log(response);
         if(response.length > 0){
+            $(".details-area").append(`<div>Shipping address: ${response[0].Shipping_Address}</div>`);
             if(response[0].Payment_Status != undefined){
                 if(response[0].Payment_Status.toUpperCase() == "PAYMENT"){
                     $(".transfer-information").css("display", "none");
