@@ -62,91 +62,110 @@
             background-color: #d4dee8;
             color: #217384;
         }
+        .profile-box{
+            border: none;
+            border-radius: 10px !important;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            margin: 5%;
+            animation: fadeInAnimation ease 3s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+        @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="card sign-up-title">
-        <div class="card-body">
-          <h5 class="card-title">Profil Akun <span id="now">Anda!</span></h5>
-          <p class="card-text">Halo selamat datang! Semoga hari Anda menyenangkan</p>
-        </div>
-    </div>
-    <div class="card profile-details">
-        <div class="card-body" id="profile-info-details">
-            <div class="form-group">
-                <label>No KTP</label>
-                <input type="email" id="profile-ktp" class="form-control" placeholder="No KTP">
-            </div>
-            <div class="form-group">
-                <label>Alamat Email</label>
-                <input type="email" id="profile-email" class="form-control" placeholder="Email" disabled>
-            </div>
-            <div class="form-group birthday">
-                <label>Tanggal Lahir Tahun</label>
-                <input type="number" id="profile-db-year" class="form-control" placeholder="1996">
-                <label>Tanggal Lahir Bulan</label>
-                <input type="number" id="profile-db-month" class="form-control" placeholder="09">
-                <label>Tanggal Lahir Hari</label>
-                <input type="number" id="profile-db-day" class="form-control" placeholder="25">
-            </div>
-            <!-- <div class="form-group">
-                <label>Password</label>
-                <input type="password" id="signup-password" class="form-control" placeholder="Password">
-            </div> -->
-            <div class="form-group">
-                <label>Nama Depan</label>
-                <input type="text" id="profile-owner-firstname" class="form-control" placeholder="Nama Depan">
-            </div>
-            <div class="form-group">
-                <label>Nama Belakang</label>
-                <input type="text" id="profile-owner-lastname" class="form-control" placeholder="Nama Belakang">
-            </div>
-            <div class="form-group">
-                <label>Nomor Telp Utama</label>
-                <input type="text" id="profile-telp" class="form-control" placeholder="0812 8888 7777">
-            </div>
-            <div class="form-group">
-                <label>Alamat lengkap</label>
-                <input type="text" id="profile-address-local" class="form-control" placeholder="Alamat Lengkap">
+    <div class="profile-box">
+        <div class="card sign-up-title">
+            <div class="card-body">
+            <h5 class="card-title">Profil Akun <span id="now">Anda!</span></h5>
+            <p class="card-text">Halo selamat datang! Semoga hari Anda menyenangkan</p>
             </div>
         </div>
-    </div>
-    <div class="alert alert-success" role="alert">
-        <h1 class="alert-heading">Untuk menyimpan hasil edit diatas</h1>
-        <p>Untuk menyimpan semua hasil edit Anda, silakan klik tombol di bawah ini, jika tidak, tidak ada yang akan disimpan</p>
-        <hr>
-        <p class="mb-0">
-            <div class="card save-button-area" onclick="editProfile()">
-                <div class="card-body">
-                    Simpan hasil edit (ubah info) Anda
+        <div class="card profile-details">
+            <div class="card-body" id="profile-info-details">
+                <div class="form-group">
+                    <label>No KTP</label>
+                    <input type="email" id="profile-ktp" class="form-control" placeholder="No KTP">
+                </div>
+                <div class="form-group">
+                    <label>Alamat Email</label>
+                    <input type="email" id="profile-email" class="form-control" placeholder="Email" disabled>
+                </div>
+                <div class="form-group birthday">
+                    <label>Tanggal Lahir Tahun</label>
+                    <input type="number" id="profile-db-year" class="form-control" placeholder="1996">
+                    <label>Tanggal Lahir Bulan</label>
+                    <input type="number" id="profile-db-month" class="form-control" placeholder="09">
+                    <label>Tanggal Lahir Hari</label>
+                    <input type="number" id="profile-db-day" class="form-control" placeholder="25">
+                </div>
+                <!-- <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signup-password" class="form-control" placeholder="Password">
+                </div> -->
+                <div class="form-group">
+                    <label>Nama Depan</label>
+                    <input type="text" id="profile-owner-firstname" class="form-control" placeholder="Nama Depan">
+                </div>
+                <div class="form-group">
+                    <label>Nama Belakang</label>
+                    <input type="text" id="profile-owner-lastname" class="form-control" placeholder="Nama Belakang">
+                </div>
+                <div class="form-group">
+                    <label>Nomor Telp Utama</label>
+                    <input type="text" id="profile-telp" class="form-control" placeholder="0812 8888 7777">
+                </div>
+                <div class="form-group">
+                    <label>Alamat lengkap</label>
+                    <input type="text" id="profile-address-local" class="form-control" placeholder="Alamat Lengkap">
                 </div>
             </div>
-        </p>
-    </div>
-    <a href="./sign-in.html" class="card log-out-button-area" onclick="logoutRequest()">
-        <div class="card-body">
-            Keluar
         </div>
-    </a>
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Menu komisi atau menu produk</strong> tidak tersedia di mobile, Anda bisa menggunakan laptop Anda dan kunjungi sold.co.id.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <div class="alert alert-info alert-dismissible fade show" role="alert">
-        <strong>Untuk mengubah password Anda</strong> bisa log out lalu click forgot password. Terima kasih
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary button-about-page" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        ABOUT SOLD.CO.ID
-    </button>
-    
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-            <img src="../www/img/about_page.png" class="about_page_png">
+        <div class="alert alert-success" role="alert">
+            <h1 class="alert-heading">Untuk menyimpan hasil edit diatas</h1>
+            <p>Untuk menyimpan semua hasil edit Anda, silakan klik tombol di bawah ini, jika tidak, tidak ada yang akan disimpan</p>
+            <hr>
+            <p class="mb-0">
+                <div class="card save-button-area" onclick="editProfile()">
+                    <div class="card-body">
+                        Simpan hasil edit (ubah info) Anda
+                    </div>
+                </div>
+            </p>
         </div>
+        <a href="./sign-in.html" class="card log-out-button-area" onclick="logoutRequest()">
+            <div class="card-body">
+                Keluar
+            </div>
+        </a>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Menu komisi atau menu produk</strong> tidak tersedia di mobile, Anda bisa menggunakan laptop Anda dan kunjungi sold.co.id.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <strong>Untuk mengubah password Anda</strong> bisa log out lalu click forgot password. Terima kasih
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary button-about-page" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            ABOUT SOLD.CO.ID
+        </button>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <img src="../www/img/about_page.png" class="about_page_png">
+            </div>
+            </div>
         </div>
     </div>
 </body>
