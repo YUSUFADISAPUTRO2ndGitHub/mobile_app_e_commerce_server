@@ -79,6 +79,13 @@
                 opacity: 1;
             }
         }
+        .btn-primary{
+            width: 100%;
+            border: none;
+            background-color: #217384;
+            border-radius: 0;
+
+        }
     </style>
 </head>
 <body>
@@ -89,6 +96,24 @@
             <p class="card-text">Halo selamat datang! Semoga hari Anda menyenangkan</p>
             </div>
         </div>
+
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#thank-you-notes" aria-expanded="false" aria-controls="thank-you-notes">
+            Ucapan terima kasih kami
+        </button>
+        <div class="collapse" id="thank-you-notes">
+            <div class="card card-body">
+                Terima kasih telah mendukung kami dengan menjadi anggota. Kami sangat mengharapkan masukan Anda. Harap jangan ragu untuk menghubungi layanan pelanggan kami untuk memberi kami lebih banyak pemikiran Anda. Kami senang melayani Anda secara langsung daripada menggunakan robot.
+            </div>
+        </div>
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Lihat semua pesanan
+        </button>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                <iframe src="./delivery_order_list.html"></iframe>
+            </div>
+        </div>
+
         <div class="card profile-details">
             <div class="card-body" id="profile-info-details">
                 <div class="form-group">

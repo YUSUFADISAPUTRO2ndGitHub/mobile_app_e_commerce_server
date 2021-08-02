@@ -83,6 +83,7 @@ function cancelOrderRequest(orderNumber){
     cancelSalesOrder(orderNumber).done(function (response) {
         if(response){
             Swal.fire("Cancelled", "", "success");
+            location.href = "./delivery_order_list.html";
         }else{
             Swal.fire("Failed", "", "warning");
         }

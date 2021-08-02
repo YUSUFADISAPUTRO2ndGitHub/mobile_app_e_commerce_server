@@ -151,6 +151,21 @@
         box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         display: none;
     }
+    .easter-egg{
+        margin: 0;
+        padding: 0;
+        width: 20%;
+        border-radius: 0;
+        border: none;
+        background-color:transparent;
+        color: transparent;
+    }
+    .easter-egg:hover{
+        border-radius: 0;
+        border: none;
+        background-color: transparent;
+        color: #edf1f4;
+    }
 </style>
 <body class="background_image">
             <table class="big-category-area">
@@ -160,6 +175,9 @@
                         <table id="big-category-list">
                             <!-- generated automatically -->
                         </table>
+                        <button class="btn easter-egg" type="button" data-bs-toggle="offcanvas" data-bs-target="#easter-egg-from-yusuf-adisaputro" aria-controls="easter-egg-from-yusuf-adisaputro">
+                            YA
+                        </button>
                     </th>
                 </tr>
                 <!-- BIG CATEGORY -->
@@ -194,7 +212,7 @@
                                 <span class="sr-only">Next</span>
                             </a>
                         </div>
-                        <iframe class="product-highlights" src="www.google.com"></iframe>
+                        <iframe class="product-highlights" src=""></iframe>
                         <table id="small-category-list" class="active-local-new">
                             <dib class="loading-area">
                                 <br>
@@ -208,14 +226,39 @@
                 <iframe class="pop-up-selection" src='./home.html'></iframe>
                 <!-- SMALL CATEGORY -->
             </table>
-
+              
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="easter-egg-from-yusuf-adisaputro" aria-labelledby="easter-egg-from-yusuf-adisaputroLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="easter-egg-from-yusuf-adisaputroLabel">You have found an easter egg</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div>
+                        This Easter egg is specially made for fun. This Easter egg is just my signature as the main developer of this project. Thank you for finding this Easter egg.
+                        <br>
+                        <br>
+                        Thank you,
+                        <br>
+                        YA
+                        <br>
+                        <br>
+                        这个复活节彩蛋是专门为好玩而制作的。 这个复活节彩蛋只是我作为这个项目的主要开发者的签名。 感谢您找到这个复活节彩蛋。
+                        <br>
+                        <br>
+                        谢谢
+                        <br>
+                        YA
+                    </div>
+                </div>
+            </div>
 </body>
 <script>
     $( ".product-highlights" ).mouseover(function() {
-            $(".product-highlights").css("height", "100vh");
-        }).mouseout(function() {
-            $(".product-highlights").css("height", "300px");
-            $(".product-highlights").attr("src", "./test_small_category.html");
+        $(".product-highlights").css("height", "100vh");
+    }).mouseout(function() {
+        $(".product-highlights").css("height", "300px");
+        // $(".product-highlights").attr("src", "./test_small_category.html");
+        $(".product-highlights").css("display", "none");
     });
 </script>
 </html>
