@@ -64,7 +64,7 @@ function loadcart(productNo, quantity){
             $("#" + productNo + "third").append("<i onclick=\"reduceQuantity(\'" + productNo + "\')\" class=\"glyphicon glyphicon-chevron-left\" id=\"productNo" + productNo + "decrease" +"\"></i>");
             $("#" + productNo + "third").append("<input id=\"quantity" + productNo + "\" class=\"fake\" value=\"" + quantity + "\" onclick=zoomIn(this) onchange=\"quantityUpdatedDirectly(this, \'" + productNo + "\')\"></input>");
             $("#" + productNo + "third").append("<i onclick=\"addQuantity(\'" + productNo + "\')\" class=\"glyphicon glyphicon-chevron-right\" id=\"productNo" + productNo + "increase" +"\"></i>");
-            $("#" + productNo + "third").append("<div class=\"card-text\">stock:" + response.Stock_Quantity + "</div>");
+            $("#" + productNo + "third").append("<div class=\"card-text stock-quantity" + productNo + "\">stock:" + response.Stock_Quantity + "</div>");
             // price
             $("#productName" + productNo).append("<td class=\"product-price\" id=\"" + productNo + "fourth" + "\">");
             $("#" + productNo + "fourth").append("<input class=\"fake-1\" id=\"" + productNo + "\" value=\"" + commafy(Math.round(((quantity * response.Sell_Price)*1)* 100)/ 100) + "\" disabled></input>");

@@ -498,6 +498,7 @@
         , estimated_volume_width
         , estimated_volume_height
         , estimated_total_price).done(function (response) {
+            console.log(response);
             loadingUpdateQuantity(1);
             $("#shipping-fee-courier-option").empty();
             $("#shipping-insurance-courier-option").empty();

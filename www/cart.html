@@ -194,5 +194,23 @@
             Pesan semua di Toko
         </div>
     </div>
+    <script>
+        check_product_datas();
+        function check_product_datas(){
+            var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
+            // alert(localStorage.getItem("itemsInCart"));
+            var i =0;
+            for(i; i < cartToJson.length; i++){
+                var quantity = cartToJson[i].quantity;
+                getProductsWithProductNo("", "", cartToJson[i].productNo).done(function (response) {
+                    if(response != false){
+                        if(quantity > response.Stock_Quantity){
+                            Swal.fire("Anda memiliki barang yang kehabisan stok", `${response.Name}`, "warning");
+                        }
+                    }
+                });
+            }
+        }
+    </script>
 </body>
 </html>
