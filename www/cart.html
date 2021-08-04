@@ -195,7 +195,9 @@
         </div>
     </div>
     <script>
-        check_product_datas();
+        setTimeout(() => {
+            check_product_datas();
+        }, 1000);
         function check_product_datas(){
             var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
             // alert(localStorage.getItem("itemsInCart"));

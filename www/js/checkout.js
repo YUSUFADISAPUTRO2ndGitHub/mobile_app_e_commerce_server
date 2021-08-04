@@ -160,10 +160,27 @@ function loadCheckoutFinalConfirmationTable(condition){
                 for(i; i < itemsToCheckout.length; i++){
                     console.log(response);
                     if(itemsToCheckout[i].productNo == response.Product_Code){
-                        $(".final_checkout").append("<tr id=\"final_checkout_row_" + i + "\">");
-                        $("#final_checkout_row_" + i).append("<td id=\"final_checkout_prod_name_" + response.Name + "\">" + response.Name + "</td>");
-                        $("#final_checkout_row_" + i).append("<td id=\"final_checkout_quantity_" + itemsToCheckout[i].productNo + "\">" + itemsToCheckout[i].quantity + "</td>");
-                        $("#final_checkout_row_" + i).append("<td id=\"final_checkout_price_" + response.Sell_Price * itemsToCheckout[i].quantity + "\">" + itemsToCheckout[i].priceAgreed + "</td>");
+                        if(itemsToCheckout[i].quantity > response.Stock_Quantity){
+                            setTimeout(() => {
+                                Swal.fire("Anda memiliki barang yang kehabisan stok", `${response.Name} akan di hapus dari opsi checkout Anda`, "warning");
+                            }, 3000);
+                        // }else if(isNAN(response.Sell_Price*1)){
+                        //     alert("isNAN");
+                        //     setTimeout(() => {
+                        //         Swal.fire("Kami minta maaf atas ketidaknyamanannya", `${response.Name} | Tetapi Anda memiliki item yang mungkin tidak menetapkan harga untuk checkout`, "warning");
+                        //     }, 3500);
+                        // }else if((response.Sell_Price*1) <= 0){
+                        //     alert("<=0");
+                        //     setTimeout(() => {
+                        //         Swal.fire("Kami minta maaf atas ketidaknyamanannya", `${response.Name} | Tetapi Anda memiliki item yang mungkin tidak menetapkan harga untuk checkout`, "warning");
+                        //     }, 3500);
+                        }else{
+                            itemsToCheckout[i].priceAgreed = response.Sell_Price * 1 * itemsToCheckout[i].quantity;
+                            $(".final_checkout").append("<tr id=\"final_checkout_row_" + i + "\">");
+                            $("#final_checkout_row_" + i).append("<td id=\"final_checkout_prod_name_" + response.Name + "\">" + response.Name + "</td>");
+                            $("#final_checkout_row_" + i).append("<td id=\"final_checkout_quantity_" + itemsToCheckout[i].productNo + "\">" + itemsToCheckout[i].quantity + "</td>");
+                            $("#final_checkout_row_" + i).append("<td id=\"final_checkout_price_" + response.Sell_Price * itemsToCheckout[i].quantity + "\">" + itemsToCheckout[i].priceAgreed + "</td>");
+                        }
                     }
                 }
             });
