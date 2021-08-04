@@ -55,20 +55,24 @@ function generateSmallCatList(x){
     
     $(".loading-area").css("display", "table");
     getAllSubCategories(categoryId).done(function (response) {
+        // alert(response.length);
         console.log(response);
-        if(response.length == 0){
-            generateSmallCatList(x);
-            $(".loading-area").css("display", "table");
+        if(response.length == 0 || response.length == undefined){
+            // generateSmallCatList(x);
+            loadingMessage(1);
+            $('.product-highlights').css('display','none')
+            $(".loading-area").css("display", "none");
+            Swal.fire("Kami mohon maaf atas ketidaknyamanan ini, tetapi tidak ada subkategori untuk kategori ini", "", "warning");
         }else{
             $(".loading-area").css("display", "none");
-        }
-        loadingMessage(response.length);
-        var product_row = 0;
-        for(product_row; product_row < response.length; product_row++){
-            generatehomeOneByOne(product_row, response[product_row], response.length);
-        }
-        if(response.length == 1){
-            $(".card").css("max-width", "50%");
+            loadingMessage(response.length);
+            var product_row = 0;
+            for(product_row; product_row < response.length; product_row++){
+                generatehomeOneByOne(product_row, response[product_row], response.length);
+            }
+            if(response.length == 1){
+                $(".card").css("max-width", "50%");
+            }
         }
     });
 
