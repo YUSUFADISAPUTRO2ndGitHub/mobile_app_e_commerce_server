@@ -161,6 +161,9 @@ function loadCheckoutFinalConfirmationTable(condition){
                     console.log(response);
                     if(itemsToCheckout[i].productNo == response.Product_Code){
                         if(itemsToCheckout[i].quantity > response.Stock_Quantity){
+                            itemsToCheckout.splice(i, 1);
+                            var updated_itemsToCheckout = JSON.stringify(itemsToCheckout);
+                            localStorage.setItem("itemsToCheckout", updated_itemsToCheckout);
                             setTimeout(() => {
                                 Swal.fire("Anda memiliki barang yang kehabisan stok", `${response.Name} akan di hapus dari opsi checkout Anda`, "warning");
                             }, 3000);
