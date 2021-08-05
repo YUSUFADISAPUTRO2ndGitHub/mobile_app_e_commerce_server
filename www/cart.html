@@ -148,6 +148,9 @@
             opacity: 1;
         }
     }
+    .alert-t0-out-of-stock{
+        display: none;
+    }
 </style>
 
 <body>
@@ -178,6 +181,13 @@
         </thead>
     </table>
 
+    <div class="alert-t0-out-of-stock alert alert-warning alert-dismissible fade show" role="alert">
+        Ada barang di <strong>keranjang (CART)</strong> Anda yang tidak dapat memenuhi permintaan stock Anda. 
+        <br><br>
+        <strong>Barang tersebut tidak akan dapat Anda checkout/pesan</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <strong>Maaf untuk ketidaknyamanannya</strong> kami tidak dapat menerima pesanan untuk diambil di toko saat ini
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -198,7 +208,7 @@
         </div>
     </div>
     <script>
-        setTimeout(() => {
+        setInterval(() => {
             check_product_datas();
         }, 1000);
         function check_product_datas(){
@@ -210,7 +220,11 @@
                 getProductsWithProductNo("", "", cartToJson[i].productNo).done(function (response) {
                     if(response != false){
                         if(quantity > response.Stock_Quantity){
-                            Swal.fire("Anda memiliki barang yang kehabisan stok", `${response.Name}`, "warning");
+                            cartToJson.splice(cartToJson.indexOf(response.Product_Code), 1);
+                            var cartToJson_string = JSON.stringify(cartToJson);
+                            localStorage.setItem("itemsInCart", cartToJson_string);
+                            // Swal.fire("Anda memiliki barang yang kehabisan stok", `${response.Name}`, "warning");
+                            $(".alert-t0-out-of-stock").css("display", "block");
                         }
                         if(isNaN(response.Sell_Price*1)){
                             cartToJson.splice(cartToJson.indexOf(response.Product_Code), 1);

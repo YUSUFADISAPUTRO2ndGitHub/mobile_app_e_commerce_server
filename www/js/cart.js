@@ -403,6 +403,7 @@ function checkingoutAll(){
     console.log("token " + token);
     if((token != "" && token != null)){
         var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
+        // alert(localStorage.getItem("itemsInCart"));
         if(cartToJson.length != 0){
             var array = [];
             var productToBeAddedStringify = JSON.stringify(array);
