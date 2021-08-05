@@ -323,6 +323,15 @@ function getAllUnpaidOrdersForThisCustomer(Customer_Code, Order_Number){
     }
     return $.ajax(settings);
 }
+// /check-delivery-order-information
+function get_shipping_information(Order_Number){
+    var settings = {
+        "url": `http://sales.sold.co.id/check-delivery-order-information?Order_Number=${Order_Number}`,
+        "method": "POST",
+        "timeout": 0,
+    };
+    return $.ajax(settings);
+}
 function getAllOrdersForThisCustomer(Customer_Code, Order_Number){
     if(Order_Number == ""){
         var settings = {

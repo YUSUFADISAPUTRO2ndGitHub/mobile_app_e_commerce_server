@@ -6,18 +6,40 @@ $(document).ready(function(){
     const orderNumber = urlParams.get('orderNumber');
     status = JSON.parse(status);
     console.log(orderNumber);
-    console.log(status);
-    console.log(status.Status);
+    get_shipping_information(orderNumber).done(function (response) {
+        var tracking_number = "";
+        if(response.Shipping_Number != undefined || response.Shipping_Number != null){
+            tracking_number = JSON.parse(response.Shipping_Number);
+            $(".details-area-order-number").empty();
+            $(".details-area-order-number").append(`
+            <div>
+                Your Order Number: ${orderNumber}
+                <br>
+                Tracking Number: ${tracking_number.paket_awb}
+            </div>
+            `);
+        }else{
+            $(".details-area-order-number").empty();
+            $(".details-area-order-number").append(`
+            <div>
+                Your Order Number: ${orderNumber}
+                <br>
+                Your Delivery Number: ${response.Delivery_Order_Number}
+            </div>
+            `);
+        }
+    });
+
     if(!orderNumber.includes("SOVIG")){
         $(".order-details").css("display", "block");
         populateOrdersTable(status);
         vaNumber = vaNumber + "" + orderNumber;
     }
-    if(status.Status == "pending"){
+    if(status.Status.toUpperCase().includes("PENDING")){
         $("#indicator-received").attr("src","./www/img/CATEGORY_ICONS/checklist.png");
         $("#indicator-approved").attr("src","./www/img/CATEGORY_ICONS/fast-delivery.png");
         $("#indicator-delivered").attr("src","./www/img/CATEGORY_ICONS/fast-delivery.png");
-    }else if(status.status == "approving"){
+    }else if(status.Status.toUpperCase().includes("APPROVING")){
         $("#indicator-received").attr("src","./www/img/CATEGORY_ICONS/checklist.png");
         $("#indicator-approved").attr("src","./www/img/CATEGORY_ICONS/checklist.png");
         $("#indicator-delivered").attr("src","./www/img/CATEGORY_ICONS/checklist.png");
