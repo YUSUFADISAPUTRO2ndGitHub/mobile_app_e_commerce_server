@@ -949,12 +949,12 @@
         loadingUpdateQuantity(10);
         getProductsWithProductNo("", "", product).done(function (response) {
             estimated_weight = estimated_weight + (response.Weight_KG * ($(".quantity-express-buy").val() * 1));
-            if(estimated_weight <= 0 || estimated_weight == null || estimated_weight == undefined || Number.isNaN(estimated_weight)){
+            if(estimated_weight <= 0 || estimated_weight == null || estimated_weight == undefined || isNaN(estimated_weight)){
                 estimated_weight = 0.1*1.5;
             }else{
                 estimated_weight = estimated_weight*1*1.5;
             }
-            if(response.Dimension_CM_CUBIC != null || response.Dimension_CM_CUBIC != "null" || response.Dimension_CM_CUBIC != undefined || Number.isNaN(response.Dimension_CM_CUBIC)){
+            if(response.Dimension_CM_CUBIC != null || response.Dimension_CM_CUBIC != "null" || response.Dimension_CM_CUBIC != undefined || response.Dimension_CM_CUBIC != "yes" || response.Dimension_CM_CUBIC != "no"){
                 var splitted_dimension = (response.Dimension_CM_CUBIC).split("*");
                 estimated_volume_length = estimated_volume_length + (splitted_dimension[0] * ($(".quantity-express-buy").val() * 1));
                 estimated_volume_width = estimated_volume_length + (splitted_dimension[1] * ($(".quantity-express-buy").val() * 1));
@@ -964,13 +964,33 @@
                 estimated_volume_width = estimated_volume_length + (0.1*1.5 * ($(".quantity-express-buy").val() * 1));
                 estimated_volume_height = estimated_volume_length + (0.1*1.5 * ($(".quantity-express-buy").val() * 1));
             }
-            estimated_total_price = estimated_total_price + (response.Sell_Price * 1 * ($(".quantity-express-buy").val() * 1)); 
-            // alert(estimated_weight);
-            // alert($(".quantity-express-buy").val() * 1);
+            if(isNaN(response.GroupBuy_SellPrice)){
+                response.GroupBuy_SellPrice = 10000;
+            }
+            estimated_total_price = estimated_total_price + (response.GroupBuy_SellPrice * 1 * ($(".quantity-express-buy").val() * 1)); 
             loadingUpdateQuantity(5.5);
             if(packaging == "PACKING KAYU"){
                 packaging = "PACKING_KAYU";
             }
+            if(isNaN(estimated_volume_length)){
+                estimated_volume_length = 0;
+                estimated_volume_length = estimated_volume_length + (0.1*1.5 * ($(".quantity-express-buy").val() * 1));
+            }
+            if(isNaN(estimated_volume_width)){
+                estimated_volume_width = 0;
+                estimated_volume_width = estimated_volume_length + (0.1*1.5 * ($(".quantity-express-buy").val() * 1));
+            }
+            if(isNaN(estimated_volume_height)){
+                estimated_volume_height = 0;
+                estimated_volume_height = estimated_volume_length + (0.1*1.5 * ($(".quantity-express-buy").val() * 1));
+            }
+            // alert(Courier_Price_Code_dest);
+            // alert(packaging);
+            // alert(estimated_weight);
+            // alert(estimated_volume_length);
+            // alert(estimated_volume_width);
+            // alert(estimated_volume_height);
+            // alert(estimated_total_price);
             get_shipping_cost_informations("CGK01.00"
             , Courier_Price_Code_dest
             , packaging

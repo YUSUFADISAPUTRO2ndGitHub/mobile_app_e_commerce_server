@@ -212,6 +212,13 @@
                         if(quantity > response.Stock_Quantity){
                             Swal.fire("Anda memiliki barang yang kehabisan stok", `${response.Name}`, "warning");
                         }
+                        if(isNaN(response.Sell_Price*1)){
+                            cartToJson.splice(cartToJson.indexOf(response.Product_Code), 1);
+                            var cartToJson_string = JSON.stringify(cartToJson);
+                            localStorage.setItem("itemsInCart", cartToJson_string);
+                            // alert(cartToJson);
+                            // Swal.fire("Anda memiliki barang yang tidak memiliki harga", `${response.Name}, Kami mohon maaf atas ketidaknyamanan ini, tetapi kami harus menghapus item ini dari keranjang Anda untuk checkout`, "warning");
+                        }
                     }
                 });
             }
