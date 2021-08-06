@@ -21,7 +21,12 @@ $(document).ready(function(){
         $("#terms").toggleClass("active");
     });
     $("#back-button").click(function(){
-        window.location.href = "./search_results.html";
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const product = urlParams.get('productid');
+        getProductsWithProductNo("", "", product).done(function (response) {
+            window.location.href = "./search_results.html?input=" + response.Name;
+        });
     });
 
     // getProductRating();

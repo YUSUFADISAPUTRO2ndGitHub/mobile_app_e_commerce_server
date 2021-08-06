@@ -359,27 +359,42 @@ function checkIfSignUpInputNull(){
         // email or password is empty
         return false;
     }else{
-        return true;
-        // email or password is not empty
-        // if($("#signup-email").val().includes("@") 
-        // && ($("#signup-email").val().includes(".com")
-        //     || $("#signup-email").val().includes(".co.id")
-        //     || $("#signup-email").val().includes(".id")
-        //     || $("#signup-email").val().includes(".ca")
-        //     )
-        // && ($("#signup-email").val().includes("gmail") 
-        //     || $("#signup-email").val().includes("yahoo")
-        //     || $("#signup-email").val().includes("aol")
-        //     || $("#signup-email").val().includes("outlook")
-        //     || $("#signup-email").val().includes("hotmail")
-        //     || $("#signup-email").val().includes("yopmail"))
-        // ){
-        //     console.log("sign up debug 2");
-        //     return true;
-        // }else{
-        //     console.log("sign up debug 3");
-        //     return false;
-        // }
+        // check bday
+        if(
+            $("#profile-db-year").val().length > 0
+            && $("#profile-db-month").val().length > 0
+            && $("#profile-db-day").val().length > 0
+        ){
+            if(
+                !(isNaN($("#profile-db-year").val() * 1)
+                && isNaN($("#profile-db-month").val().length * 1)
+                && isNaN($("#profile-db-day").val().length * 1))
+            ){
+                if(
+                    $("#profile-db-year").val() <= 2020
+                ){
+                    if(
+                        $("#profile-db-month").val() <= 12
+                    ){
+                        if(
+                            $("#profile-db-day").val() <= 31
+                        ){
+                            return true;
+                        }else{
+                            alert($("#profile-db-day").val() + " | Hari lahir Anda tidak sesuai");
+                        }
+                    }else{
+                        alert($("#profile-db-month").val() + " | Bulan lahir Anda tidak sesuai");
+                    }
+                }else{
+                    alert($("#profile-db-year").val() + " | Anda terlalu muda untuk bergabung dengan kami");
+                }
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
     }
 }
 
