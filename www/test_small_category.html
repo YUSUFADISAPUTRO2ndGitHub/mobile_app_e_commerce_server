@@ -131,7 +131,8 @@
                 });
             }
             function change_iframe_attr(x){
-                window.location.href = "./sub-category.html?Subcategory=" + x;
+                parent.redirect_parent_to_display_sub_cat(x);
+                // window.location.href = "./sub-category.html?Subcategory=" + x;
             }
         </script>
     </body>

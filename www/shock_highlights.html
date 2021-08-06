@@ -115,8 +115,9 @@
 </body>
 <script>
     const goToProductCode=(product_id)=>{
-        console.log(product_id)
-        window.location.href = `./product_details.html?productid=${product_id}`;
+        // console.log(product_id)
+        parent.redirect_parent_to_display_product_details(product_id);
+        // window.location.href = `./product_details.html?productid=${product_id}`;
     }
 </script>
 </html>

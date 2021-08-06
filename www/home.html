@@ -368,6 +368,13 @@
         <div class="close-ads" onclick="hidepopupads()">Close</div>
     </div>
     <script>
+        function redirect_parent_to_display_product_details(product_id){
+            window.location.href = `./product_details.html?productid=${product_id}`;
+        }
+        function redirect_parent_to_display_sub_cat(Subcategory){
+            // $('.small-cat-area').remove();
+            window.location.href = "./sub-category.html?Subcategory=" + Subcategory;
+        }
         $( ".small-cat-area" ).mouseover(function() {
             $(".small-cat-area").css("height", "100vh");
         }).mouseout(function() {

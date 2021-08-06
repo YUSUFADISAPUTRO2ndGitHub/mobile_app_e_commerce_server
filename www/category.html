@@ -256,13 +256,10 @@
             </div>
 </body>
 <script>
-    $( ".product-highlights" ).mouseover(function() {
-        $(".product-highlights").css("height", "100vh");
-    }).mouseout(function() {
-        $(".product-highlights").css("height", "300px");
-        // $(".product-highlights").attr("src", "./test_small_category.html");
-        $(".product-highlights").css("display", "none");
-    });
+
+    function redirect_parent_to_product_detail(product_code){
+        window.location.href = "./product_details.html?productid="+product_code;
+    }
 </script>
 </html>
 

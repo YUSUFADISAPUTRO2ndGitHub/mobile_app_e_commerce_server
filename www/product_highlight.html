@@ -111,8 +111,8 @@ $( document ).ready(function() {
 });
 
 const display_product_detail=(product_code)=>{
-
-    window.location.href = "./product_details.html?productid="+product_code;
+    parent.redirect_parent_to_product_detail(product_code);
+    // window.location.href = "./product_details.html?productid="+product_code;
 }
 
 </script>

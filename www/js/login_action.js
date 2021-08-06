@@ -233,12 +233,14 @@ function signupRequest(){
                     console.log(data);
                     createNewCustomer("", "", data).done(function (response) {
                         console.log(response);
-                        if(response){
-                            Swal.fire("SIGN-UP SUCCESS", "", "success");
+                        if(response != false){
+                            // Swal.fire("SIGN-UP SUCCESS", "", "success");
                             window.location.href = "./profile-account.html";
                         }else{
                             Swal.fire("SIGN-UP FAILED", "", "warning");
-                            window.location.href = "./profile-account.html";
+                            setTimeout(() => {
+                                window.location.href = "./sign-in.html";
+                            }, 2000);
                         }
                     });
                 }else{
@@ -353,36 +355,31 @@ function checkIfSignUpInputNull(){
     || $("#signup-password").val().length == 0 
     || $("#signup-telp").val().length == 0 
     || $("#signup-owner-first-name").val().length == 0 
-    || $("#signup-owner-last-name").val().length == 0 
-    || $("#profile-db-year").val().length == 0 
-    || $("#profile-db-month").val().length == 0 
-    || $("#profile-db-day").val().length == 0 
     || $("#signup-address").val().length == 0){
         // email or password is empty
         return false;
     }else{
+        return true;
         // email or password is not empty
-        if($("#signup-email").val().includes("@") 
-        && ($("#signup-email").val().includes(".com")
-            || $("#signup-email").val().includes(".co.id")
-            || $("#signup-email").val().includes(".id")
-            || $("#signup-email").val().includes(".ca")
-            )
-        && ($("#signup-email").val().includes("gmail") 
-            || $("#signup-email").val().includes("yahoo")
-            || $("#signup-email").val().includes("aol")
-            || $("#signup-email").val().includes("outlook")
-            || $("#signup-email").val().includes("hotmail")
-            || $("#signup-email").val().includes("yopmail"))
-        && ($("#signup-telp").val().length > 0 && $("#signup-telp").val().length <= 15)
-        && ($("#signup-referral").val().length > 0)
-        ){
-            console.log("sign up debug 2");
-            return true;
-        }else{
-            console.log("sign up debug 3");
-            return false;
-        }
+        // if($("#signup-email").val().includes("@") 
+        // && ($("#signup-email").val().includes(".com")
+        //     || $("#signup-email").val().includes(".co.id")
+        //     || $("#signup-email").val().includes(".id")
+        //     || $("#signup-email").val().includes(".ca")
+        //     )
+        // && ($("#signup-email").val().includes("gmail") 
+        //     || $("#signup-email").val().includes("yahoo")
+        //     || $("#signup-email").val().includes("aol")
+        //     || $("#signup-email").val().includes("outlook")
+        //     || $("#signup-email").val().includes("hotmail")
+        //     || $("#signup-email").val().includes("yopmail"))
+        // ){
+        //     console.log("sign up debug 2");
+        //     return true;
+        // }else{
+        //     console.log("sign up debug 3");
+        //     return false;
+        // }
     }
 }
 
