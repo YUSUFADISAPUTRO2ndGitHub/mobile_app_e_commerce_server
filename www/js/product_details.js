@@ -234,10 +234,25 @@ function fillingInInformations(productNo){
         if(!response){
             alert("Unfortunately this product is not available");
         }else{ // main-available-stock
-            $("#main-price").html("Rp. " + commafy(response.Sell_Price * 1) );
+            if(isNaN(response.Sell_Price*1)){
+                response.Sell_Price = 0;
+            }
+            if(isNaN(response.GroupBuy_SellPrice*1)){
+                response.GroupBuy_SellPrice = 0;
+            }
+            if(response.Sell_Price*1 > 0){
+                $("#main-price").html("Rp. " + commafy(response.Sell_Price * 1) );
+                $("#main-cod").html("Rp. " + commafy(response.Sell_Price * 1) );
+            }else{
+                $("#main-price").html("Hubungi Customer Service Kami untuk melakukan pembelian produk ini");
+                $("#main-cod").html("Hubungi Customer Service Kami untuk melakukan pembelian produk ini");
+            }
+            if(response.GroupBuy_SellPrice*1 > 0){
+                $("#main-period").html("Rp. " + commafy(response.GroupBuy_SellPrice));
+            }else{
+                $("#main-period").html("Hubungi Customer Service Kami untuk melakukan pembelian produk ini");
+            }
             $("#main-name").html(response.Name);
-            $("#main-cod").html("Rp. " + commafy(response.Sell_Price * 1) );
-            $("#main-period").html("Rp. " + commafy(response.GroupBuy_SellPrice));
             $("#main-period-2").html("Rp. Hidden | Tersembunyi");
             $("#main-available-stock").html(response.Stock_Quantity + " tersisah");
             $("#main-details").html(response.Description + "<br><br>Specification:" + response.Specification + "<br>Color: " + response.Color);

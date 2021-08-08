@@ -85,6 +85,9 @@ function searchUpBasedOnCategory(subcategory){
 }
 
 function generatehomeOneByOne(product_row, data, dataLength){
+    if(isNaN(data.Sell_Price*1)){
+        data.Sell_Price = 0;
+    }
     if(product_row % 2 != 0){
         var product_row = product_row - 1;
         // right
@@ -95,9 +98,16 @@ function generatehomeOneByOne(product_row, data, dataLength){
         $("#card-right" + product_row).append("<div class=\"card-body small-padding\" id=\"card-body-right"+ product_row +"\">");
         $("#card-body-right" + product_row).append("<div class=\"card-title\">" + data.Name ); // + "</div><span class=\"dots\">..</span><br><br>");
         $("#card-body-right" + product_row).append("<div class=\"card-text\" id=\"card-text-right"+ product_row +"\">");
-        $("#card-text-right" + product_row).append("<del class=\"grey-vantsing-text\">Rp. " + commafy(Math.round((data.Sell_Price*1.2)* 100)/ 100) + "</del>");
-        $("#card-text-right" + product_row).append("<div class=\"red-vantsing-text\">Rp. " + commafy(Math.round((data.Sell_Price*1)* 100)/ 100) + "</div>");
-        $("#card-text-right" + product_row).append("<div class=\"add-to-cart\" onclick=\"addToCartDirectly(\'" + data.Product_Code + "\')\"><span class=\"add-to-cart-button\"><img class=\"independent-cart-icon\" src=\"../www/img/Additional_icons/cart.png\"><span></div>");
+
+        if(data.Sell_Price <= 0){
+            $("#card-text-right" + product_row).append("<div class=\"red-vantsing-text\">Hubungi customer service untuk pembelian</div>");
+            $("#card-text-right" + product_row).append("<div class=\"add-to-cart\" onclick=\"contact_customer_service_for_price(\'" + data.Product_Code + "\')\"><span class=\"add-to-cart-button\"><img class=\"independent-cart-icon\" src=\"../www/img/Additional_icons/cart.png\"><span></div>");
+        }else{
+            $("#card-text-right" + product_row).append("<del class=\"grey-vantsing-text\">Rp. " + commafy(Math.round((data.Sell_Price*1.2)* 100)/ 100) + "</del>");
+            $("#card-text-right" + product_row).append("<div class=\"red-vantsing-text\">Rp. " + commafy(Math.round((data.Sell_Price*1)* 100)/ 100) + "</div>");
+            $("#card-text-right" + product_row).append("<div class=\"add-to-cart\" onclick=\"addToCartDirectly(\'" + data.Product_Code + "\')\"><span class=\"add-to-cart-button\"><img class=\"independent-cart-icon\" src=\"../www/img/Additional_icons/cart.png\"><span></div>");
+        }
+
         // badge
         if(data.GroupBuy_Purchase == "yes"){
             $("#product-card-right" + product_row).append("<div class=\"homemade-badge category-icon-badge\" id=\"badge-right"+ product_row +"\">");
@@ -118,9 +128,16 @@ function generatehomeOneByOne(product_row, data, dataLength){
         $("#card-left" + product_row).append("<div class=\"card-body small-padding\" id=\"card-body-left"+ product_row +"\">");
         $("#card-body-left" + product_row).append("<div class=\"card-title\">" + data.Name ); // + "</div><span class=\"dots\">..</span><br><br>");
         $("#card-body-left" + product_row).append("<div class=\"card-text\" id=\"card-text-left"+ product_row +"\">");
-        $("#card-text-left" + product_row).append("<del class=\"grey-vantsing-text\">Rp. " + commafy(Math.round((data.Sell_Price*1.2)* 100)/ 100) + "</del>");
-        $("#card-text-left" + product_row).append("<div class=\"red-vantsing-text\">Rp. " + commafy(Math.round((data.Sell_Price*1)* 100)/ 100) + "</div>");
-        $("#card-text-left" + product_row).append("<div class=\"add-to-cart\" onclick=\"addToCartDirectly(\'" + data.Product_Code + "\')\"><span class=\"add-to-cart-button\"><img class=\"independent-cart-icon\" src=\"../www/img/Additional_icons/cart.png\"><span></div>");
+
+        if(data.Sell_Price <= 0){
+            $("#card-text-left" + product_row).append("<div class=\"red-vantsing-text\">Hubungi customer service untuk pembelian</div>");
+            $("#card-text-left" + product_row).append("<div class=\"add-to-cart\" onclick=\"contact_customer_service_for_price(\'" + data.Product_Code + "\')\"><span class=\"add-to-cart-button\"><img class=\"independent-cart-icon\" src=\"../www/img/Additional_icons/cart.png\"><span></div>");
+        }else{
+            $("#card-text-left" + product_row).append("<del class=\"grey-vantsing-text\">Rp. " + commafy(Math.round((data.Sell_Price*1.2)* 100)/ 100) + "</del>");
+            $("#card-text-left" + product_row).append("<div class=\"red-vantsing-text\">Rp. " + commafy(Math.round((data.Sell_Price*1)* 100)/ 100) + "</div>");
+            $("#card-text-left" + product_row).append("<div class=\"add-to-cart\" onclick=\"addToCartDirectly(\'" + data.Product_Code + "\')\"><span class=\"add-to-cart-button\"><img class=\"independent-cart-icon\" src=\"../www/img/Additional_icons/cart.png\"><span></div>");
+        }
+
         // badge
         if(data.GroupBuy_Purchase == "yes"){
             $("#product-card-left" + product_row).append("<div class=\"homemade-badge category-icon-badge\" id=\"badge-left"+ product_row +"\">");
@@ -131,6 +148,10 @@ function generatehomeOneByOne(product_row, data, dataLength){
             $("#badge-left" + product_row).append("<img src=\"../www/img/Additional_icons/new.png\" class=\"category-icon\" >");
         }
     }
+}
+
+function contact_customer_service_for_price(product_code){
+    Swal.fire("Please contact us to purchase this item in large quantity", "Silahkan hubungi kami untuk membeli barang ini dalam jumlah besar", "warning");
 }
 
 function generatehomeleftOnly(product_row, leftdata, dataLength){
