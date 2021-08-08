@@ -91,7 +91,7 @@ setInterval(() => {
 function loadingMessage(timer){
     let timerInterval
     Swal.fire({
-    title: 'Loading Your Request',
+    title: 'JANGAN TUTUP HALAMAN INI, sedang memproses permintaan Anda',
     html: '',
     timer: timer*1000,
     timerProgressBar: true,

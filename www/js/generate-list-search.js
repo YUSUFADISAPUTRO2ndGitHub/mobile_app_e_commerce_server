@@ -14,7 +14,7 @@ $(document).ready(function(){
 function loadingMessage(interval){
     let timerInterval
     Swal.fire({
-    title: 'Loading Your Request',
+    title: 'Memproses permintaan Anda',
     html: '',
     timer: interval*100,
     timerProgressBar: true,

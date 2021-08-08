@@ -441,6 +441,14 @@
     .center-text{
         text-align: center;
     }
+    .swal-custom, .swal2-title, .swal2-container{
+        background-color: white;
+        color: #217384 ;
+        border: none;
+    }
+    .swal2-backdrop-show{
+        background-color: white !important;
+    }
 </style>
 <body>
     <!-- The Modal -->
@@ -785,6 +793,7 @@
     }
 
     $( document ).ready(function() {
+        loadingUpdateQuantity(100000);
         initial_render_courier();
         console.log( "ready!" );
         const queryString = window.location.search;
@@ -1117,6 +1126,7 @@
         html: '',
         timer: timerMultiplier*1000,
         timerProgressBar: true,
+        customClass: 'swal-custom',
         allowOutsideClick: false,
         didOpen: () => {
             Swal.showLoading()
