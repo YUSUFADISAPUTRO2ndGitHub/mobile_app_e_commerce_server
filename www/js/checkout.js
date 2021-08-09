@@ -1,19 +1,19 @@
 $(document).ready(async function(){
     getCustomersWithCustomerNo(localStorage.getItem("token")).done(function (response) {
         if(response != false){
-            if(response.Address_1 != "NULL" && response.Address_1 != null){
+            if(response.Address_1 != "NULL" && response.Address_1 != null && response.Address_1 != "undefined"){
                 $("#sub-saved-address").append("<option value=\"" + response.Address_1 + "\">" + response.Address_1 + "</option>");
             }
-            if(response.Address_2 != "NULL" && response.Address_2 != null){
+            if(response.Address_2 != "NULL" && response.Address_2 != null && response.Address_2 != "undefined"){
                 $("#sub-saved-address").append("<option value=\"" + response.Address_2 + "\">" + response.Address_2 + "</option>");
             }
-            if(response.Address_3 != "NULL" && response.Address_3 != null){
+            if(response.Address_3 != "NULL" && response.Address_3 != null && response.Address_3 != "undefined"){
                 $("#sub-saved-address").append("<option value=\"" + response.Address_3 + "\">" + response.Address_3 + "</option>");
             }
-            if(response.Address_4 != "NULL" && response.Address_4 != null){
+            if(response.Address_4 != "NULL" && response.Address_4 != null && response.Address_4 != "undefined"){
                 $("#sub-saved-address").append("<option value=\"" + response.Address_4 + "\">" + response.Address_4 + "</option>");
             }
-            if(response.Address_5 != "NULL" && response.Address_5 != null){
+            if(response.Address_5 != "NULL" && response.Address_5 != null && response.Address_5 != "undefined"){
                 $("#sub-saved-address").append("<option value=\"" + response.Address_5 + "\">" + response.Address_5 + "</option>");
             }
         }
