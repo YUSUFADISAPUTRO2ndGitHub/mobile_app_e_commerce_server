@@ -1,5 +1,10 @@
 $(document).ready(function(){
     generateListSale();
+    if(localStorage.getItem("main-ads-pop-up-counter") === "1"){
+        $(".ads-group").css("display", "none");
+    }else{
+        $(".ads-group").css("display", "block");
+    }
 });
 
 function generatehomeOneByOne(product_row, data, dataLength){
@@ -304,8 +309,17 @@ function addToCartDirectly(product){
     Swal.fire("Item Added", "have fun shopping!", "success");
 }
 
+setInterval(() => {
+    if(localStorage.getItem("main-ads-pop-up-counter") === "1"){
+        $(".ads-group").css("display", "none");
+    }else{
+        $(".ads-group").css("display", "block");
+    }
+}, 1000);
+
 function hidepopupads(){
-    $(".ads-group").css("display", "none")
+    $(".ads-group").css("display", "none");
+    localStorage.setItem("main-ads-pop-up-counter", 1);
 }
 
 function gopromotedproduct(Product_Code){

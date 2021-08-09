@@ -283,6 +283,15 @@
     .input_scrolled{
         background-color:red;
     }
+
+    #unpaid_icon_quantity{
+        background-color: darkred;
+        color: white;
+        position: relative;
+        left: -15%;
+        padding: 5%;
+        border-radius: 50%;
+    }
     
 </style>
 <body onload="update()">
@@ -321,7 +330,10 @@
                                 </span>
                         </th>
                         <th class="width-30">
-                            <img src="../www/img/Additional_icons/truck.png" class="category-icon-header navbar-bottom-icon" id="delivery-icon">
+                            <div>
+                                <img src="../www/img/Additional_icons/truck.png" class="category-icon-header navbar-bottom-icon" id="delivery-icon">
+                                <span id="unpaid_icon_quantity" class="font-accepted-family">0</span>
+                            </div>
                         </th>
                         <th class="width-30">
                             <div id="cart-top" class="notification">
@@ -379,6 +391,7 @@
 
 </body>
 <script>
+    localStorage.setItem("main-ads-pop-up-counter", 0);
     function update(){
         setTimeout(function(){
             // display: none;
@@ -387,13 +400,8 @@
 
         if((localStorage.getItem("token")) ==  null){
             localStorage.setItem("token", "");
-            console.log( "here" );
         }
 
-        // section for alert for unpaid orders
-        // swal.fire("You have unpaid order(s)","Please proceed to pay your order(s), click below to view unpaid order(s)","warning");
-        // http://147.139.168.202:8080/checkPaymentStatusInGroupBuy.jsp?customerId=Sy8Hr4Od8Dw2Oy7Xl6Hg8Ta8Js1
-        // setInterval(update_cart_icon(), 1000);
         setInterval(function(){ 
             if (typeof(Storage) !== "undefined") {
                 var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
@@ -401,6 +409,16 @@
                     $("#cart_icon_quantity").html(cartToJson.length);
                 }
             }
+            // alert("called");
+            getAllUnpaidOrdersForThisCustomer(localStorage.getItem("token"), "").done(function (response) {
+                // alert(response.length);
+                if(response.length > 0){
+                    $("#unpaid_icon_quantity").css("display", "block");
+                    $("#unpaid_icon_quantity").html(response.length);
+                }else{
+                    $("#unpaid_icon_quantity").css("display", "none");
+                }
+            });
         }, 1000);
     }
     function showCustomerService(){

@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script type="text/javascript">
+        function disableBack() { window.history.forward(); }
+        setTimeout("disableBack()", 0);
+        window.onunload = function () { null };
+    </script>
     <link rel="stylesheet" href="../mobile_browser_adjustment.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
@@ -63,6 +68,14 @@
     }
     .modal-dialog{
         max-width: 90% !important;
+    }
+    .swal-custom, .swal2-title, .swal2-container{
+        background-color: white;
+        color: #217384 ;
+        border: none;
+    }
+    .swal2-backdrop-show{
+        background-color: white !important;
     }
 </style>
 <body>
@@ -132,15 +145,15 @@
                     <label>Nama Jalan dan RT/RW</label>
                     <input type="text" id="signup-address" class="form-control" placeholder="Nama Jalan dan RT/RW" onchange="check_address(this)">
                     <label>Provinsi</label>
-                    <select class="form-select signup-address-province province" onclick="render_city()">
+                    <select class="form-select signup-address-province province" onchange="render_city()">
                         <option value="1">One</option>
                     </select>
                     <label>Kota</label>
-                    <select class="form-select signup-address-city city" onclick="render_district()">
+                    <select class="form-select signup-address-city city" onchange="render_district()">
                         <option value="1">One</option>
                     </select>
                     <label>Kecamatan</label>
-                    <select class="form-select signup-address-district district" onclick="render_sub_district()">
+                    <select class="form-select signup-address-district district" onchange="render_sub_district()">
                         <option value="1">One</option>
                     </select>
                     <label>Kelurahan</label>
@@ -223,14 +236,16 @@
     </div>
     <div class="card sign-up-button-area" onclick="signupRequest()">
         <div class="card-body">
-            Kumpulkan
+            Daftar
         </div>
     </div>
     <script>
         $( document ).ready(function() {
             render_province();
         });
+        window.onbeforeunload = function() { return "Your work will be lost."; };
         function render_province(){
+            loadingMessageWithInterval(1);
             $(".province").empty();
             get_all_province_from_courier("tiki", "tiki").done(function (prov) {
                 var i = 0;
@@ -241,6 +256,7 @@
             })
         }
         function render_city(){
+            loadingMessageWithInterval(1);
             $(".city").empty();
             get_all_city_from_courier("tiki", "tiki", $(".province").find(":selected").text()).done(function (City) {
                 var i = 0;
@@ -251,6 +267,7 @@
             })
         }
         function render_district(){
+            loadingMessageWithInterval(1);
             $(".district").empty();
             get_all_district_from_courier("tiki", "tiki", $(".city").find(":selected").text()).done(function (District) {
                 var i = 0;
@@ -261,6 +278,7 @@
             })
         }
         function render_sub_district(){
+            loadingMessageWithInterval(1);
             $(".subdistrict").empty();
             get_all_subdistrict_from_courier("tiki", "tiki", $(".district").find(":selected").text()).done(function (Sub_District) {
                 var i = 0;

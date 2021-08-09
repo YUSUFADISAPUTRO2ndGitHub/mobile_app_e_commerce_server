@@ -445,6 +445,32 @@ function loadingMessage(){
     })
 }
 
+function loadingMessageWithInterval(time){
+    let timerInterval
+    Swal.fire({
+    title: 'Memproses',
+    html: '',
+    timer: time*1000,
+    timerProgressBar: true,
+    customClass: 'swal-custom',
+    allowOutsideClick: false,
+    didOpen: () => {
+        Swal.showLoading()
+        timerInterval = setInterval(() => {
+        const content = Swal.getContent()
+        }, 100)
+    },
+    willClose: () => {
+        clearInterval(timerInterval)
+    }
+    }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('I was closed by the timer')
+        }
+    })
+}
+
 function forgotpasswordrequest(){
     if($("#forgot-email").val().length != 0 
     && $("#forgot-telp").val().length != 0 
