@@ -2,6 +2,7 @@ $(document).ready(function(){
     if(localStorage.getItem("token") != ""){
         getCustomersWithCustomerNo(localStorage.getItem("token")).done(function (response) {
             console.log(response);
+            $(".profile-fullname").html(response.First_Name + " " + response.Last_Name);
             if(response.Birthday != undefined){
                 if(response.Birthday.length > 0 && response.User_Type != undefined){
                     if(response.User_Type == "Customer"){

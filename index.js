@@ -584,6 +584,11 @@ router.get('/www/img/kran_single.png',function(req,res){
     //__dirname : It will resolve to your project folder.
 });
 
+router.get('/img/user-profile.png',function(req,res){
+    res.sendFile(path.join(__dirname+'/www/img/user-profile.png'));
+    //__dirname : It will resolve to your project folder.
+});
+
 /*
     rating stars
 */

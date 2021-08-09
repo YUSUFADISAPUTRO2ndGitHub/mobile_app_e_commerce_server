@@ -86,14 +86,40 @@
             border-radius: 0;
 
         }
+        .user-profile-image{
+            width: 20%;
+        }
+        .profile-card{
+            background-color: #0d6efd;
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            border: none;
+        }
+        .profile-content{
+            display: flex;
+            flex-direction: row;
+        }
+        .profile-fullname{
+            margin: 5%;
+        }
     </style>
 </head>
 <body>
     <div class="profile-box">
         <div class="card sign-up-title">
             <div class="card-body">
-            <h5 class="card-title">Profil Akun <span id="now">Anda!</span></h5>
-            <p class="card-text">Halo selamat datang! Semoga hari Anda menyenangkan</p>
+                <h5 class="card-title">Profil Akun <span id="now">Anda!</span></h5>
+                <p class="card-text">Halo selamat datang! Semoga hari Anda menyenangkan</p>
+                <div>
+                    <div class="card profile-card">
+                        <div class="card-body profile-content">
+                            <img src="./img/user-profile.png" class="user-profile-image">
+                            <h5 class="profile-fullname card-title">Your Name</h5>
+                            <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
