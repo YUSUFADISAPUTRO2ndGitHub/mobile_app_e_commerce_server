@@ -103,6 +103,18 @@
         .profile-fullname{
             margin: 5%;
         }
+        .edit-address-button{
+            border: none;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+        .edited_address{
+            display: none;
+        }
+        .cancel-edit-address-button{
+            border: none;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -174,8 +186,36 @@
                 </div>
                 <div class="form-group">
                     <label>Alamat lengkap</label>
-                    <input type="text" id="profile-address-local" class="form-control" placeholder="Alamat Lengkap">
+                    <input type="text" id="profile-address-local" class="form-control" placeholder="Alamat Lengkap" disabled>
+                    <br>
+                    <button type="button" class="btn btn-success edit-address-button" onclick="show_edit_address_inputs()">Ganti alamat diatas</button>
+                    <button type="button" class="btn btn-success cancel-edit-address-button" onclick="cancel_edit_address_inputs()">Batalkan permintaan perubahan alamat</button>
                 </div>
+                <br>
+                <div class="form-group edited_address">
+                    <label>Alamat Baru Anda</label>
+                    <div class="form-group card-body">
+                        <label>Nama Jalan dan RT/RW</label>
+                        <input type="text" id="profile-address" class="form-control" placeholder="Nama Jalan dan RT/RW">
+                        <label>Provinsi</label>
+                        <select class="form-select profile-address-province province" onclick="render_city()">
+                            <option value="1">One</option>
+                        </select>
+                        <label>Kota</label>
+                        <select class="form-select profile-address-city city" onclick="render_district()">
+                            <option value="1">One</option>
+                        </select>
+                        <label>Kecamatan</label>
+                        <select class="form-select profile-address-district district" onclick="render_sub_district()">
+                            <option value="1">One</option>
+                        </select>
+                        <label>Kelurahan</label>
+                        <select class="form-select profile-address-subdistrict subdistrict">
+                            <option value="1">One</option>
+                        </select>
+                    </div>
+                </div>
+
             </div>
         </div>
         <div class="alert alert-success" role="alert">
@@ -218,4 +258,59 @@
         </div>
     </div>
 </body>
+<script>
+    function show_edit_address_inputs(){
+        $(".edited_address").css("display", "block");
+        $(".edit-address-button").css("display", "none");
+        $(".cancel-edit-address-button").css("display", "block");
+    }
+    function cancel_edit_address_inputs(){
+        $(".edited_address").css("display", "none");
+        $(".edit-address-button").css("display", "block");
+        $(".cancel-edit-address-button").css("display", "none");
+    }
+    $( document ).ready(function() {
+        render_province();
+    });
+
+    function render_province(){
+        $(".province").empty();
+        get_all_province_from_courier("tiki", "tiki").done(function (prov) {
+            var i = 0;
+            for(i ; i < prov.length;i++){
+                $(".province").append(`<option>${prov[i].Province}</option>`);
+            }
+            render_city();
+        })
+    }
+    function render_city(){
+        $(".city").empty();
+        get_all_city_from_courier("tiki", "tiki", $(".province").find(":selected").text()).done(function (City) {
+            var i = 0;
+            for(i ; i < City.length;i++){
+                $(".city").append(`<option>${City[i].City}</option>`);
+            }
+            render_district();
+        })
+    }
+    function render_district(){
+        $(".district").empty();
+        get_all_district_from_courier("tiki", "tiki", $(".city").find(":selected").text()).done(function (District) {
+            var i = 0;
+            for(i ; i < District.length;i++){
+                $(".district").append(`<option>${District[i].District}</option>`);
+            }
+            render_sub_district();
+        })
+    }
+    function render_sub_district(){
+        $(".subdistrict").empty();
+        get_all_subdistrict_from_courier("tiki", "tiki", $(".district").find(":selected").text()).done(function (Sub_District) {
+            var i = 0;
+            for(i ; i < Sub_District.length;i++){
+                $(".subdistrict").append(`<option>${Sub_District[i].Sub_District}</option>`);
+            }
+        })
+    }
+</script>
 </html>

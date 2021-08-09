@@ -125,26 +125,52 @@ function additionalAddresses(response){
 
 function editProfile(){
     getCustomersWithCustomerNo(localStorage.getItem("token")).done(function (response) {
-        var data = {
-            customer_data: {
-                Customer_Code: localStorage.getItem("token"),
-                First_Name: $("#profile-owner-firstname").val(),
-                Last_Name: $("#profile-owner-lastname").val(),
-                // User_Password: $("#signup-password").val(),
-                Birthday: $("#birthday").val(),// $("#profile-db-year").val() + "/" + $("#profile-db-month").val() + "/" + $("#profile-db-day").val(),
-                Created_Date: "CURRENT_TIMESTAMP()",
-                Last_Login: "CURRENT_TIMESTAMP()",
-                Email: $("#profile-email").val(),
-                Contact_Number_1: $("#profile-telp").val(),
-                Contact_Number_2: response.Contact_Number_2,
-                Address_1: $("#profile-address-local").val(),
-                Address_2: $("#profile-address-local-2").val(),
-                Address_3: $("#profile-address-local-3").val(),
-                Address_4: $("#profile-address-local-4").val(),
-                Address_5: $("#profile-address-local-5").val(),
-                Status: "Approved",
-                User_Type: response.User_Type,
-                ktp: $("#profile-ktp").val()
+        var data = {};
+        if($(".edit-address-button").css("display") == "block"){
+            data = {
+                customer_data: {
+                    Customer_Code: localStorage.getItem("token"),
+                    First_Name: $("#profile-owner-firstname").val(),
+                    Last_Name: $("#profile-owner-lastname").val(),
+                    // User_Password: $("#signup-password").val(),
+                    Birthday: $("#birthday").val(),// $("#profile-db-year").val() + "/" + $("#profile-db-month").val() + "/" + $("#profile-db-day").val(),
+                    Created_Date: "CURRENT_TIMESTAMP()",
+                    Last_Login: "CURRENT_TIMESTAMP()",
+                    Email: $("#profile-email").val(),
+                    Contact_Number_1: $("#profile-telp").val(),
+                    Contact_Number_2: response.Contact_Number_2,
+                    Address_1:  $("#profile-address-local").val(),
+                    Address_2: $("#profile-address-local-2").val(),
+                    Address_3: $("#profile-address-local-3").val(),
+                    Address_4: $("#profile-address-local-4").val(),
+                    Address_5: $("#profile-address-local-5").val(),
+                    Status: "Approved",
+                    User_Type: response.User_Type,
+                    ktp: $("#profile-ktp").val()
+                }
+            }
+        }else{
+            data = {
+                customer_data: {
+                    Customer_Code: localStorage.getItem("token"),
+                    First_Name: $("#profile-owner-firstname").val(),
+                    Last_Name: $("#profile-owner-lastname").val(),
+                    // User_Password: $("#signup-password").val(),
+                    Birthday: $("#birthday").val(),// $("#profile-db-year").val() + "/" + $("#profile-db-month").val() + "/" + $("#profile-db-day").val(),
+                    Created_Date: "CURRENT_TIMESTAMP()",
+                    Last_Login: "CURRENT_TIMESTAMP()",
+                    Email: $("#profile-email").val(),
+                    Contact_Number_1: $("#profile-telp").val(),
+                    Contact_Number_2: response.Contact_Number_2,
+                    Address_1: $("#profile-address").val() + " " + $(".profile-address-subdistrict").find(":selected").text() + " " + $(".profile-address-district").find(":selected").text() + " " + $(".profile-address-city").find(":selected").text() + " " + $(".profile-address-province").find(":selected").text(),// $("#profile-address-local").val(),
+                    Address_2: $("#profile-address-local-2").val(),
+                    Address_3: $("#profile-address-local-3").val(),
+                    Address_4: $("#profile-address-local-4").val(),
+                    Address_5: $("#profile-address-local-5").val(),
+                    Status: "Approved",
+                    User_Type: response.User_Type,
+                    ktp: $("#profile-ktp").val()
+                }
             }
         }
         console.log(data);
