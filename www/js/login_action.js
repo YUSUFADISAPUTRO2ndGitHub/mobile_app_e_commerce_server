@@ -6,16 +6,17 @@ $(document).ready(function(){
             if(response.Birthday != undefined){
                 if(response.Birthday.length > 0 && response.User_Type != undefined){
                     if(response.User_Type == "Customer"){
-                        var bday = response.Birthday.split("/");
+                        var bday = response.Birthday.split("-");
                         $("#profile-owner-firstname").val(response.First_Name);
                         $("#profile-owner-lastname").val(response.Last_Name);
                         $("#profile-email").val(response.Email);
                         $("#profile-telp").val(response.Contact_Number_1);
                         $("#profile-address-local").val(response.Address_1);
                         $("#profile-ktp").val(response.ktp);
-                        $("#profile-db-year").val(bday[0]);
-                        $("#profile-db-month").val(bday[1]);
-                        $("#profile-db-day").val(bday[2]);
+                        // $("#profile-db-year").val(bday[0]);
+                        // $("#profile-db-month").val(bday[1]);
+                        // $("#profile-db-day").val(bday[2]);
+                        $("#birthday").val(response.Birthday);
                     }else{
                         $("#profile-owner-firstname").val(response.First_Name);
                         $("#profile-owner-lastname").val(response.Last_Name);
@@ -130,7 +131,7 @@ function editProfile(){
                 First_Name: $("#profile-owner-firstname").val(),
                 Last_Name: $("#profile-owner-lastname").val(),
                 // User_Password: $("#signup-password").val(),
-                Birthday:$("#profile-db-year").val() + "/" + $("#profile-db-month").val() + "/" + $("#profile-db-day").val(),
+                Birthday: $("#birthday").val(),// $("#profile-db-year").val() + "/" + $("#profile-db-month").val() + "/" + $("#profile-db-day").val(),
                 Created_Date: "CURRENT_TIMESTAMP()",
                 Last_Login: "CURRENT_TIMESTAMP()",
                 Email: $("#profile-email").val(),
@@ -213,13 +214,13 @@ function signupRequest(){
                             First_Name : $("#signup-owner-first-name").val(),
                             Last_Name : $("#signup-owner-last-name").val(),
                             User_Password : response,
-                            Birthday : $("#profile-db-year").val() + "/" + $("#profile-db-month").val() + "/" + $("#profile-db-day").val(),
+                            Birthday : $("#birthday").val(), // $("#profile-db-year").val() + "/" + $("#profile-db-month").val() + "/" + $("#profile-db-day").val(),
                             Created_Date : "CURRENT_TIMESTAMP()",
                             Last_Login : "CURRENT_TIMESTAMP()",
                             Email : $("#signup-email").val(),
                             Contact_Number_1 : $("#signup-telp").val(),
                             Contact_Number_2 : $("#signup-telp-2").val(),
-                            Address_1 : (typeof $("#signup-address").val() === 'undefined') ? "NULL" : $("#signup-address").val(),
+                            Address_1 : (typeof $("#signup-address").val() === 'undefined') ? "NULL" : $("#signup-address").val() + " " + $(".signup-address-subdistrict").find(":selected").text() + " " + $(".signup-address-district").find(":selected").text() + " " + $(".signup-address-city").find(":selected").text() + " " + $(".signup-address-province").find(":selected").text(),
                             Address_2 : (typeof $("#signup-address-0").val() === 'undefined') ? "NULL" : $("#signup-address-0").val(),
                             Address_3 : (typeof $("#signup-address-1").val() === 'undefined') ? "NULL" : $("#signup-address-1").val(),
                             Address_4 : (typeof $("#signup-address-2").val() === 'undefined') ? "NULL" : $("#signup-address-2").val(),
@@ -360,42 +361,7 @@ function checkIfSignUpInputNull(){
         // email or password is empty
         return false;
     }else{
-        // check bday
-        if(
-            $("#profile-db-year").val().length > 0
-            && $("#profile-db-month").val().length > 0
-            && $("#profile-db-day").val().length > 0
-        ){
-            if(
-                !(isNaN($("#profile-db-year").val() * 1)
-                && isNaN($("#profile-db-month").val().length * 1)
-                && isNaN($("#profile-db-day").val().length * 1))
-            ){
-                if(
-                    $("#profile-db-year").val() <= 2020
-                ){
-                    if(
-                        $("#profile-db-month").val() <= 12
-                    ){
-                        if(
-                            $("#profile-db-day").val() <= 31
-                        ){
-                            return true;
-                        }else{
-                            alert($("#profile-db-day").val() + " | Hari lahir Anda tidak sesuai");
-                        }
-                    }else{
-                        alert($("#profile-db-month").val() + " | Bulan lahir Anda tidak sesuai");
-                    }
-                }else{
-                    alert($("#profile-db-year").val() + " | Anda terlalu muda untuk bergabung dengan kami");
-                }
-            }else{
-                return false;
-            }
-        }else{
-            return false;
-        }
+        return true;
     }
 }
 
