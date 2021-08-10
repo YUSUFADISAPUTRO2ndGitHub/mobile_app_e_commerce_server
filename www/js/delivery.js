@@ -23,9 +23,15 @@ function populateDeliveryTable(){
 
 function generateRowsDelivery(i, datas){
     $("#table-delivery-order").append("<tr id=\"" + i + "\" class=\"body-table\">");
-    $("#" + i).append("<td><div class=\"date-body-table\" onclick=\"orderDetailRequest(\'" + datas.Order_Number + "\')\">" + datas.Update_date + "</div></td>");
-    $("#" + i).append("<td><div class=\"orderNum-body-table\" onclick=\"orderDetailRequest(\'" + datas.Order_Number + "\')\">" + datas.Order_Number + "</div></td>");
-    $("#" + i).append("<td><div class=\"paymentterm-body-table\" onclick=\"orderDetailRequest(\'" + datas.Order_Number + "\')\">" + datas.Payment_Method + "</div></td>");
+    if(datas.Payment_Status == "waitpay"){
+        $("#" + i).append("<td><div class=\"date-body-table red-unpaid-order\" onclick=\"orderDetailRequest(\'" + datas.Order_Number + "\')\">" + datas.Update_date + "</div></td>");
+        $("#" + i).append("<td><div class=\"orderNum-body-table red-unpaid-order\" onclick=\"orderDetailRequest(\'" + datas.Order_Number + "\')\">" + datas.Order_Number + "</div></td>");
+        $("#" + i).append("<td><div class=\"paymentterm-body-table red-unpaid-order\" onclick=\"orderDetailRequest(\'" + datas.Order_Number + "\')\">" + datas.Payment_Method + "</div></td>");
+    }else{
+        $("#" + i).append("<td><div class=\"date-body-table\" onclick=\"orderDetailRequest(\'" + datas.Order_Number + "\')\">" + datas.Update_date + "</div></td>");
+        $("#" + i).append("<td><div class=\"orderNum-body-table\" onclick=\"orderDetailRequest(\'" + datas.Order_Number + "\')\">" + datas.Order_Number + "</div></td>");
+        $("#" + i).append("<td><div class=\"paymentterm-body-table\" onclick=\"orderDetailRequest(\'" + datas.Order_Number + "\')\">" + datas.Payment_Method + "</div></td>");
+    }
     if(datas.Status.toUpperCase() != 'cancelled'.toUpperCase()){
         $("#" + i).append("<td><div class=\"cancel-body-table\" onclick=\"cancelOrderRequest(\'" + datas.Order_Number + "\')\">Cancel</div></td>");
     }else{

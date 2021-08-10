@@ -120,6 +120,14 @@
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             display: none;
         }
+        .swal-custom, .swal2-title, .swal2-container{
+            background-color: white;
+            color: #217384 ;
+            border: none;
+        }
+        .swal2-backdrop-show{
+            background-color: white !important;
+        }
     </style>
 </head>
 <body>
@@ -294,6 +302,7 @@
     });
 
     function render_province(){
+        loadingMessageWithInterval(1);
         $(".province").empty();
         get_all_province_from_courier("tiki", "tiki").done(function (prov) {
             var i = 0;
@@ -304,6 +313,7 @@
         })
     }
     function render_city(){
+        loadingMessageWithInterval(1);
         $(".city").empty();
         get_all_city_from_courier("tiki", "tiki", $(".province").find(":selected").text()).done(function (City) {
             var i = 0;
@@ -314,6 +324,7 @@
         })
     }
     function render_district(){
+        loadingMessageWithInterval(1);
         $(".district").empty();
         get_all_district_from_courier("tiki", "tiki", $(".city").find(":selected").text()).done(function (District) {
             var i = 0;
@@ -324,6 +335,7 @@
         })
     }
     function render_sub_district(){
+        loadingMessageWithInterval(1);
         $(".subdistrict").empty();
         get_all_subdistrict_from_courier("tiki", "tiki", $(".district").find(":selected").text()).done(function (Sub_District) {
             var i = 0;
