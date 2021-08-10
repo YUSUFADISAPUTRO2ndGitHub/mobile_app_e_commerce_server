@@ -22,13 +22,14 @@ function populateDeliveryTable(){
 }
 
 function generateRowsDelivery(i, datas){
+    datas.Update_date = datas.Update_date.split("T");
     if(datas.Status.toUpperCase() != 'cancelled'.toUpperCase()){
         $(`.table-delivery-order-new`).append(`
             <div class="product-in-card">
                 <div class="card-body">
                     <div class="product-details">
                         <label>DATE</label>
-                        <div class="card-text product-in-card-name">${datas.Update_date}</div>
+                        <div class="card-text product-in-card-name">${datas.Update_date[0]}</div>
                         <label>ORDER NUMBER</label>
                         <div class="card-text product-in-card-name order-number" onclick="orderDetailRequest('${datas.Order_Number}')">${datas.Order_Number}</div>
                         <label>PAYMENT TERM</label>
@@ -46,7 +47,7 @@ function generateRowsDelivery(i, datas){
                 <div class="card-body">
                     <div class="product-details">
                         <label>DATE</label>
-                        <div class="card-text product-in-card-name">${datas.Update_date}</div>
+                        <div class="card-text product-in-card-name">${datas.Update_date[0]}</div>
                         <label>ORDER NUMBER</label>
                         <div class="card-text product-in-card-name order-number" onclick="orderDetailRequest('${datas.Order_Number}')">${datas.Order_Number}</div>
                         <label>PAYMENT TERM</label>

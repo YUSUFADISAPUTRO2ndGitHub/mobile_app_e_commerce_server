@@ -2,21 +2,18 @@
 <html>
     <head>
         <link rel="stylesheet" href="../mobile_browser_adjustment.css">
-        <link rel="stylesheet" href="../www/css/bootstrap.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
         <script src="../www/js/accessingAccurateAPIsGroup1.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="../www/js/product_details.js"></script>
-        <!-- <script src="../www/js/expressCheckout.js"></script> -->
         <script src="../www/js/expressCheckout.js"></script>
         <script src="../www/js/sweetalert.js"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <!-- <script src="../www/js/IndonesiaAddress.js"></script> -->
         <script src="../www/js/inputChecker.js"></script>
         <script src="../www/js/time.js"></script>
         <script src="../www/js/navigation.js"></script>
-        <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v9.0" nonce="W4kcd74M"></script>
     </head>
 <style>
@@ -369,7 +366,7 @@
         width: 100%;
         height: 30px;
     }
-    #modal-group-purchase{
+    #modal-group-purchase, #modal-add-to-cart{
         z-index: 50;
     }
     .glowing-box{
@@ -449,8 +446,34 @@
     .swal2-backdrop-show{
         background-color: white !important;
     }
+    .user-options-to-add-to-cart{
+        background-color: white;
+        color: #217384;
+        border-radius: 10px;
+        border: none;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        padding: 3%;
+    }
 </style>
 <body>
+
+    <!-- Modal -->
+    <div id="modal-add-to-cart" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="user-options-to-add-to-cart card-text">
+                <div class="mb-3">
+                    <label class="form-label">Kuantitas</label>
+                    <input type="number" class="form-control requested-quantity-by-user" value="1">
+                    <div class="form-text">Masukkan jumlah yang diinginkan untuk dimasukan kekeranjang</div>
+                    <button type="button" class="btn btn-success" onclick="addToCartDirectlyFromProductDetails()">add to cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <!-- The Modal -->
     <div id="modal-group-purchase" class="modal">
 
@@ -642,7 +665,7 @@
                                 <button type="button" id="back-button" class="product-details-button-main product-details-button back-button">
                                     Pencarian <img class="independent-cart-icon" src="../www/img/Additional_icons/search.png" class="category-icon" >
                                 </button>
-                                <button type="button" class="product-details-button-main product-details-button add-cart-button" onclick="addToCartDirectlyFromProductDetails()">
+                                <button type="button" class="product-details-button-main product-details-button add-cart-button" onclick="show_modal_quantity_requested('modal-add-to-cart')">
                                     Tambah <img class="independent-cart-icon" src="../www/img/Additional_icons/shopping-cart.png" class="category-icon" >
                                 </button>
                                 <br>
@@ -660,7 +683,7 @@
                                     Bagikan APP ini melalui <img class="independent-share-wa-icon" src="../www/img/Additional_icons/whatsapp.png" class="category-icon" >
                                 </a>
                                 <iframe class="rating-stars-iframe" src="./rating-stars/index.html"></iframe>
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3 product-option-dropdown">
                                     <div class="input-group-prepend">
                                         <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</button>
                                         <div class="dropdown-menu" id="product-option-dropdown">
@@ -668,7 +691,7 @@
                                         </div>
                                     </div>
                                     <input id="product-option-dropdown-name" type="text" class="form-control" disabled>
-                                  </div>
+                                </div>
                             </div>
                         </div>
                     </tr>
@@ -759,12 +782,19 @@
 </body>
 <script>
     // Get the modal
-    var modal = document.getElementById("modal-group-purchase");
+    var modal1 = document.getElementById("modal-group-purchase");
+    var modal2 = document.getElementById("modal-add-to-cart");
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
+    var span1 = document.getElementsByClassName("close")[1];
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
-        modal.style.display = "none";
+        modal1.style.display = "none";
+        modal2.style.display = "none";
+    }
+    span1.onclick = function() {
+        modal1.style.display = "none";
+        modal2.style.display = "none";
     }
 
     function change_bellow_options(x){

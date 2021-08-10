@@ -12,16 +12,18 @@ $(document).ready(async function(){
             }
         }else{
             loadingMessage(1);
-            get_cart(localStorage.getItem("token")).done(function (response) {
-                // alert("get_cart");
-                if(response != undefined){
-                    cartToJson = JSON.parse(response);
-                    localStorage.setItem("itemsInCart", response);
-                    for(i; i < cartToJson.length; i ++){
-                        loadcart(cartToJson[i].productNo, cartToJson[i].quantity);
-                    }
-                }
-            });
+            // get_cart(localStorage.getItem("token")).done(function (response) {
+            //     if(response != undefined){
+            //         cartToJson = JSON.parse(response);
+            //         localStorage.setItem("itemsInCart", response);
+            //         for(i; i < cartToJson.length; i ++){
+            //             loadcart(cartToJson[i].productNo, cartToJson[i].quantity);
+            //         }
+            //     }
+            // });
+            for(i; i < cartToJson.length; i ++){
+                loadcart(cartToJson[i].productNo, cartToJson[i].quantity);
+            }
         }
     }else{
         var emptyArray = [];

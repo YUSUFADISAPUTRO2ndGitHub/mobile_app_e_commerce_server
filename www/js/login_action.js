@@ -1,14 +1,18 @@
 $(document).ready(function(){
     if(localStorage.getItem("token") != ""){
         getCustomersWithCustomerNo(localStorage.getItem("token")).done(function (response) {
-            console.log(response);
             $(".profile-fullname").html(response.First_Name + " " + response.Last_Name);
             if(response.Birthday != undefined){
-                if(response.Birthday.length > 0 && response.User_Type != undefined){
+                if(response.User_Type != undefined){
                     if(response.User_Type == "Customer"){
                         var bday = response.Birthday.split("-");
                         $("#profile-owner-firstname").val(response.First_Name);
                         $("#profile-owner-lastname").val(response.Last_Name);
+                        if(response.bank_account_number != undefined){
+                            if(response.bank_account_number.length > 0){
+                                $("#profile-account-number").val(response.bank_account_number);
+                            }
+                        }
                         $("#profile-email").val(response.Email);
                         $("#profile-telp").val(response.Contact_Number_1);
                         $("#profile-address-local").val(response.Address_1);
@@ -20,6 +24,11 @@ $(document).ready(function(){
                     }else{
                         $("#profile-owner-firstname").val(response.First_Name);
                         $("#profile-owner-lastname").val(response.Last_Name);
+                        if(response.bank_account_number != undefined){
+                            if(response.bank_account_number.length > 0){
+                                $("#profile-account-number").val(response.bank_account_number);
+                            }
+                        }
                         $("#profile-email").val(response.Email);
                         $("#profile-telp").val(response.Contact_Number_1);
                         $("#profile-address-local").val(response.Address_1);
@@ -132,6 +141,7 @@ function editProfile(){
                     Customer_Code: localStorage.getItem("token"),
                     First_Name: $("#profile-owner-firstname").val(),
                     Last_Name: $("#profile-owner-lastname").val(),
+                    bank_account_number: $("#profile-account-number").val(),
                     // User_Password: $("#signup-password").val(),
                     Birthday: $("#birthday").val(),// $("#profile-db-year").val() + "/" + $("#profile-db-month").val() + "/" + $("#profile-db-day").val(),
                     Created_Date: "CURRENT_TIMESTAMP()",
@@ -155,6 +165,7 @@ function editProfile(){
                     Customer_Code: localStorage.getItem("token"),
                     First_Name: $("#profile-owner-firstname").val(),
                     Last_Name: $("#profile-owner-lastname").val(),
+                    bank_account_number: $("#profile-account-number").val(),
                     // User_Password: $("#signup-password").val(),
                     Birthday: $("#birthday").val(),// $("#profile-db-year").val() + "/" + $("#profile-db-month").val() + "/" + $("#profile-db-day").val(),
                     Created_Date: "CURRENT_TIMESTAMP()",
@@ -253,7 +264,7 @@ function signupRequest(){
                             Address_5 : (typeof $("#signup-address-3").val() === 'undefined') ? "NULL" : $("#signup-address-3").val(),
                             Status : "pending",
                             User_Type : "Customer",
-                            account_number: $("#signup-account-number").val(),
+                            // account_number: $("#signup-account-number").val(),
                             referral_customer_code: $("#signup-referral").val(),
                             ktp: (typeof $("#signup-id-number").val() === 'undefined') ? "NULL" : $("#signup-id-number").val()
                         }
@@ -387,7 +398,12 @@ function checkIfSignUpInputNull(){
         // email or password is empty
         return false;
     }else{
-        return true;
+        // term-and-condition-button-agree-checkbox
+        if ($( "input:checked" ).val()) {
+            return true;
+        }else{
+            return false;
+        }
     }
 }
 
