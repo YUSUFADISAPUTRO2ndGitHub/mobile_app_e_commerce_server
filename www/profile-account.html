@@ -84,13 +84,6 @@
                 opacity: 1;
             }
         }
-        .btn-primary{
-            width: 100%;
-            border: none;
-            background-color: #217384;
-            border-radius: 0;
-
-        }
         .user-profile-image{
             width: 20%;
         }
@@ -128,6 +121,28 @@
         .swal2-backdrop-show{
             background-color: white !important;
         }
+        .profile-menus{
+            padding: 1%;
+            display: flex;
+            flex-direction: row;
+        }
+        .button-profile-menu{
+            max-width: 20%;
+            margin: 1%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            background-color: white;
+            color: #217384;
+        }
+        .button-profile-menu-icon{
+            max-width: 100%;
+        }
+        .profile-menus-title{
+            padding-left: 5%;
+            padding-top: 2%;
+            color: #217384;
+            font-weight: 700;
+        }
     </style>
 </head>
 <body>
@@ -147,21 +162,21 @@
                 </div>
             </div>
         </div>
+        <div class="profile-menus-title">
+            Menu
+        </div>
 
-        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#thank-you-notes" aria-expanded="false" aria-controls="thank-you-notes">
-            Ucapan terima kasih kami
-        </button>
+        <div class="profile-menus">
+            <button class="btn btn-primary button-profile-menu" type="button" data-bs-toggle="collapse" data-bs-target="#thank-you-notes" aria-expanded="false" aria-controls="thank-you-notes">
+                Our thank you notes
+            </button>
+            <button class="btn btn-primary button-profile-menu" type="button" onclick="redirect_parent_to_display_delivery_order_list()">
+                <img class="button-profile-menu-icon" src="../www/img/Additional_icons/truck.png">
+            </button>
+        </div>
         <div class="collapse" id="thank-you-notes">
             <div class="card card-body">
                 Terima kasih telah mendukung kami dengan menjadi anggota. Kami sangat mengharapkan masukan Anda. Harap jangan ragu untuk menghubungi layanan pelanggan kami untuk memberi kami lebih banyak pemikiran Anda. Kami senang melayani Anda secara langsung daripada menggunakan robot.
-            </div>
-        </div>
-        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            Lihat semua pesanan
-        </button>
-        <div class="collapse" id="collapseExample">
-            <div class="card card-body">
-                <iframe src="./delivery_order_list.html"></iframe>
             </div>
         </div>
 
@@ -276,6 +291,11 @@
     </div>
 </body>
 <script>
+    function redirect_parent_to_display_delivery_order_list(){
+        window.location.href = `./delivery_order_list.html`;
+    }
+
+
     function getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);

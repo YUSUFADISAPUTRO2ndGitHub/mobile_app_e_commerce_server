@@ -23,11 +23,32 @@ function populateDeliveryTable(){
 
 function generateRowsDelivery(i, datas){
     datas.Update_date = datas.Update_date.split("T");
-    if(datas.Status.toUpperCase() != 'cancelled'.toUpperCase()){
+
+    if(datas.Payment_Status.toUpperCase() == 'PAYMENT'.toUpperCase() || datas.Status.toUpperCase() != 'APPROVING'.toUpperCase()){
         $(`.table-delivery-order-new`).append(`
             <div class="product-in-card">
                 <div class="card-body">
                     <div class="product-details">
+                        <a class="view-details" onclick="orderDetailRequest('${datas.Order_Number}')">View details</a>
+                        <label>DATE</label>
+                        <div class="card-text product-in-card-name">${datas.Update_date[0]}</div>
+                        <label>ORDER NUMBER</label>
+                        <div class="card-text product-in-card-name order-number" onclick="orderDetailRequest('${datas.Order_Number}')">${datas.Order_Number}</div>
+                        <label>PAYMENT TERM</label>
+                        <div class="card-text product-in-card-name">${datas.Payment_Method}</div>
+                        <div class="card-text product-in-card-name">
+                            <div class="cancel-body-table">Order telah di proses</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `);
+    }else if(datas.Status.toUpperCase() != 'cancelled'.toUpperCase()){
+        $(`.table-delivery-order-new`).append(`
+            <div class="product-in-card">
+                <div class="card-body">
+                    <div class="product-details">
+                        <a class="view-details" onclick="orderDetailRequest('${datas.Order_Number}')">View details</a>
                         <label>DATE</label>
                         <div class="card-text product-in-card-name">${datas.Update_date[0]}</div>
                         <label>ORDER NUMBER</label>
@@ -46,6 +67,7 @@ function generateRowsDelivery(i, datas){
             <div class="product-in-card">
                 <div class="card-body">
                     <div class="product-details">
+                        <a class="view-details" onclick="orderDetailRequest('${datas.Order_Number}')">View details</a>
                         <label>DATE</label>
                         <div class="card-text product-in-card-name">${datas.Update_date[0]}</div>
                         <label>ORDER NUMBER</label>

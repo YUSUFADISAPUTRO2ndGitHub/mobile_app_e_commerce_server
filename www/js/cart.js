@@ -90,7 +90,7 @@ function loadcart(productNo, quantity){
             }
         }else{
             $(`.cart-list`).append(`
-            <div class="product-in-card">
+            <div class="product-in-card" id="product-in-card-${productNo}">
                 <div class="product-in-card-body">
                     <img class="product-image-in-cart" src="${response.Picture_1}">
                     <div class="product-details">
@@ -218,14 +218,14 @@ var checkboxCounter = 0;
 var totalPrice = 0;
 function selectedCart(checkBox,number){
     if (checkBox.checked == true){
-
+        $("#product-in-card-"+number).css("border", "solid 5px lightblue");
         addItemsToCheckout(number);
 
 
         totalPrice = totalPrice + parseInt( removeComma($("#" + number).val()) );
         checkboxCounter++;
     } else {
-
+        $("#product-in-card-"+number).css("border", "none");
         removeItemsToCheckout(number);
 
         totalPrice = totalPrice - parseInt( removeComma($("#" + number).val()) );

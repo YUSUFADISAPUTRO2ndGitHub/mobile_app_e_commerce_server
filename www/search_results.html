@@ -158,6 +158,18 @@
     .slides{
         max-height: auto;
     }
+    .options-area{
+        display: flex;
+        flex-direction: row;
+        padding: 1%;
+    }
+    .option-button{
+        border-radius: 10px;
+        max-width: 20%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        padding: 2%;
+        color: #217384;
+    }
 </style>
 <body class="background_image">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -235,11 +247,60 @@
         </tr>
         <tr>
             <td class="bottom-structure" >
+                <div class="options-area">
+                    <div class="option-button" onclick="sort_by_price(this)">Harga</div>
+                </div>
                 <table id="product-highlights">
                     <!-- <div id="product-highlights-small-quantity"></div> -->
                 </table>
             </td>
         </tr>
     </table>
+    <script>
+        var sort_price_counter_click = 0;
+        function sort_by_price(x){
+            var queryString = window.location.search;
+            var urlParams = new URLSearchParams(queryString);
+            var search = urlParams.get('input');
+            $("#product-highlights").empty();
+            getAllProductsWithoutPaginationWithFilter("", "", "", "", search).done(function (response) {
+                if(response[0] != false){
+                    if(response.length == 0){
+                        loadingMessage(1);
+                        searchUpBasedOnCategory(keywords);
+                    }else if(response.length == 1){
+                        loadingMessage(response.length);
+                        generatehomeleftOnly(response.length, response[0], response.length);
+                    }else{
+                        // condition works for more than 1 product
+                        if(sort_price_counter_click == 0){ // sort from cheap to expensive
+                            response = response.sort((a,b) => (a.Sell_Price*1 > b.Sell_Price*1) ? 1 : ((b.Sell_Price*1 > a.Sell_Price*1) ? -1 : 0));
+                            $(x).css("background-color", "green");
+                            $(x).css("color", "white");
+                        }else if(sort_price_counter_click == 1){
+                            response = response.sort((a,b) => (a.Sell_Price*1 < b.Sell_Price*1) ? 1 : ((b.Sell_Price*1 < a.Sell_Price*1) ? -1 : 0));
+                            $(x).css("background-color", "darkred");
+                            $(x).css("color", "white");
+                        }else{
+                            $(x).css("background-color", "white");
+                            $(x).css("color", "#217384");
+                            sort_price_counter_click = 0;
+                        }
+                        sort_price_counter_click++;
+                        loadingMessage(response.length);
+                        var product_row = 0;
+                        for(product_row; product_row < response.length; product_row++){
+                            generatehomeOneByOne(product_row, response[product_row], response.length);
+                        }
+                    }
+                }else{
+                    Swal.fire("Item not found", "Mungkin saya bisa menunjukkan hasil pencarian yang berbeda", "warning");
+                    setTimeout(() => {
+                        searchUp(keywords.substring(1, 2), "", "");
+                    }, 3000);
+                }
+            });
+        }
+    </script>
 </body>
 </html>
