@@ -145,7 +145,9 @@ function loadCheckoutFinalConfirmationTable(condition){
                                 <div class="product-details">
                                     <div class="card-text product-in-card-name">${response.Name}</div>
                                     <label>Harga</label>
-                                    <input type="text" id="final_checkout_price_${(response.In_Store_Price * itemsToCheckout[i].quantity)}" class="form-control price-form" value="${(response.In_Store_Price * itemsToCheckout[i].quantity)}" disabled>
+                                    <input type="text" id="final_checkout_price_${(response.In_Store_Price * itemsToCheckout[i].quantity)}" class="form-control price-form" value="${commafy((response.In_Store_Price * itemsToCheckout[i].quantity))}" disabled>
+                                    <label>Estimasi berat total (kg)</label>
+                                    <input type="text" class="form-control price-form" value="${commafy(response.Weight_KG * itemsToCheckout[i].quantity)}" disabled>
                                     <label>Kuantitas diminta</label>
                                     <input type="number" id="final_checkout_quantity_${itemsToCheckout[i].productNo}" class="form-control quantity-form" value="${itemsToCheckout[i].quantity}"  disabled>
                                 </div>
@@ -192,7 +194,9 @@ function loadCheckoutFinalConfirmationTable(condition){
                                     <div class="product-details">
                                         <div class="card-text product-in-card-name">${response.Name}</div>
                                         <label>Harga</label>
-                                        <input type="text" id="final_checkout_price_${(response.Sell_Price * itemsToCheckout[i].quantity)}" class="form-control price-form" value="${itemsToCheckout[i].priceAgreed}" disabled>
+                                        <input type="text" id="final_checkout_price_${(response.Sell_Price * itemsToCheckout[i].quantity)}" class="form-control price-form" value="${commafy(itemsToCheckout[i].priceAgreed)}" disabled>
+                                        <label>Estimasi berat total (kg)</label>
+                                        <input type="text" class="form-control price-form" value="${commafy(response.Weight_KG * itemsToCheckout[i].quantity)}" disabled>
                                         <label>Kuantitas diminta</label>
                                         <input type="number" id="final_checkout_quantity_${itemsToCheckout[i].productNo}" class="form-control quantity-form" value="${itemsToCheckout[i].quantity}"  disabled>
                                     </div>
@@ -221,7 +225,9 @@ function loadCheckoutFinalConfirmationTable(condition){
                                 <div class="product-details">
                                     <div class="card-text product-in-card-name">${response.Name}</div>
                                     <label>Harga</label>
-                                    <input type="text" id="final_checkout_price_${(response.Sell_Price * itemsToCheckout[i].quantity)}" class="form-control price-form" value="${itemsToCheckout[i].priceAgreed}" disabled>
+                                    <input type="text" id="final_checkout_price_${(response.Sell_Price * itemsToCheckout[i].quantity)}" class="form-control price-form" value="${commafy(itemsToCheckout[i].priceAgreed)}" disabled>
+                                    <label>Estimasi berat total (kg)</label>
+                                    <input type="text" class="form-control price-form" value="${commafy(response.Weight_KG * itemsToCheckout[i].quantity)}" disabled>
                                     <label>Kuantitas diminta</label>
                                     <input type="number" id="final_checkout_quantity_${itemsToCheckout[i].productNo}" class="form-control quantity-form" value="${itemsToCheckout[i].quantity}"  disabled>
                                 </div>
@@ -234,6 +240,18 @@ function loadCheckoutFinalConfirmationTable(condition){
         }
     }
 }
+
+function commafy( num ) {
+    var str = num.toString().split('.');
+    if (str[0].length >= 5) {
+        str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+    }
+    if (str[1] && str[1].length >= 5) {
+        str[1] = str[1].replace(/(\d{3})/g, '$1 ');
+    }
+    return str.join('.');
+}
+
 function periodOptionSelected(x){
     if($(x).children("option:selected").val().toUpperCase() == "TRANSFER"){
         swal.fire("Compare to Virtual Account Transfer, Normal Transfer may take longer time to process", "make sure you make the payment as soon as possible for your order to be processed","warning");

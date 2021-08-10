@@ -23,7 +23,12 @@ function populateDeliveryTable(){
 
 function generateRowsDelivery(i, datas){
     datas.Update_date = datas.Update_date.split("T");
-
+    var payment = "not paid";
+    if(datas.Payment_Status.toUpperCase() == "payment".toUpperCase()){
+        payment = "paid";
+    }else if(datas.Payment_Status.toUpperCase() == "cancelled".toUpperCase()){
+        payment = "revoked";
+    }
     if(datas.Payment_Status.toUpperCase() == 'PAYMENT'.toUpperCase() || datas.Status.toUpperCase() != 'APPROVING'.toUpperCase()){
         $(`.table-delivery-order-new`).append(`
             <div class="product-in-card">
@@ -36,6 +41,8 @@ function generateRowsDelivery(i, datas){
                         <div class="card-text product-in-card-name order-number" onclick="orderDetailRequest('${datas.Order_Number}')">${datas.Order_Number}</div>
                         <label>PAYMENT TERM</label>
                         <div class="card-text product-in-card-name">${datas.Payment_Method}</div>
+                        <label>PAYMENT STATUS</label>
+                        <div class="card-text product-in-card-name">${payment}</div>
                         <div class="card-text product-in-card-name">
                             <div class="cancel-body-table">Order telah di proses</div>
                         </div>
@@ -55,6 +62,8 @@ function generateRowsDelivery(i, datas){
                         <div class="card-text product-in-card-name order-number" onclick="orderDetailRequest('${datas.Order_Number}')">${datas.Order_Number}</div>
                         <label>PAYMENT TERM</label>
                         <div class="card-text product-in-card-name">${datas.Payment_Method}</div>
+                        <label>PAYMENT STATUS</label>
+                        <div class="card-text product-in-card-name">${payment}</div>
                         <div class="card-text product-in-card-name">
                             <div class="cancel-body-table" onclick="cancelOrderRequest('${datas.Order_Number}')">Cancel</div>
                         </div>
@@ -74,6 +83,8 @@ function generateRowsDelivery(i, datas){
                         <div class="card-text product-in-card-name order-number" onclick="orderDetailRequest('${datas.Order_Number}')">${datas.Order_Number}</div>
                         <label>PAYMENT TERM</label>
                         <div class="card-text product-in-card-name">${datas.Payment_Method}</div>
+                        <label>PAYMENT STATUS</label>
+                        <div class="card-text product-in-card-name">${payment}</div>
                         <div class="card-text product-in-card-name">
                             <div class="cancel-body-table">Order Telah di Cancelled</div>
                         </div>

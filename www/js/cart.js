@@ -100,6 +100,8 @@ function loadcart(productNo, quantity){
                         </div>
                         <label>Harga</label>
                         <input type="text" id="${productNo}" class="form-control price-form" value="${commafy(Math.round(((quantity * response.Sell_Price)*1)* 100)/ 100)}" disabled>
+                        <label>Estimasi berat/pc (kg)</label>
+                        <input type="text" id="${productNo}" class="form-control price-form" value="${commafy(response.Weight_KG)}" disabled>
                         <table>
                             <tr>
                             <th>Kuantitas permintaan</th>

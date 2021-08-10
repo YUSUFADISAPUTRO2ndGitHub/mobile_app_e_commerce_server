@@ -661,9 +661,9 @@
         var insurance_information = $('#shipping-insurance-courier-option').find(":selected").text().split(" ");
         if(insurance_information[1] != "0"){
             var total_fee = courier_information[2]*1 + insurance_information[insurance_information.length -1]*1;
-            $("#estimated-price-courier-option").html(`${total_fee}`);
+            $("#estimated-price-courier-option").html(`${commafy(total_fee)}`);
         }else{
-            $("#estimated-price-courier-option").html(`${courier_information[2]}`);
+            $("#estimated-price-courier-option").html(`${commafy(courier_information[2])}`);
         }
     }
 
