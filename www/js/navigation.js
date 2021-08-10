@@ -130,12 +130,12 @@ function get_live_chat(){
             // $(".content_iframe").attr("src","http://147.139.168.202:3045/?user_name=" + (response.First_Name + " " + response.Last_Name));
             $(".content_iframe").attr("src","https://tawk.to/chat/60f103efd6e7610a49ab8521/1famneoj8");
             $(".content_iframe_floating").css("display", "none");
-            $("#customer-service-help-line-icon").css("display", "none");
+            // $("#customer-service-help-line-icon").css("display", "none");
         });
     }else{
         $(".content_iframe").attr("src","https://tawk.to/chat/60f103efd6e7610a49ab8521/1famneoj8");
         $(".content_iframe_floating").css("display", "none");
-        $("#customer-service-help-line-icon").css("display", "none");
+        // $("#customer-service-help-line-icon").css("display", "none");
     }
 }
 

@@ -589,6 +589,11 @@ router.get('/img/user-profile.png',function(req,res){
     //__dirname : It will resolve to your project folder.
 });
 
+router.get('/img/Additional_icons/previous.png',function(req,res){
+    res.sendFile(path.join(__dirname+'/www/img/Additional_icons/previous.png'));
+    //__dirname : It will resolve to your project folder.
+});
+
 /*
     rating stars
 */

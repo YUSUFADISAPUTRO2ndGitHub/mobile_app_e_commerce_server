@@ -61,11 +61,11 @@
         border: solid 0.5px black !important;
     } */
     .floating-button-icon{
-        width: 90px !important;
+        width: 100px !important;
     }
     .customer-service-information{
         top: 100px !important;
-        width: 300px !important;
+        width: 30% !important;
     }
     .independent-cart-icon{
         width: 60px !important;
