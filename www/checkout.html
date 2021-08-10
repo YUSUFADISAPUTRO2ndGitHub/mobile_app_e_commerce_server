@@ -152,6 +152,17 @@
         background-color: white;
         color: #217384;
     }
+    .shipping-fee{
+        color: white;
+    }
+    .swal-custom, .swal2-title, .swal2-container{
+        background-color: white;
+        color: #217384 ;
+        border: none;
+    }
+    .swal2-backdrop-show{
+        background-color: white !important;
+    }
 </style>
 <body class=".body">
     <div class="card header">
@@ -269,8 +280,12 @@
                         </select>
                     </div>
                     <div class="input-group mb-3">
-                        <span class="input-group-text">Estimasi harga pengiriman:</span>
-                        <span class="input-group-text" id="estimated-price-courier-option">0.00</span>
+                        <div class="card">
+                            <div class="card-body shipping-fee">
+                                <span>Estimasi harga pengiriman:</span>
+                                <span id="estimated-price-courier-option">0.00</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
                         <strong>Pastikan pilihan di atas benar</strong>
@@ -302,7 +317,7 @@
             <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLongTitle">Diperlukan Verifikasi</h5>
             </div>
-            <div class="modal-body">
+            <!-- <div class="modal-body">
                 <div class="form-group">
                     <label for="checkout-password">Password</label>
                     <input type="password" class="form-control" id="checkout-password" placeholder="Enter password">
@@ -314,14 +329,14 @@
                 <div class="form-group">
                     <button type="button" class="btn btn-primary" onclick="get_otp_for_checkout()">GET OTP</button>
                 </div>
-            </div>
+            </div> -->
             <div class="modal-footer">
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     <strong>Periksa OTP Anda di alamat email yang Anda daftarkan.</strong> Silakan periksa kotak masuk atau folder spam Anda. Atau Anda dapat mengklik GET OTP untuk mendapatkan OTP baru
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="requestToFinish()">Submit</button>
+                </div> -->
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Permintaan tidak sesuai</button>
+                <button type="button" class="btn btn-primary" onclick="requestToFinish()">Permintaan sudah sesuai</button>
             </div>
         </div>
         </div>
@@ -329,6 +344,7 @@
 </body>
 <script>
     $( document ).ready(function() {
+        loadingUpdateQuantity(1000000)
         initial_render_courier();
     });
     
