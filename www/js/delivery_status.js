@@ -79,10 +79,23 @@ function populateOrdersTable(datas){
 }
 
 function generateOrdersRow(i, datas){
-    $("#unpaid-orders").append("<tr id=\"" + i + "\">");
-    $("#" + i ).append("<th>" + datas.Product_Name + "</th>");
-    $("#" + i ).append("<td id=\"" + i + "-details\">" + datas.Quantity_Requested + "</td>");
-    $("#" + i ).append("<td id=\"" + i + "-total-accountNumber\">" + commafy(datas.Price_Based_On_Total_Quantity) + "</td>");
+    getProductsWithProductNo("", "", datas.Product_Code).done(function (response) {
+        $(".order-details-new").append(`
+            <div class="product-in-card">
+                <div class="product-in-card-body">
+                    <img class="product-image-in-cart" src="${response.Picture_1}">
+                    <div class="product-details">
+                        <div class="card-text product-in-card-name">${datas.Product_Name}</div>
+                        <br>
+                        <label>Harga</label>
+                        <input type="text" id="final_checkout_price_${datas.Price_Based_On_Total_Quantity}" class="form-control price-form" value="${commafy(datas.Price_Based_On_Total_Quantity)}" disabled>
+                        <label>Kuantitas diminta</label>
+                        <input type="number" class="form-control quantity-form" value="${datas.Quantity_Requested}"  disabled>
+                    </div>
+                </div>
+            </div>
+        `);
+    });
 }
 
 function commafy( num ) {

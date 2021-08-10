@@ -42,20 +42,9 @@
         background-color: #37ced5;
     }
     
-    tbody {
-        width: 100%;
-        table-layout: fixed;
-        word-break: break-all;
-        border-collapse: collapse;
-        background-color: #37ced5 !important;
-    }
-    td{
-        color: #d4dee8;
-        background-color: #217384 !important;
-    }
     .card{
         width: 100%;
-        height: 20vh;
+        padding: 5%;
         border-radius: 0%;
         background-color: #217384;
     }
@@ -151,6 +140,45 @@
     .alert-t0-out-of-stock{
         display: none;
     }
+
+    /* new */
+    .product-image-in-cart{
+        padding-right: 2%;
+        min-width: 50%;
+        max-width: 50%;
+    }
+    .product-in-card{
+        color: white;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        background-color: #217384;
+        border: none;
+        border-radius: 10px;
+        max-width: 96%;
+        min-width: 96%;
+        margin: 2%;
+    }
+    .product-in-card-body{
+        padding: 1%;
+        display: flex;
+        flex-direction: row;
+    }
+    .quantity-form, .price-form, .stock-form{
+        border-radius: 10px;
+        border: none;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    .form-check-input{
+        max-width: 10%;
+        min-width: 10%;
+        margin-right: 5%;
+    }
+    .product-in-card-name{
+        width: 75%;
+    }
+    .total-price-area{
+        background-color: white;
+        color: #217384;
+    }
 </style>
 
 <body>
@@ -158,28 +186,21 @@
     <div class="card" style="width: 100%;">
         <div class="title">CART/KERANJANG</div>
     </div>
+    <div class="cart-list">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Product</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Price</th>
-            </tr>
-        </thead>
-        <tbody id="cart-list">
-            
-        </tbody>
-        <thead>
-            <tr>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col">Total Price</th>
-                <th scope="col" id="total_selected_price">0</th>
-            </tr>
-        </thead>
-    </table>
+    </div>
+
+    <div class="product-in-card">
+        <div class="card-body">
+            <div class="product-in-card total-price-area">
+                <div class="card-body">
+                    <div class="card-text">Total Price: 
+                        <span class="card-text" id="total_selected_price">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="alert-t0-out-of-stock alert alert-danger alert-dismissible fade show" role="alert">
         Ada barang di <strong>keranjang (CART)</strong> Anda yang tidak dapat memenuhi permintaan stock Anda. 

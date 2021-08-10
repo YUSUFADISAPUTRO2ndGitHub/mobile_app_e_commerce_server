@@ -90,6 +90,56 @@
         background-color: #217384;
         color: white;
     }
+    .bca_account_number{
+        max-width: 100%;
+    }
+
+    /* new */
+    .product-image-in-cart{
+        padding-right: 2%;
+        min-width: 50%;
+        max-width: 50%;
+    }
+    .product-in-card{
+        color: white;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        background-color: #217384;
+        border: none;
+        border-radius: 10px;
+        max-width: 96%;
+        min-width: 96%;
+        margin: 2%;
+    }
+    .product-in-card-body{
+        padding: 1%;
+        display: flex;
+        flex-direction: row;
+    }
+    .quantity-form, .price-form, .stock-form{
+        border-radius: 10px;
+        border: none;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    .form-check-input{
+        max-width: 10%;
+        min-width: 10%;
+        margin-right: 5%;
+    }
+    .product-in-card-name{
+        width: 75%;
+    }
+    .total-price-area{
+        background-color: white;
+        color: #217384;
+    }
+    .product-details{
+        width: 100%;
+    }
+    .card{
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
 </style>
 <body>
     <div class="card header">
@@ -148,22 +198,19 @@
                     </ul>
                 </li>
             </ul>
-            <div class="order-details">
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Product Name</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Total Price</th>
-                        </tr>
-                    </thead>
-                    <tbody id="unpaid-orders">
-                    </tbody>
-                </table>
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-test">
+                        Order List
+                    </div>
+                </div>
+            </div>
+            <div class="order-details-new">
+
             </div>
             <div class="if-order-is-unpaid">
                 <div class="card">
-                    <img class="card-img-top" src="../www/img/Additional_icons/bca.png" alt="Card image cap">
+                    <img class="card-img-top" src="../www/img/Additional_icons/bca.png">
                     <div class="card-body">
                       <h5 class="card-title">Anda dapat melalukan pembayaran sesuai keterangan di bawah ini:</h5>
                       <p class="card-text">No. VA BCA: <span id="va-number-based-on-order-number"></span></p>

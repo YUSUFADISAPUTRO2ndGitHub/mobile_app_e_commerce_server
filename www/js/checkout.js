@@ -138,14 +138,20 @@ function loadCheckoutFinalConfirmationTable(condition){
                 for(i; i < itemsToCheckout.length; i++){
                     console.log(response);
                     if(itemsToCheckout[i].productNo == response.Product_Code){
-                        $(".final_checkout").append("<tr id=\"final_checkout_row_" + i + "\">");
-                        $("#final_checkout_row_" + i).append("<td id=\"final_checkout_prod_name_" + response.Name + "\">" + response.Name + "</td>");
-                        $("#final_checkout_row_" + i).append("<td id=\"final_checkout_quantity_" + itemsToCheckout[i].productNo + "\">" + itemsToCheckout[i].quantity + "</td>");
-                        if(response.In_Store_Price != 'NULL'){
-                            $("#final_checkout_row_" + i).append("<td id=\"final_checkout_price_" + response.In_Store_Price * itemsToCheckout[i].quantity + "\">" + (response.In_Store_Price * itemsToCheckout[i].quantity) + "</td>");
-                        }else{
-                            $("#final_checkout_row_" + i).append("<td id=\"final_checkout_price_" + response.Sell_Price * itemsToCheckout[i].quantity + "\">" + (response.Sell_Price * itemsToCheckout[i].quantity) + "</td>");
-                        }
+                        $(".final-checkout-new").append(`
+                        <div class="product-in-card">
+                            <div class="product-in-card-body">
+                                <img class="product-image-in-cart" src="${response.Picture_1}">
+                                <div class="product-details">
+                                    <div class="card-text product-in-card-name">${response.Name}</div>
+                                    <label>Harga</label>
+                                    <input type="text" id="final_checkout_price_${(response.In_Store_Price * itemsToCheckout[i].quantity)}" class="form-control price-form" value="${(response.In_Store_Price * itemsToCheckout[i].quantity)}" disabled>
+                                    <label>Kuantitas diminta</label>
+                                    <input type="number" id="final_checkout_quantity_${itemsToCheckout[i].productNo}" class="form-control quantity-form" value="${itemsToCheckout[i].quantity}"  disabled>
+                                </div>
+                            </div>
+                        </div>
+                        `);
                     }
                 }
             });
@@ -179,10 +185,20 @@ function loadCheckoutFinalConfirmationTable(condition){
                         //     }, 3500);
                         }else{
                             itemsToCheckout[i].priceAgreed = response.Sell_Price * 1 * itemsToCheckout[i].quantity;
-                            $(".final_checkout").append("<tr id=\"final_checkout_row_" + i + "\">");
-                            $("#final_checkout_row_" + i).append("<td id=\"final_checkout_prod_name_" + response.Name + "\">" + response.Name + "</td>");
-                            $("#final_checkout_row_" + i).append("<td id=\"final_checkout_quantity_" + itemsToCheckout[i].productNo + "\">" + itemsToCheckout[i].quantity + "</td>");
-                            $("#final_checkout_row_" + i).append("<td id=\"final_checkout_price_" + response.Sell_Price * itemsToCheckout[i].quantity + "\">" + itemsToCheckout[i].priceAgreed + "</td>");
+                            $(".final-checkout-new").append(`
+                            <div class="product-in-card">
+                                <div class="product-in-card-body">
+                                    <img class="product-image-in-cart" src="${response.Picture_1}">
+                                    <div class="product-details">
+                                        <div class="card-text product-in-card-name">${response.Name}</div>
+                                        <label>Harga</label>
+                                        <input type="text" id="final_checkout_price_${(response.Sell_Price * itemsToCheckout[i].quantity)}" class="form-control price-form" value="${itemsToCheckout[i].priceAgreed}" disabled>
+                                        <label>Kuantitas diminta</label>
+                                        <input type="number" id="final_checkout_quantity_${itemsToCheckout[i].productNo}" class="form-control quantity-form" value="${itemsToCheckout[i].quantity}"  disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            `);
                         }
                     }
                 }
@@ -198,10 +214,20 @@ function loadCheckoutFinalConfirmationTable(condition){
                 var itemsToCheckout = JSON.parse(localStorage.getItem("itemsToCheckout"));
                 for(i; i < itemsToCheckout.length; i++){
                     if(itemsToCheckout[i].productNo == datas[0].Product_Code){
-                        $(".final_checkout").append("<tr id=\"final_checkout_row_" + i + "\">");
-                        $("#final_checkout_row_" + i).append("<td id=\"final_checkout_prod_name_" + datas[0].Name + "\">" + datas[0].Name + "</td>");
-                        $("#final_checkout_row_" + i).append("<td id=\"final_checkout_quantity_" + itemsToCheckout[i].productNo + "\">" + itemsToCheckout[i].quantity + "</td>");
-                        $("#final_checkout_row_" + i).append("<td id=\"final_checkout_price_" + datas[0].Sell_Price * itemsToCheckout[i].quantity + "\">" + datas[0].period * itemsToCheckout[i].quantity + "</td>");
+                        $(".final-checkout-new").append(`
+                        <div class="product-in-card">
+                            <div class="product-in-card-body">
+                                <img class="product-image-in-cart" src="${response.Picture_1}">
+                                <div class="product-details">
+                                    <div class="card-text product-in-card-name">${response.Name}</div>
+                                    <label>Harga</label>
+                                    <input type="text" id="final_checkout_price_${(response.Sell_Price * itemsToCheckout[i].quantity)}" class="form-control price-form" value="${itemsToCheckout[i].priceAgreed}" disabled>
+                                    <label>Kuantitas diminta</label>
+                                    <input type="number" id="final_checkout_quantity_${itemsToCheckout[i].productNo}" class="form-control quantity-form" value="${itemsToCheckout[i].quantity}"  disabled>
+                                </div>
+                            </div>
+                        </div>
+                        `);
                     }
                 }
             });
