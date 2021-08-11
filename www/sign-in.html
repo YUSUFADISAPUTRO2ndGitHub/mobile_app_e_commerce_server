@@ -26,7 +26,7 @@
         font-weight: bold;
     }
     .sign-in-button-area{
-        background-color: #37ced5;
+        background-color: #217384;
         color: white;
         text-align: center;
     }
@@ -37,118 +37,99 @@
         text-decoration: none;
     }
     .forgot-password-button-area{
-        background-color: #37ced5;
+        background-color: #217384;
         color: white;
         text-align: center;
         text-decoration: none;
     }
     #now{
         color: #37ced5;
-    }
-    .introduction-warning-area{
-        margin: 5%;
+        padding: 2%;
+        border-radius: 10px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        background-color: white;
     }
-    .login-card{
-        padding-bottom: 5px;
+    .btn-primary{
+        width: 100%;
         background-color: #217384;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
-        animation: fadeInAnimation ease 3s;
-        animation-iteration-count: 1;
-        animation-fill-mode: forwards;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
-    .login-outer-card{
-        padding: 5%;
-        background-color: rgba(0, 0, 0, 0.2);
+    .sign-in-card{
+        margin: 2%;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        -webkit-animation-duration: 1s;
+        animation-duration: 1s;
+        -webkit-animation-name: fadeIn;
+        animation-name: fadeIn;
     }
-    @keyframes fadeInAnimation {
-        0% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
-        }
+    @-webkit-keyframes fadeIn {
+        0% {opacity: 0;}
+        100% {opacity: 1;}
     }
-    .sign-up-supplier{
-        background-color: rgb(23, 34, 1);
-        color: lightgrey;
+         
+    @keyframes fadeIn {
+        0% {opacity: 0;}
+        100% {opacity: 1;}
+    }
+    .form-control{
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    }
+    .form-group{
+        margin-bottom: 5%;
     }
 </style>
 <body>
-    <div class="login-outer-card">
-        <div class="login-card">
-            <div class="card sign-up-title">
-                <div class="card-body">
-                <h5 class="card-title">Sign in <span id="now">now!</span></h5>
-                <p class="card-text">Hi, Welcome! Please sign in to continue</p>
+    <div class="sign-in-card">
+        <div class="login-outer-card">
+            <div class="login-card">
+                <div class="card sign-up-title">
+                    <div class="card-body">
+                    <h5 class="card-title">Sign in <span id="now">now!</span></h5>
+                    <p class="card-text">Hi, Welcome! Please sign in to continue</p>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <div class="form-group">
-                        <label>Alamat Email</label>
-                        <input type="email" id="login-email" class="form-control" placeholder="Enter email">
-                        <small class="form-text text-muted">Tolong masukan email address Anda dengan benar</small>
-                    </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" id="login-password" class="form-control" placeholder="Password">
-                        <small class="form-text text-muted">Tolong masukan password Anda dengan baik</small>
-                    </div>
-                    <div class="form-group">
-                        <label>OTP</label>
-                        <input type="text" id="login-otp" class="form-control" placeholder="your otp, please click get otp or check your email">
-                        <small class="form-text text-muted">Silahkan klik GET OTP atau cek email anda</small>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <input type="email" id="login-email" class="form-control" placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="login-password" class="form-control" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="login-otp" class="form-control" placeholder="OTP">
+                        </div>
                         <button onclick="get_otp_login()" class="btn btn-primary">GET OTP</button>
                     </div>
                 </div>
-            </div>
-            <div class="card sign-in-button-area" onclick="loginRequest()">
-                <div class="card-body">
-                    Masuk
+                <div class="card sign-in-button-area" onclick="loginRequest()">
+                    <div class="card-body">
+                        Masuk
+                    </div>
                 </div>
-            </div>
-            <a href="./sign-up.html" class="card sign-up-button-area">
-                <div class="card-body">
-                    Bergabung sekarang!
-                </div>
-            </a>
-            <!-- <a href="./sign-up-supplier.html" class="card sign-up-button-area">
-                <div class="card-body">
-                    daftar sekarang sebagai supplier kami, kami akan memberi Anda lebih banyak manfaat dan keuntungan, hubungi layanan pelanggan kami untuk lebih jelasnya
-                </div>
-            </a> -->
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>kami sangat menyesal,</strong> jika Anda ingin bergabung sebagai supplier / penjual untuk sold.co.id, Anda perlu menghubungi layanan pelanggan kami dan diperlukan verifikasi lebih lanjut.
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            <a href="./forgot-password.html" class="card forgot-password-button-area">
-                <div class="card-body">
-                    lupa password
-                </div>
-            </a>
-            <div class="alert alert-primary d-flex align-items-center introduction-warning-area" role="alert">
-                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
-                  <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                </svg>
-                <div>
-                    Mengapa bergabung sebagai Supplier untuk sold.co.id?
-                    <br>
-                    <br>
-                        <span>Dengan menjadi Pemasok kami, Anda tidak hanya akan menerima keuntungan dari menjual produk Anda di platform kami
-                            <br> tetapi Anda juga akan mendapatkan komisi untuk setiap pembelian yang dilakukan oleh pelanggan yang mendaftar karena Anda.
-                            <br> Oleh karena itu, kami menghargai kerja keras dan kerjasama Anda bersama kami
-                        </span>
-                    <br>
-                    <br>
-                    ATAU Mengapa saya harus mendaftar ke sold.co.id?
-                    <br>
-                    <br>
-                        <span>Anda bisa mendapatkan uang hanya dengan memberitahu teman Anda untuk mendaftar di sold.co.id
-                            <br> Teman Anda dapat memilih Anda sebagai referensi mereka
-                            <br> Anda akan mendapatkan komisi untuk setiap pembelian yang dilakukan sebanyak 3%
-                        </span>
+                <a href="./sign-up.html" class="card sign-up-button-area">
+                    <div class="card-body">
+                        Daftar sekarang!
+                    </div>
+                </a>
+                <!-- <a href="./sign-up-supplier.html" class="card sign-up-button-area">
+                    <div class="card-body">
+                        daftar sekarang sebagai supplier kami, kami akan memberi Anda lebih banyak manfaat dan keuntungan, hubungi layanan pelanggan kami untuk lebih jelasnya
+                    </div>
+                </a> -->
+                <a href="./forgot-password.html" class="card forgot-password-button-area">
+                    <div class="card-body">
+                        lupa password
+                    </div>
+                </a>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>kami sangat menyesal,</strong> jika Anda ingin bergabung sebagai supplier / penjual untuk sold.co.id, Anda perlu menghubungi layanan pelanggan kami dan diperlukan verifikasi lebih lanjut.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             </div>
         </div>

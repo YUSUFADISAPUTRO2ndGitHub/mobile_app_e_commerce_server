@@ -32,6 +32,9 @@
             font-weight: bold;
         }
         .save-button-area{
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             background-color: #217384;
             color: white;
             text-align: center;
@@ -44,6 +47,9 @@
         }
         #now{
             color: #37ced5;
+            padding: 2%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
         .profile-details{
             background-color: #d4dee8;
@@ -103,6 +109,7 @@
         }
         .edit-address-button{
             border: none;
+            border-radius: 10px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
         .edited_address{
@@ -142,6 +149,11 @@
             padding-top: 2%;
             color: #217384;
             font-weight: 700;
+        }
+        .form-control{
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
     </style>
 </head>
@@ -267,6 +279,10 @@
                 Keluar
             </div>
         </a>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary button-about-page" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            ABOUT SOLD.CO.ID
+        </button>
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
             <strong>Menu komisi atau menu produk</strong> tidak tersedia di mobile, Anda bisa menggunakan laptop Anda dan kunjungi sold.co.id.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -275,10 +291,6 @@
             <strong>Untuk mengubah password Anda</strong> bisa log out lalu click forgot password. Terima kasih
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary button-about-page" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            ABOUT SOLD.CO.ID
-        </button>
         
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
