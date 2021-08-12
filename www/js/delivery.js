@@ -29,9 +29,9 @@ function generateRowsDelivery(i, datas){
     }else if(datas.Payment_Status.toUpperCase() == "cancelled".toUpperCase()){
         payment = "revoked";
     }
-    if(datas.Payment_Status.toUpperCase() == 'PAYMENT'.toUpperCase() || datas.Status.toUpperCase() != 'APPROVING'.toUpperCase()){
+    if(datas.Payment_Status.toUpperCase() == 'PAYMENT'.toUpperCase() && datas.Status.toUpperCase() == 'APPROVING'.toUpperCase()){
         $(`.table-delivery-order-new`).append(`
-            <div class="product-in-card">
+            <div class="product-in-card" id="${datas.Order_Number}">
                 <div class="card-body">
                     <div class="product-details">
                         <a class="view-details" onclick="orderDetailRequest('${datas.Order_Number}')">View details</a>
@@ -52,7 +52,7 @@ function generateRowsDelivery(i, datas){
         `);
     }else if(datas.Status.toUpperCase() != 'cancelled'.toUpperCase()){
         $(`.table-delivery-order-new`).append(`
-            <div class="product-in-card">
+            <div class="product-in-card" id="${datas.Order_Number}">
                 <div class="card-body">
                     <div class="product-details">
                         <a class="view-details" onclick="orderDetailRequest('${datas.Order_Number}')">View details</a>
@@ -73,7 +73,7 @@ function generateRowsDelivery(i, datas){
         `);
     }else{
         $(`.table-delivery-order-new`).append(`
-            <div class="product-in-card">
+            <div class="product-in-card" id="${datas.Order_Number}">
                 <div class="card-body">
                     <div class="product-details">
                         <a class="view-details" onclick="orderDetailRequest('${datas.Order_Number}')">View details</a>
@@ -92,6 +92,9 @@ function generateRowsDelivery(i, datas){
                 </div>
             </div>
         `);
+    }
+    if(payment == "not paid"){
+        $(`#${datas.Order_Number}`).css("background-color", "darkred");
     }
 }
 

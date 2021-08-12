@@ -594,6 +594,16 @@ router.get('/img/Additional_icons/previous.png',function(req,res){
     //__dirname : It will resolve to your project folder.
 });
 
+router.get('/img/cart-header.png',function(req,res){
+    res.sendFile(path.join(__dirname+'/www/img/cart-header.png'));
+    //__dirname : It will resolve to your project folder.
+});
+
+router.get('/img/delivery-header.png',function(req,res){
+    res.sendFile(path.join(__dirname+'/www/img/delivery-header.png'));
+    //__dirname : It will resolve to your project folder.
+});
+
 /*
     rating stars
 */

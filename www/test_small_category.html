@@ -102,27 +102,31 @@
                                 get_small_categories_based_on_big_category(response[i].Category).done(function (small_cat) {
                                     all_small_categories.concat(small_cat);
                                     var x = 1;
-                                    for(x ; x < response.length; x = x + 2){
-                                        $(`.main-category-section-body`).append(
-                                            `
-                                            <div class="card card-section-piece-category">
-                                                <div class="card card-section-piece-category-group">
-                                                    <div class="card card-small-category">
-                                                        <div class="card card-small-category-content" onclick="change_iframe_attr('${small_cat[x-1].Subcategory}')">
-                                                            <img src="${small_cat[x-1].Picture_1}" class="card-img-small-cat">
-                                                            <p class="card-title small-cat-title">${small_cat[x-1].Subcategory}</p>
+                                    if(small_cat != undefined){
+                                        if(small_cat.length > x + 1){
+                                            for(x ; x < small_cat.length; x = x + 2){
+                                                $(`.main-category-section-body`).append(
+                                                    `
+                                                    <div class="card card-section-piece-category">
+                                                        <div class="card card-section-piece-category-group">
+                                                            <div class="card card-small-category">
+                                                                <div class="card card-small-category-content" onclick="change_iframe_attr('${small_cat[x-1].Subcategory}')">
+                                                                    <img src="${small_cat[x-1].Picture_1}" class="card-img-small-cat">
+                                                                    <p class="card-title small-cat-title">${small_cat[x-1].Subcategory}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card card-small-category">
+                                                                <div class="card card-small-category-content" onclick="change_iframe_attr('${small_cat[x].Subcategory}')">
+                                                                    <img src="${small_cat[x].Picture_1}" class="card-img-small-cat">
+                                                                    <p class="card-title small-cat-title">${small_cat[x].Subcategory}</p>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="card card-small-category">
-                                                        <div class="card card-small-category-content" onclick="change_iframe_attr('${small_cat[x].Subcategory}')">
-                                                            <img src="${small_cat[x].Picture_1}" class="card-img-small-cat">
-                                                            <p class="card-title small-cat-title">${small_cat[x].Subcategory}</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            `
-                                        );
+                                                    `
+                                                );
+                                            }
+                                        }   
                                     }
                                 });
                             }

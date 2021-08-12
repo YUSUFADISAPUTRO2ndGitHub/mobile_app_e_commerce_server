@@ -115,7 +115,7 @@
         padding: 2%;
     }
     .checkout-button{
-        width: 33.33%;
+        width: 100%;
         height: auto;
         border: none;
         border-radius: 10px;
@@ -143,6 +143,7 @@
 
     /* new */
     .product-image-in-cart{
+        border-radius: 10px;
         padding-right: 2%;
         min-width: 50%;
         max-width: 50%;
@@ -158,11 +159,14 @@
         margin: 2%;
     }
     .product-in-card-body{
-        padding: 1%;
+        padding: 2%;
         display: flex;
         flex-direction: row;
     }
     .quantity-form, .price-form, .stock-form{
+        
+        min-width: 80%;
+        max-width: 80%;
         border-radius: 10px;
         border: none;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -174,22 +178,53 @@
         position: absolute;
         right: 5%;
     }
-    .product-in-card-name{
-        width: 75%;
+    .product-in-card-name, th{
+        max-width: 55% !important;
+        
     }
     .total-price-area{
         background-color: white;
         color: #217384;
     }
+    .product-details{
+        
+        max-width: 100%;
+    }
+    .erase-button{
+        background-color: #37ced5;
+        color: white;
+        border-radius: 0 0 10px 10px;
+        text-align: center;
+    }
+    .price-form{
+        background-color: #217384 !important;
+        color: white;
+    }
+    .cart-header{
+        background-image: url("./img/cart-header.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 20vh;
+    }
+    .form-check, .form-switch{
+        padding: 0 !important;
+        background-color: #217384;
+        color: white;
+    }
+    .order-all-text{
+        padding-left: 1%;
+    }
 </style>
 
 <body>
     
-    <div class="card" style="width: 100%;">
-        <div class="title">CART/KERANJANG</div>
+    <div class="card cart-header" style="width: 100%;">
+    </div>
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="set-all-checked" onchange="check_all(this)">
+        <div class="card-text order-all-text">Pesan semua barang</div>
     </div>
     <div class="cart-list">
-
     </div>
 
     <div class="product-in-card">
@@ -210,25 +245,34 @@
         <strong>Barang tersebut tidak akan dapat Anda checkout/pesan</strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+
     <div class="checkout-options">
         <div class="checkout-button" onclick="checkingout()">
             Pesan barang Tercentang
         </div>
-        <div class="checkout-button" onclick="checkingoutAll()">
-            Pesan semua barang
-        </div>
-        <!-- <div id="button-checkout-in-store" class="checkout-button" onclick="checkingoutAllInStore()">
-            Pesan semua di Toko
-        </div> -->
         <div id="button-checkout-in-store" class="checkout-button">
             Pesan semua di Toko
         </div>
+        <!-- <div class="checkout-button" onclick="checkingoutAll()">
+            Pesan semua barang
+        </div> -->
+        <!-- <div id="button-checkout-in-store" class="checkout-button" onclick="checkingoutAllInStore()">
+            Pesan semua di Toko
+        </div> -->
+        <!-- <div id="button-checkout-in-store" class="checkout-button">
+            Pesan semua di Toko
+        </div> -->
     </div>
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <strong>Maaf untuk ketidaknyamanannya</strong> kami tidak dapat menerima pesanan untuk diambil di toko saat ini
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <script>
+        function check_all(x){
+            if($(x).prop('checked') == true){
+                checkingoutAll();
+            }
+        }
         setInterval(() => {
             check_product_datas();
         }, 1000);

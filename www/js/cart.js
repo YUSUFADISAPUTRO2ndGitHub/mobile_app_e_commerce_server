@@ -95,7 +95,9 @@ function loadcart(productNo, quantity){
                     <img class="product-image-in-cart" src="${response.Picture_1}">
                     <div class="product-details">
                         <div class="product-in-card-body">
-                            <input class="form-check-input" id="checklist${productNo}" type="checkbox" value="${productNo}" onchange="selectedCart(this,'${productNo}')">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" id="checklist${productNo}" type="checkbox" value="${productNo}" onchange="selectedCart(this,'${productNo}')">
+                            </div>
                             <div class="card-text product-in-card-name">${response.Name}</div>
                         </div>
                         <label>Harga</label>
@@ -114,6 +116,7 @@ function loadcart(productNo, quantity){
                         </table>
                     </div>
                 </div>
+                <div class="erase-button" onclick="eraseItem('${productNo}')">hapus</div>
             </div>
             `);
         }
@@ -152,7 +155,8 @@ function eraseItem(id){
         }
     }
     removeItemsToCheckout(id);
-    $("#productName" + id).empty();
+    // $("#productName" + id).empty();
+    window.location.href = "./cart.html"
 }
 
 function commafy( num ) {
@@ -220,7 +224,7 @@ var checkboxCounter = 0;
 var totalPrice = 0;
 function selectedCart(checkBox,number){
     if (checkBox.checked == true){
-        $("#product-in-card-"+number).css("border", "solid 5px lightblue");
+        $("#product-in-card-"+number).css("border", "solid 5px #0d6efd");
         addItemsToCheckout(number);
 
 
@@ -231,6 +235,9 @@ function selectedCart(checkBox,number){
         removeItemsToCheckout(number);
 
         totalPrice = totalPrice - parseInt( removeComma($("#" + number).val()) );
+        if(totalPrice < 0){
+            totalPrice = 0;
+        }
         checkboxCounter--;
     }
     $("#total_selected_price").html(commafy(totalPrice));
