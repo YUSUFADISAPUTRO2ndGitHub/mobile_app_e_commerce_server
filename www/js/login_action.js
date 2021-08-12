@@ -1,5 +1,6 @@
 $(document).ready(function(){
     if(localStorage.getItem("token") != ""){
+        $(".profile-customer-code").html(localStorage.getItem("token"));
         getCustomersWithCustomerNo(localStorage.getItem("token")).done(function (response) {
             $(".profile-fullname").html(response.First_Name + " " + response.Last_Name);
             if(response.Birthday != undefined){
@@ -338,7 +339,8 @@ function signupRequestSupplier(){
                             };
                             console.log(data);
                             createNewCustomerSupplier("", "", data).done(function (response) {
-                                console.log(response);
+                                // console.log(response);
+                                // alert(response);
                                 if(response){
                                     Swal.fire("SIGN-UP SUCCESS", "", "success");
                                     window.location.href = "./profile-account.html";
