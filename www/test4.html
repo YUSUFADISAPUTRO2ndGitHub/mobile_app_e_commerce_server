@@ -1,20 +1,214 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="../www/js/accessingAccurateAPIsGroup1.js"></script>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    </head>
 <style>
+
+
+    
+
+    #container {
+        height: 250px;
+    }
+
+    .green {
+    color: darken(#99DBB4, 20%);
+    }
+
+    .red {
+    color: darken(#EF8D9C, 10%);
+    }
+
+    p {
+        margin: 1%;
+        font-size: 0.5em;
+        color: #217384;
+    }
+
+    #success-box {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        width: 250px;
+        height: 100%;
+        border-radius: 20px;
+        box-shadow: 5px 5px 20px rgba(#CBCDD3, 10%);
+        perspective: 40px;
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
+        background: #FCFCFC;
+        border-radius: 50%;
+        position: absolute;
+        top: 4%;
+        right: 6%;
+    }
+
+    .two {
+        right: 12%;
+        opacity: .5;
+    }
+
+    .face {
+        position: absolute;
+        width: 22%;
+        height: 22%;
+        background: #FCFCFC;
+        border-radius: 50%;
+        border: 1px solid #777777;
+        top: 21%;
+        left: 37.5%;
+        z-index: 2;
+        animation: bounce 1s ease-in infinite;
+    }
+
+    .face2 {
+        position: absolute;
+        width: 22%;
+        height: 22%;
+        background: #FCFCFC;
+        border-radius: 50%;
+        border: 1px solid #777777;
+        top: 21%;
+        left: 37.5%;
+        z-index: 2;
+        animation: roll 3s ease-in-out infinite;
+    }
+
+    .eye {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        background: #777777;
+        border-radius: 50%;
+        top: 40%;
+        left: 20%;
+    }
+
+    .right {
+    left: 68%;
+    }
+
+    .mouth {
+        position:absolute;
+        top: 43%;
+        left: 41%;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+    }
+
+    .happy {
+        border: 2px solid;
+        border-color: transparent #777777 #777777 transparent;
+        transform: rotate(45deg);
+    }
+
+    .shadow {
+        position: absolute;
+        width: 21%;
+        height: 3%;
+        opacity: .5;
+        background: #777777;
+        left: 40%;
+        top: 43%;
+        border-radius: 50%;
+        z-index: 1;
+    }
+
+    .scale {
+    animation: scale 1s ease-in infinite;
+    }
+    .move {
+    animation: move 3s ease-in-out infinite;
+    }
+
+
+    .message {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        height: 40%;
+        top: 47%;
+    }
+
+    .button-box {
+        position: absolute;
+        background: #FCFCFC;
+        width: 50%;
+        height: 15%;
+        border-radius: 20px;
+        top: 73%;
+        left: 25%;
+        outline: 0;
+        border: none;
+        box-shadow: 2px 2px 10px rgba(#777777, .5);
+        transition: all .5s ease-in-out;
+    }
+
+    @keyframes bounce {
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    @keyframes scale {
+        50% {
+            transform: scale(0.9);
+        }
+    }
+
+    @keyframes roll {
+        0% {
+            transform: rotate(0deg);
+            left: 25%;
+        }
+        50% {
+            left: 60%;
+            transform: rotate(168deg);
+        }
+        100% {
+            transform: rotate(0deg);
+            left: 25%;
+        }
+    }
+
+    @keyframes move {
+        0% {
+            left: 25%;
+        }
+        50% {
+            left: 60%;
+        }
+        100% {
+            left: 25%;
+        }
+    }
+    .alert{
+        font-size: 0.9em;
+        letter-spacing: 3px;
+        color: black;
+        text-transform: uppercase;
+    }
 </style>
-</head>
 <body>
-    <button type="button" onclick="tester()">button</button>
-    <div id="all-customers"></div>
-    <br>
-    <div id="all-items"></div>
-    <br>
-    <div id="all-payment-terms"></div>
-    <br>
-    <div id="sales-order"></div>
+    <div id="container">
+        <div id="success-box">
+            <div class="dot"></div>
+            <div class="dot two"></div>
+            <div class="face">
+                <div class="eye"></div>
+                <div class="eye right"></div>
+                <div class="mouth happy"></div>
+            </div>
+            <div class="shadow scale"></div>
+            <div class="message">
+              <h1 class="alert">Jangan lupa</h1>
+                <p class="card-text">Untuk simpan informasi diatas, untuk melakukan pembayaran. Harap simpan foto bukti transfer Anda dan kirimkan ke customer service kami melalui WhatsApp termasuk Nomor Pesanan Anda, untuk membantu verifikasi</p>
+                <p class="card-text">-YA-</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

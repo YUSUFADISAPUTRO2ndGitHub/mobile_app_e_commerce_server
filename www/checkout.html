@@ -163,6 +163,215 @@
     .swal2-backdrop-show{
         background-color: white !important;
     }
+    .input-group-text, .price-form{
+        border-radius: 10px;
+        border: none;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        background-color: #217384;
+        color: white;
+    }
+    .form-select, .form-control{
+        border-radius: 10px;
+        border: none;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        background-color: white;
+        color: #217384;
+    }
+    .alert-warning{
+        border-radius: 10px;
+        border: none;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    #container {
+        display: table;
+        margin: auto;
+        height: 250px;
+    }
+
+    .green {
+    color: darken(#99DBB4, 20%);
+    }
+
+    .red {
+    color: darken(#EF8D9C, 10%);
+    }
+
+    p {
+        margin: 1%;
+        font-size: 0.5em;
+        color: #217384;
+    }
+
+    #success-box {
+        background-color: turquoise;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        width: 250px;
+        height: 100%;
+        border-radius: 20px;
+        box-shadow: 5px 5px 20px rgba(#CBCDD3, 10%);
+        perspective: 40px;
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
+        background: #FCFCFC;
+        border-radius: 50%;
+        position: absolute;
+        top: 4%;
+        right: 6%;
+    }
+
+    .two {
+        right: 12%;
+        opacity: .5;
+    }
+
+    .face {
+        position: absolute;
+        width: 22%;
+        height: 22%;
+        background: #FCFCFC;
+        border-radius: 50%;
+        border: 1px solid #777777;
+        top: 21%;
+        left: 37.5%;
+        z-index: 2;
+        animation: bounce 1s ease-in infinite;
+    }
+
+    .face2 {
+        position: absolute;
+        width: 22%;
+        height: 22%;
+        background: #FCFCFC;
+        border-radius: 50%;
+        border: 1px solid #777777;
+        top: 21%;
+        left: 37.5%;
+        z-index: 2;
+        animation: roll 3s ease-in-out infinite;
+    }
+
+    .eye {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        background: #777777;
+        border-radius: 50%;
+        top: 40%;
+        left: 20%;
+    }
+
+    .right {
+    left: 68%;
+    }
+
+    .mouth {
+        position:absolute;
+        top: 43%;
+        left: 41%;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+    }
+
+    .happy {
+        border: 2px solid;
+        border-color: transparent #777777 #777777 transparent;
+        transform: rotate(45deg);
+    }
+
+    .shadow {
+        position: absolute;
+        width: 21%;
+        height: 3%;
+        opacity: .5;
+        background: #777777;
+        left: 40%;
+        top: 43%;
+        border-radius: 50%;
+        z-index: 1;
+    }
+
+    .scale {
+    animation: scale 1s ease-in infinite;
+    }
+    .move {
+    animation: move 3s ease-in-out infinite;
+    }
+
+
+    .message {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        height: 40%;
+        top: 47%;
+    }
+
+    .button-box {
+        position: absolute;
+        background: #FCFCFC;
+        width: 50%;
+        height: 15%;
+        border-radius: 20px;
+        top: 73%;
+        left: 25%;
+        outline: 0;
+        border: none;
+        box-shadow: 2px 2px 10px rgba(#777777, .5);
+        transition: all .5s ease-in-out;
+    }
+
+    @keyframes bounce {
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    @keyframes scale {
+        50% {
+            transform: scale(0.9);
+        }
+    }
+
+    @keyframes roll {
+        0% {
+            transform: rotate(0deg);
+            left: 25%;
+        }
+        50% {
+            left: 60%;
+            transform: rotate(168deg);
+        }
+        100% {
+            transform: rotate(0deg);
+            left: 25%;
+        }
+    }
+
+    @keyframes move {
+        0% {
+            left: 25%;
+        }
+        50% {
+            left: 60%;
+        }
+        100% {
+            left: 25%;
+        }
+    }
+    .alert{
+        font-size: 0.9em;
+        letter-spacing: 3px;
+        color: black;
+        text-transform: uppercase;
+    }
+    .modal-header{
+        display: block;
+    }
 </style>
 <body class=".body">
     <div class="card header">
@@ -183,6 +392,21 @@
             <div class="form-control" id="normal-transfer-selected">
                 <div class="card-body">
                     <img class="card-img-top" src="./img/bca_account_number.png">
+                </div>
+                <div id="container">
+                    <div id="success-box">
+                        <div class="dot"></div>
+                        <div class="dot two"></div>
+                        <div class="face">
+                            <div class="eye"></div>
+                            <div class="eye right"></div>
+                            <div class="mouth happy"></div>
+                        </div>
+                        <div class="shadow scale"></div>
+                        <div class="message">
+                          <h1 class="alert">Jangan lupa</h1>
+                        </div>
+                    </div>
                 </div>
                 <div class="alert alert-danger" role="alert">
                     <p class="card-text">Jangan lupa untuk simpan informasi diatas, untuk melakukan pembayaran</p>
@@ -315,7 +539,23 @@
         <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Diperlukan Verifikasi</h5>
+            <h5 class="modal-title">
+                <div id="container">
+                    <div id="success-box">
+                        <div class="dot"></div>
+                        <div class="dot two"></div>
+                        <div class="face">
+                            <div class="eye"></div>
+                            <div class="eye right"></div>
+                            <div class="mouth happy"></div>
+                        </div>
+                        <div class="shadow scale"></div>
+                        <div class="message">
+                          <h1 class="alert">Pastikan Kembali</h1>
+                        </div>
+                    </div>
+                </div>
+            </h5>
             </div>
             <!-- <div class="modal-body">
                 <div class="form-group">
@@ -335,8 +575,8 @@
                     <strong>Periksa OTP Anda di alamat email yang Anda daftarkan.</strong> Silakan periksa kotak masuk atau folder spam Anda. Atau Anda dapat mengklik GET OTP untuk mendapatkan OTP baru
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div> -->
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Permintaan tidak sesuai</button>
                 <button type="button" class="btn btn-primary" onclick="requestToFinish()">Permintaan sudah sesuai</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Permintaan tidak sesuai</button>
             </div>
         </div>
         </div>
