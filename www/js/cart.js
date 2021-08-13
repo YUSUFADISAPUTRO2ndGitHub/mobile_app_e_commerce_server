@@ -35,7 +35,20 @@ $(document).ready(async function(){
     var productToBeAddedStringify = JSON.stringify(requestArrayForItemsToCheckout);
     localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
     console.log("localStorage.getItem(\"itemsToCheckout\") " + localStorage.getItem("itemsToCheckout"));
+    load_cart_to_get_total_price();
 });
+
+async function load_cart_to_get_total_price(){
+    var i = 0;
+    total_all_price = 0;
+    var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
+    for(i; i < cartToJson.length; i ++){
+        await getProductsWithProductNo("", "", cartToJson[i].productNo).done(function (response) {
+            total_all_price = total_all_price + Math.round(((cartToJson[i].quantity * response.Sell_Price)*1)* 100)/ 100;
+        });
+    }
+    $("#total_all_price").html(commafy(total_all_price));
+}
 
 // function loadcart(productNo, quantity){
 //     getProductsWithProductNo("", "", productNo).done(function (response) {
@@ -74,6 +87,7 @@ $(document).ready(async function(){
 //     });
 // }
 
+var total_all_price = 0;
 function loadcart(productNo, quantity){
     getProductsWithProductNo("", "", productNo).done(function (response) {
         console.log(response);
@@ -200,6 +214,7 @@ function quantityUpdatedDirectly(x, id){
                     break;
                 }
             }
+            load_cart_to_get_total_price();
         });
     }else{
         var i = 0;
@@ -217,6 +232,7 @@ function quantityUpdatedDirectly(x, id){
             }
         }
         $("#productName" + id).empty();
+        load_cart_to_get_total_price();
     }
 }
 
