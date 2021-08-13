@@ -432,6 +432,20 @@
 
 </body>
 <script>
+    getLocation();
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else { 
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    function showPosition(position) {
+        // alert(position.coords.latitude);
+        // alert(position.coords.longitude);
+    }
+    
     localStorage.setItem('all_products_in_sold_co_id', JSON.stringify([]));
     localStorage.setItem('all_new_products_in_sold_co_id', JSON.stringify([]));
     localStorage.setItem('all_group_buy_products_in_sold_co_id', JSON.stringify([]));
