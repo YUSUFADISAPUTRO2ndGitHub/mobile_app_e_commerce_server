@@ -47,7 +47,7 @@ function generatehomeOneByOne(product_row, data, dataLength){
         $("#product-highlights" + product_row).append("<th class=\"th-home-search\" id=\"left"+ product_row +"\">");
         $("#left" + product_row).append("<div class=\"notification product-card product-card-home-and-search\" id=\"product-card-left"+ product_row +"\">");
         $("#product-card-left" + product_row).append("<div class=\"card product-card-home-and-search\" id=\"card-left"+ product_row +"\" style=\"width: 100%;\">");
-        $("#card-left" + product_row).append("<img onclick=\"redirectProductDetails(this, \'" + data.Product_Code + "\', \'" + data.Name + "\')\" class=\"card-img-top product-card-images-home-and-search\" src=\"" + data.Picture_1 + "\">");
+        $("#card-left" + product_row).append("<a href=\"./product_details.html?productid="+ data.Product_Code +"\"><img class=\"card-img-top product-card-images-home-and-search\" src=\"" + data.Picture_1 + "\"></a>");
         $("#card-left" + product_row).append("<div class=\"card-body small-padding\" id=\"card-body-left"+ product_row +"\">");
         $("#card-body-left" + product_row).append("<div class=\"card-title\">" + data.Name ); // + "</div><span class=\"dots\">..</span><br><br>");
         $("#card-body-left" + product_row).append("<div class=\"card-text\" id=\"card-text-left"+ product_row +"\">");

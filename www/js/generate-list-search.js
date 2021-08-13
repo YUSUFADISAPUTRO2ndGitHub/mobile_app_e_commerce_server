@@ -37,30 +37,64 @@ function loadingMessage(interval){
 }
 
 function searchUp(keywords, conditionPrice, conditionAlphabet){
-    getAllProductsWithoutPaginationWithFilter("", "", "", "", keywords).done(function (response) {
-        console.log(response);
-        if(response[0] != false){
-            if(response.length == 0){
-                loadingMessage(1);
-                searchUpBasedOnCategory(keywords);
-            }else if(response.length == 1){
-                loadingMessage(response.length);
-                generatehomeleftOnly(response.length, response[0], response.length);
+    var all_products = JSON.parse(localStorage.getItem("all_products_in_sold_co_id"));
+    if(keywords.toUpperCase().includes('new'.toUpperCase())){
+        var all_new_products = JSON.parse(localStorage.getItem("all_new_products_in_sold_co_id"));
+        if(all_new_products.length > 0){
+            loadingMessage(1);
+            if(all_new_products.length == 1){
+                generatehomeleftOnly(all_new_products.length, all_new_products[0], all_new_products.length);
             }else{
-                // condition works for more than 1 product
-                loadingMessage(response.length);
                 var product_row = 0;
-                for(product_row; product_row < response.length; product_row++){
-                    generatehomeOneByOne(product_row, response[product_row], response.length);
+                for(product_row; product_row < all_new_products.length; product_row++){
+                    generatehomeOneByOne(product_row, all_new_products[product_row], all_new_products.length);
                 }
             }
         }else{
-            Swal.fire("Item not found", "Mungkin saya bisa menunjukkan hasil pencarian yang berbeda", "warning");
-            setTimeout(() => {
-                searchUp(keywords.substring(1, 2), "", "");
-            }, 3000);
+            searchUp("", "", "");
         }
-    });
+    }else{
+        if(all_products.length > 0){
+            loadingMessage(1);
+            var product_row = 0;
+            var selected_products_based_on_keywords = []
+            for(product_row; product_row < all_products.length; product_row++){
+                if(all_products[product_row].Name != null){
+                    if(all_products[product_row].Name.toUpperCase().includes(keywords.toUpperCase())){
+                        selected_products_based_on_keywords.push(all_products[product_row]);
+                    }
+                }
+            }
+            product_row = 0;
+            for(product_row; product_row < selected_products_based_on_keywords.length; product_row++){
+                generatehomeOneByOne(product_row, selected_products_based_on_keywords[product_row], selected_products_based_on_keywords.length);
+            }
+        }else{
+            getAllProductsWithoutPaginationWithFilter("", "", "", "", keywords).done(function (response) {
+                if(response[0] != false){
+                    if(response.length == 0){
+                        loadingMessage(1);
+                        searchUpBasedOnCategory(keywords);
+                    }else if(response.length == 1){
+                        loadingMessage(1);
+                        generatehomeleftOnly(response.length, response[0], response.length);
+                    }else{
+                        // condition works for more than 1 product
+                        loadingMessage(1);
+                        var product_row = 0;
+                        for(product_row; product_row < response.length; product_row++){
+                            generatehomeOneByOne(product_row, response[product_row], response.length);
+                        }
+                    }
+                }else{
+                    Swal.fire("Item not found", "Mungkin saya bisa menunjukkan hasil pencarian yang berbeda", "warning");
+                    setTimeout(() => {
+                        searchUp(keywords.substring(1, 2), "", "");
+                    }, 3000);
+                }
+            });
+        }
+    }
 }
 
 function searchUpBasedOnCategory(subcategory){
@@ -94,7 +128,7 @@ function generatehomeOneByOne(product_row, data, dataLength){
         $("#product-highlights" + product_row).append("<th class=\"th-home-search\" id=\"right"+ product_row +"\">");
         $("#right" + product_row).append("<div class=\"notification product-card product-card-home-and-search\" id=\"product-card-right"+ product_row +"\">");
         $("#product-card-right" + product_row).append("<div class=\"card\" id=\"card-right"+ product_row +"\" style=\"width: 100%;\">");
-        $("#card-right" + product_row).append("<img onclick=\"redirectProductDetails(this, \'" + data.Product_Code + "\', \'" + data.Name + "\')\" class=\"card-img-top product-card-images-home-and-search\" src=\"" + data.Picture_1 + "\">");
+        $("#card-right" + product_row).append("<a href=\"./product_details.html?productid="+ data.Product_Code +"\"><img class=\"card-img-top product-card-images-home-and-search\" src=\"" + data.Picture_1 + "\"></a>");
         $("#card-right" + product_row).append("<div class=\"card-body small-padding\" id=\"card-body-right"+ product_row +"\">");
         $("#card-body-right" + product_row).append("<div class=\"card-title\">" + data.Name ); // + "</div><span class=\"dots\">..</span><br><br>");
         $("#card-body-right" + product_row).append("<div class=\"card-text\" id=\"card-text-right"+ product_row +"\">");
@@ -124,7 +158,7 @@ function generatehomeOneByOne(product_row, data, dataLength){
         $("#product-highlights" + product_row).append("<th class=\"th-home-search\" id=\"left"+ product_row +"\">");
         $("#left" + product_row).append("<div class=\"notification product-card product-card-home-and-search\" id=\"product-card-left"+ product_row +"\">");
         $("#product-card-left" + product_row).append("<div class=\"card\" id=\"card-left"+ product_row +"\" style=\"width: 100%;\">");
-        $("#card-left" + product_row).append("<img onclick=\"redirectProductDetails(this, \'" + data.Product_Code + "\', \'" + data.Name + "\')\" class=\"card-img-top product-card-images-home-and-search\" src=\"" + data.Picture_1 + "\">");
+        $("#card-left" + product_row).append("<a href=\"./product_details.html?productid="+ data.Product_Code +"\"><img class=\"card-img-top product-card-images-home-and-search\" src=\"" + data.Picture_1 + "\">");
         $("#card-left" + product_row).append("<div class=\"card-body small-padding\" id=\"card-body-left"+ product_row +"\">");
         $("#card-body-left" + product_row).append("<div class=\"card-title\">" + data.Name ); // + "</div><span class=\"dots\">..</span><br><br>");
         $("#card-body-left" + product_row).append("<div class=\"card-text\" id=\"card-text-left"+ product_row +"\">");
