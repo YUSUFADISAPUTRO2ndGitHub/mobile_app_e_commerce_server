@@ -154,6 +154,35 @@ function get_upaid_order_from_product_code_and_customer_code(access_token, Produ
     return $.ajax(settings);
 }
 
+var all_products_in_sold_co_id = [];
+var all_new_products_in_sold_co_id = [];
+var all_group_buy_products_in_sold_co_id = [];
+function save_all_products_to_local_storage (){
+    getAllProductsWithoutPagination("", "").done(function (response) {
+        all_products_in_sold_co_id = response;
+        var i = 0;
+        all_new_products_in_sold_co_id = [];
+        all_group_buy_products_in_sold_co_id = [];
+        for(i; i < all_products_in_sold_co_id.length; i++){
+            if(all_products_in_sold_co_id[i].Categorize_NEW == "true"){
+                all_new_products_in_sold_co_id.push(all_products_in_sold_co_id[i]);
+            }
+            if(all_products_in_sold_co_id[i].GroupBuy_Purchase == "true"){
+                all_group_buy_products_in_sold_co_id.push(all_products_in_sold_co_id[i]);
+            }
+        }
+        localStorage.setItem("all_products_in_sold_co_id", JSON.stringify(all_products_in_sold_co_id));
+        localStorage.setItem("all_new_products_in_sold_co_id", JSON.stringify(all_new_products_in_sold_co_id));
+        localStorage.setItem("all_group_buy_products_in_sold_co_id", JSON.stringify(all_group_buy_products_in_sold_co_id));
+    });
+}
+if(JSON.parse(localStorage.getItem("all_products_in_sold_co_id")).length <= 0){
+    save_all_products_to_local_storage ();
+}
+setInterval(() => {
+    save_all_products_to_local_storage ();
+}, "900000");
+
 function getAllProductsWithoutPagination(access_token, session_id){
     var settings = {
         "url": `http://products.sold.co.id/get-product-details?`,

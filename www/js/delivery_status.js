@@ -16,6 +16,8 @@ $(document).ready(function(){
                 Your Order Number: ${orderNumber}
                 <br>
                 Tracking Number: ${tracking_number.paket_awb}
+                <br><br>
+                Total Amount (Jumlah total): ${status.Total_Price}
             </div>
             `);
         }else{
@@ -25,6 +27,8 @@ $(document).ready(function(){
                 Your Order Number: ${orderNumber}
                 <br>
                 Your Delivery Number: ${response.Delivery_Order_Number}
+                <br><br>
+                Total Amount (Jumlah total): ${status.Total_Price}
             </div>
             `);
         }

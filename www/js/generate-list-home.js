@@ -89,76 +89,117 @@ function commafy( num ) {
 function theCaller(type){
     loadingMessage(100000);
     $("#product-highlights").empty();
-    console.log(type == "sale");
+    if(JSON.parse(localStorage.getItem("all_products_in_sold_co_id")).length <= 0){
+        save_all_products_to_local_storage ();
+    }
     if(type == "sale"){
-        getAllProductsInGroupBuy("", "").done(function (response) {
-            if(response.length == 0){
-                loadingMessage(1);
-            }
-            if(!response){
-                loadingMessage(1);
-            }else{
-                if(response.length > 100){
-                    loadingMessage(response.length/4);
-                }else{
-                    loadingMessage(response.length);
-                }
-            }
-            if(response.length == 1){
-                generatehomeleftOnly(response.length, response[0], response.length);
+        var all_group_buy_products = JSON.parse(localStorage.getItem("all_group_buy_products_in_sold_co_id"));
+        if(all_group_buy_products.length > 0){
+            loadingMessage(1);
+            if(all_group_buy_products.length == 1){
+                generatehomeleftOnly(all_group_buy_products.length, all_group_buy_products[0], all_group_buy_products.length);
             }else{
                 var product_row = 0;
-                for(product_row; product_row < response.length; product_row++){
-                    generatehomeOneByOne(product_row, response[product_row], response.length);
+                for(product_row; product_row < all_group_buy_products.length; product_row++){
+                    generatehomeOneByOne(product_row, all_group_buy_products[product_row], all_group_buy_products.length);
                 }
             }
-        });
+        }else{
+            getAllProductsInGroupBuy("", "").done(function (response) {
+                if(response.length == 0){
+                    loadingMessage(1);
+                }
+                if(!response){
+                    loadingMessage(1);
+                }else{
+                    if(response.length > 100){
+                        loadingMessage(response.length/4);
+                    }else{
+                        loadingMessage(response.length);
+                    }
+                }
+                if(response.length == 1){
+                    generatehomeleftOnly(response.length, response[0], response.length);
+                }else{
+                    var product_row = 0;
+                    for(product_row; product_row < response.length; product_row++){
+                        generatehomeOneByOne(product_row, response[product_row], response.length);
+                    }
+                }
+            });
+        }
     }else if(type == "new"){
-        getAllProductsInNew("", "").done(function (response) {
-            if(response.length == 0){
-                loadingMessage(1);
-            }
-            if(!response){
-                loadingMessage(1);
-            }else{
-                if(response.length > 100){
-                    loadingMessage(response.length/4);
-                }else{
-                    loadingMessage(response.length);
-                }
-            }
-            if(response.length == 1){
-                generatehomeleftOnly(response.length, response[0], response.length);
+        var all_new_products = JSON.parse(localStorage.getItem("all_new_products_in_sold_co_id"));
+        if(all_new_products.length > 0){
+            loadingMessage(1);
+            if(all_new_products.length == 1){
+                generatehomeleftOnly(all_new_products.length, all_new_products[0], all_new_products.length);
             }else{
                 var product_row = 0;
-                for(product_row; product_row < response.length; product_row++){
-                    generatehomeOneByOne(product_row, response[product_row], response.length);
+                for(product_row; product_row < all_new_products.length; product_row++){
+                    generatehomeOneByOne(product_row, all_new_products[product_row], all_new_products.length);
                 }
             }
-        });
+        }else{
+            getAllProductsInNew("", "").done(function (response) {
+                if(response.length == 0){
+                    loadingMessage(1);
+                }
+                if(!response){
+                    loadingMessage(1);
+                }else{
+                    if(response.length > 100){
+                        loadingMessage(response.length/4);
+                    }else{
+                        loadingMessage(response.length);
+                    }
+                }
+                if(response.length == 1){
+                    generatehomeleftOnly(response.length, response[0], response.length);
+                }else{
+                    var product_row = 0;
+                    for(product_row; product_row < response.length; product_row++){
+                        generatehomeOneByOne(product_row, response[product_row], response.length);
+                    }
+                }
+            });
+        }
     }else{
-        getAllProductsWithoutPagination("", "").done(function (response) {
-            if(response.length == 0){
-                loadingMessage(1);
-            }
-            if(!response){
-                loadingMessage(1);
-            }else{
-                if(response.length > 100){
-                    loadingMessage(response.length/4);
-                }else{
-                    loadingMessage(response.length);
-                }
-            }
-            if(response.length == 1){
-                generatehomeleftOnly(response.length, response[0], response.length);
+        var all_products = JSON.parse(localStorage.getItem("all_products_in_sold_co_id"));
+        if(all_products.length > 0){
+            loadingMessage(1);
+            if(all_products.length == 1){
+                generatehomeleftOnly(all_products.length, all_products[0], all_products.length);
             }else{
                 var product_row = 0;
-                for(product_row; product_row < response.length; product_row++){
-                    generatehomeOneByOne(product_row, response[product_row], response.length);
+                for(product_row; product_row < all_products.length; product_row++){
+                    generatehomeOneByOne(product_row, all_products[product_row], all_products.length);
                 }
             }
-        });
+        }else{
+            getAllProductsWithoutPagination("", "").done(function (response) {
+                if(response.length == 0){
+                    loadingMessage(1);
+                }
+                if(!response){
+                    loadingMessage(1);
+                }else{
+                    if(response.length > 100){
+                        loadingMessage(response.length/4);
+                    }else{
+                        loadingMessage(response.length);
+                    }
+                }
+                if(response.length == 1){
+                    generatehomeleftOnly(response.length, response[0], response.length);
+                }else{
+                    var product_row = 0;
+                    for(product_row; product_row < response.length; product_row++){
+                        generatehomeOneByOne(product_row, response[product_row], response.length);
+                    }
+                }
+            });
+        }
     }
 }
 

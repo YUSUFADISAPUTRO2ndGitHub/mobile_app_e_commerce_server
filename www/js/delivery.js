@@ -43,6 +43,8 @@ function generateRowsDelivery(i, datas){
                         <div class="card-text product-in-card-name">${datas.Payment_Method}</div>
                         <label>PAYMENT STATUS</label>
                         <div class="card-text product-in-card-name">${payment}</div>
+                        <label>TOTAL AMOUNT</label>
+                        <div class="card-text product-in-card-name">${datas.Total_Price}</div>
                         <div class="card-text product-in-card-name">
                             <div class="cancel-body-table">Order telah di proses</div>
                         </div>
@@ -64,6 +66,8 @@ function generateRowsDelivery(i, datas){
                         <div class="card-text product-in-card-name">${datas.Payment_Method}</div>
                         <label>PAYMENT STATUS</label>
                         <div class="card-text product-in-card-name">${payment}</div>
+                        <label>TOTAL AMOUNT</label>
+                        <div class="card-text product-in-card-name">${datas.Total_Price}</div>
                         <div class="card-text product-in-card-name">
                             <div class="cancel-body-table" onclick="cancelOrderRequest('${datas.Order_Number}')">Cancel</div>
                         </div>
@@ -85,6 +89,8 @@ function generateRowsDelivery(i, datas){
                         <div class="card-text product-in-card-name">${datas.Payment_Method}</div>
                         <label>PAYMENT STATUS</label>
                         <div class="card-text product-in-card-name">${payment}</div>
+                        <label>TOTAL AMOUNT</label>
+                        <div class="card-text product-in-card-name">${datas.Total_Price}</div>
                         <div class="card-text product-in-card-name">
                             <div class="cancel-body-table">Order Telah di Cancelled</div>
                         </div>
