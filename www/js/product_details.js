@@ -1,9 +1,9 @@
 
 $(document).ready(function(){
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const product = urlParams.get('productid');
-    const productName = urlParams.get('productName');
+    queryString = window.location.search;
+    urlParams = new URLSearchParams(queryString);
+    product = urlParams.get('productid');
+    productName = urlParams.get('productName');
     $(".rating-stars-iframe").attr("src", "./rating-stars/index.html?product_code=" + product);
     console.log(productName);
     fillingInInformations(product);
@@ -21,9 +21,6 @@ $(document).ready(function(){
         $("#terms").toggleClass("active");
     });
     $("#back-button").click(function(){
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const product = urlParams.get('productid');
         getProductsWithProductNo("", "", product).done(function (response) {
             window.location.href = "./search_results.html?input=" + response.Name;
         });
@@ -36,6 +33,11 @@ $(document).ready(function(){
     listPaymentMethods();
     check_if_user_has_unpaid_sales_order();
 });
+
+var queryString = window.location.search;
+var urlParams = new URLSearchParams(queryString);
+var product = urlParams.get('productid');
+var productName = urlParams.get('productName');
 
 setInterval(() => {
     var addressSelection = $("#address-selection").children("option:selected").val();
@@ -112,9 +114,9 @@ function reload_page(product){
 }
 
 function check_if_user_has_unpaid_sales_order(){
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const product = urlParams.get('productid');
+    // const queryString = window.location.search;
+    // const urlParams = new URLSearchParams(queryString);
+    // const product = urlParams.get('productid');
     if(localStorage.getItem("token").length > 0){
         get_upaid_order_from_product_code_and_customer_code(localStorage.getItem("token"), product).done(function (response) {
             if(!response){
@@ -142,9 +144,9 @@ function listPaymentMethods(){
 function checkQuantityBuyLimit(x){
     console.log($(x).val());
     // alert($(x).val());
-    var queryString = window.location.search;
-    var urlParams = new URLSearchParams(queryString);
-    var product = urlParams.get('productid');
+    // var queryString = window.location.search;
+    // var urlParams = new URLSearchParams(queryString);
+    // var product = urlParams.get('productid');
     getGroupBuyQuantitySoFarGross(product).done(function (response) {
         if($(x).val() > (parseFloat($("#group-purchase-quantity-target").html()) - response.Total_Quantity)){
             swal.fire("Kuantitas melebihi yang kita dapat berikan", "", "info");
@@ -184,9 +186,9 @@ function generateUserSavedAddress(){
 }
 
 function getProducts(){
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const product = urlParams.get('productid');
+    // const queryString = window.location.search;
+    // const urlParams = new URLSearchParams(queryString);
+    // const product = urlParams.get('productid');
     getProductsWithProductNo("", "", product).done(function (response) {
         getAllProductsWithoutPaginationWithFilter("", "", "", "", response.Name).done(function (response) {
             console.log(response);
@@ -199,17 +201,6 @@ function getProducts(){
             }
         });
     });
-    // getAllProductsInGroupBuy("", "").done(function (response) {
-    //     console.log(response);
-    //     if(response.length == 0){
-    //         getProducts();
-    //         console.log("call again");
-    //     }
-    //     var product_row = 1;
-    //     for(product_row; product_row <= response.length; product_row = product_row +2){
-    //         generateListOneByOne(product_row, response[product_row-1], response[product_row]);
-    //     }
-    // });
 }
 
 function generateListOneByOne(product_row, data1, data2){
@@ -511,9 +502,9 @@ async function confirmedPurchaseGroupBuy(){
             }
             }).then((result) => {});
 
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            const product = urlParams.get('productid');
+            // const queryString = window.location.search;
+            // const urlParams = new URLSearchParams(queryString);
+            // const product = urlParams.get('productid');
             getProductsWithProductNo("", "", product).done(function (response) {
                 getGroupBuyQuantitySoFarGross(response.Product_Code).done(function (response) {
                     var quantitySoFAR = 0;
@@ -699,9 +690,9 @@ async function generateGroupBuy(x){
             footer: '<a href=\'./sign-in.html\'>SIGN-UP/SIGN-IN</a>'
          })
     }else{
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const product = urlParams.get('productid');
+        // const queryString = window.location.search;
+        // const urlParams = new URLSearchParams(queryString);
+        // const product = urlParams.get('productid');
         get_upaid_order_from_product_code_and_customer_code(localStorage.getItem("token"), product).done(function (response) {
             if(!response){
                 Swal.fire({
@@ -722,9 +713,9 @@ async function generateGroupBuy(x){
 }
 
 function show_modal_quantity_requested(x){
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const product = urlParams.get('productid');
+    // const queryString = window.location.search;
+    // const urlParams = new URLSearchParams(queryString);
+    // const product = urlParams.get('productid');
     generate_available_options(product);
     var modal = document.getElementById(x);
     modal.style.display = "block";
@@ -742,9 +733,9 @@ function commafy( num ) {
 }
 
 function addToCartDirectlyFromProductDetails(){
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    var product = urlParams.get('productid');
+    // const queryString = window.location.search;
+    // const urlParams = new URLSearchParams(queryString);
+    // var product = urlParams.get('productid');
     if(
         $('input[name="product-to-be-added"]:checked').val() != undefined
     ){
@@ -899,9 +890,9 @@ async function generate_available_options(Product_Code){
 }
 
 function render_html_for_options(data){
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    var product = urlParams.get('productid');
+    // const queryString = window.location.search;
+    // const urlParams = new URLSearchParams(queryString);
+    // var product = urlParams.get('productid');
     if(product == data.Product_Code){
         $(`
             .list-options-available
@@ -936,6 +927,8 @@ function check_selection(){
             $(`#${response.Product_Code}-form`).addClass('selected-option');
             $(`.requested-price-by-user`).val(response.Sell_Price);
             $(`.requested-available-stock-by-user`).val(response.Stock_Quantity);
+            fillingInInformations(response.Product_Code);
+            product = response.Product_Code;
         }
     });
 }
