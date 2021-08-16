@@ -465,6 +465,38 @@
     #modal-add-to-cart{
         z-index: 98;
     }
+    .product-selection-images{
+        min-width: 20%;
+        max-width: 20%;
+        max-height: 170px;
+        min-height: 170px;
+    }
+    .product-selection-names{
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .btn-success{
+        width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    .list-options-available-title{
+        text-align: center;
+        padding: 2%;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        margin-bottom: 2%;
+    }
+    .selected-option{
+        border: solid 2px darkred;
+        border-radius: 10px;
+    }
+    .form-check .form-check-input {
+        float: none;
+        margin-left: 0;
+    }
 </style>
 <body>
 
@@ -472,9 +504,22 @@
     <div id="modal-add-to-cart" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
+            <div class="list-options-available-title">
+                Opsi
+            </div>
+            <div class="user-options-to-add-to-cart card-text list-options-available">
+
+            </div>
+            <br>
             <div class="user-options-to-add-to-cart card-text">
                 <div class="mb-3">
-                    <label class="form-label">Kuantitas</label>
+                    <label class="form-label">Tersedia digudang kami</label>
+                    <input type="number" class="form-control requested-available-stock-by-user" value="0" disabled>
+                    <br>
+                    <label class="form-label">Harga satuan</label>
+                    <input type="number" class="form-control requested-price-by-user" value="0" disabled>
+                    <br>
+                    <label class="form-label">Kuantitas permintaan</label>
                     <input type="number" class="form-control requested-quantity-by-user" value="1">
                     <div class="form-text">Masukkan jumlah yang diinginkan untuk dimasukan kekeranjang</div>
                     <button type="button" class="btn btn-success" onclick="addToCartDirectlyFromProductDetails()">add to cart</button>

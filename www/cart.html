@@ -303,15 +303,16 @@
         setInterval(() => {
             check_product_datas();
         }, 1000);
-        function check_product_datas(){
+        async function check_product_datas(){
             var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
             // alert(localStorage.getItem("itemsInCart"));
             var i =0;
             for(i; i < cartToJson.length; i++){
                 var quantity = cartToJson[i].quantity;
-                getProductsWithProductNo("", "", cartToJson[i].productNo).done(function (response) {
+                await getProductsWithProductNo("", "", cartToJson[i].productNo).done(async function (response) {
                     if(response != false){
-                        if(quantity > response.Stock_Quantity){
+                        if((quantity*1) > (response.Stock_Quantity*1)){
+                            alert((response.Stock_Quantity*1));
                             cartToJson.splice(cartToJson.indexOf(response.Product_Code), 1);
                             var cartToJson_string = JSON.stringify(cartToJson);
                             localStorage.setItem("itemsInCart", cartToJson_string);

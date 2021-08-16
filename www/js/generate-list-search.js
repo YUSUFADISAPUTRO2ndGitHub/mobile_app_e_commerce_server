@@ -65,7 +65,43 @@ function searchUp(keywords, conditionPrice, conditionAlphabet){
                     }
                 }
             }
-            selected_products_based_on_keywords = selected_products_based_on_keywords.concat(all_products);
+            var keywords_splitted = keywords.split(" ");
+            z = 0;
+            for(z; z < keywords_splitted.length; z++){
+                product_row = 0;
+                for(product_row; product_row < all_products.length; product_row++){
+                    if(all_products[product_row].Name != null){
+                        if(
+                            keywords_splitted[z].toUpperCase().includes(all_products[product_row].Name.toUpperCase())
+                        ){
+                            if(
+                                !(selected_products_based_on_keywords.includes(all_products[product_row]))
+                            ){
+                                selected_products_based_on_keywords.push(all_products[product_row]);
+                            }
+                        }
+                    }
+                }
+            }
+
+            var selected_products_based_on_keywords_splitted = selected_products_based_on_keywords[0].Name.split(" ");
+            z = 0;
+            for(z; z < selected_products_based_on_keywords_splitted.length; z++){
+                product_row = 0;
+                for(product_row; product_row < all_products.length; product_row++){
+                    if(all_products[product_row].Name != null){
+                        if(
+                            selected_products_based_on_keywords_splitted[z].toUpperCase().includes(all_products[product_row].Name.toUpperCase())
+                        ){
+                            if(
+                                !(selected_products_based_on_keywords.includes(all_products[product_row]))
+                            ){
+                                selected_products_based_on_keywords.push(all_products[product_row]);
+                            }
+                        }
+                    }
+                }
+            }
             product_row = 0;
             for(product_row; product_row < selected_products_based_on_keywords.length; product_row++){
                 generatehomeOneByOne(product_row, selected_products_based_on_keywords[product_row], selected_products_based_on_keywords.length);

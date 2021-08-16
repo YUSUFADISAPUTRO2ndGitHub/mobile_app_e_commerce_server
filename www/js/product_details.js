@@ -722,6 +722,10 @@ async function generateGroupBuy(x){
 }
 
 function show_modal_quantity_requested(x){
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const product = urlParams.get('productid');
+    generate_available_options(product);
     var modal = document.getElementById(x);
     modal.style.display = "block";
 }   
@@ -740,7 +744,12 @@ function commafy( num ) {
 function addToCartDirectlyFromProductDetails(){
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const product = urlParams.get('productid');
+    var product = urlParams.get('productid');
+    if(
+        $('input[name="product-to-be-added"]:checked').val() != undefined
+    ){
+        product = $('input[name="product-to-be-added"]:checked').val();
+    }
     getProductsWithProductNo("", "", product).done(function (response) {
         if(response != undefined){
             if(response.Stock_Quantity != undefined){
@@ -749,53 +758,74 @@ function addToCartDirectlyFromProductDetails(){
                 }else{
                     if((response.Stock_Quantity*1) > 0){
                         if(localStorage.getItem("itemsInCart") === null){
-                            var productToBeAdded = {
-                                productNo: product,
-                                quantity: $(".requested-quantity-by-user").val()
-                            };
-                            var array = [];
-                            array.push(productToBeAdded);
-                    
-                            // saving to storage
-                            var productToBeAddedStringify = JSON.stringify(array);
-                            localStorage.setItem("itemsInCart", productToBeAddedStringify);
-                            console.log(localStorage.getItem("itemsInCart"));
-                    
-                            // add total item in cart
-                            localStorage.setItem("totalItemInCart", array.length);
-                        }else{
-                            var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
-                            console.log(cartToJson);
-                            var i = 0;
-                            var indicator = 0;
-                            for(i; i < cartToJson.length; i ++){
-                                if(cartToJson[i].productNo == product){
-                                    cartToJson[i].quantity = (parseInt(cartToJson[i].quantity) + ($(".requested-quantity-by-user").val()*1));
-                                    indicator++;
-                                
-                                    // saving to storage
-                                    var productToBeAddedStringify = JSON.stringify(cartToJson);
-                                    localStorage.setItem("itemsInCart", productToBeAddedStringify);
-                                    console.log("bug " + localStorage.getItem("itemsInCart"));
-                                    break;
-                                }
-                            }
-                            if(indicator == 0){
+                            if(
+                                ($(".requested-quantity-by-user").val()*1) <= (response.Stock_Quantity*1)
+                            ){
                                 var productToBeAdded = {
                                     productNo: product,
                                     quantity: $(".requested-quantity-by-user").val()
                                 };
-                                cartToJson.push(productToBeAdded);
+                                var array = [];
+                                array.push(productToBeAdded);
                         
                                 // saving to storage
-                                var productToBeAddedStringify = JSON.stringify(cartToJson);
+                                var productToBeAddedStringify = JSON.stringify(array);
                                 localStorage.setItem("itemsInCart", productToBeAddedStringify);
                                 console.log(localStorage.getItem("itemsInCart"));
+                        
+                                // add total item in cart
+                                localStorage.setItem("totalItemInCart", array.length);
+                                Swal.fire("Item Added", "have fun shopping!", "success");
+                            }else{
+                                Swal.fire("Stock barang yang di minta tidak cukup", "Maaf untuk ketidaknyamanannya", "warning");
+                            }
+                        }else{
+                            var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
+                            var i = 0;
+                            var indicator = 0;
+                            for(i; i < cartToJson.length; i ++){
+                                if(cartToJson[i].productNo == product){
+                                    if(
+                                        (parseInt(cartToJson[i].quantity) + ($(".requested-quantity-by-user").val()*1)) <= (response.Stock_Quantity*1)
+                                    ){
+                                        cartToJson[i].quantity = (parseInt(cartToJson[i].quantity) + ($(".requested-quantity-by-user").val()*1));
+                                        indicator++;
+                                    
+                                        // saving to storage
+                                        var productToBeAddedStringify = JSON.stringify(cartToJson);
+                                        localStorage.setItem("itemsInCart", productToBeAddedStringify);
+                                        break;
+                                    }else{
+                                        indicator = -1;
+                                        break;
+                                    }
+                                }
+                            }
+                            if(indicator == 0){
+                                if(
+                                    ($(".requested-quantity-by-user").val()*1) <= (response.Stock_Quantity*1)
+                                ){
+                                    var productToBeAdded = {
+                                        productNo: product,
+                                        quantity: $(".requested-quantity-by-user").val()
+                                    };
+                                    cartToJson.push(productToBeAdded);
+                            
+                                    // saving to storage
+                                    var productToBeAddedStringify = JSON.stringify(cartToJson);
+                                    localStorage.setItem("itemsInCart", productToBeAddedStringify);
+                                    Swal.fire("Item Added", "have fun shopping!", "success");
+                                }else{
+                                    Swal.fire("Stock barang yang di minta tidak cukup", "Maaf untuk ketidaknyamanannya", "warning");
+                                }
+                            }else if(indicator < 0){
+                                Swal.fire("Stock barang yang di minta tidak cukup", "Maaf untuk ketidaknyamanannya", "warning");
+                            }else{
+                                Swal.fire("Item Added", "have fun shopping!", "success");
                             }
                             // add total item in cart
                             localStorage.setItem("totalItemInCart", cartToJson.length);
                         }
-                        Swal.fire("Item Added", "have fun shopping!", "success");
                     }else{
                         Swal.fire("Stock untuk barang ini sudah habis", "Maaf untuk ketidaknyamanannya", "warning");
                     }
@@ -806,10 +836,106 @@ function addToCartDirectlyFromProductDetails(){
         }else{
             Swal.fire("Stock untuk barang ini sudah habis", "Maaf untuk ketidaknyamanannya", "warning");
         }
-
+        console.log(localStorage.getItem("itemsInCart"));
         var modal1 = document.getElementById("modal-group-purchase");
         var modal2 = document.getElementById("modal-add-to-cart");
         modal1.style.display = "none";
         modal2.style.display = "none";
+    });
+}
+
+async function generate_available_options(Product_Code){
+    $(`
+        .list-options-available
+    `).empty();
+    var i = 0;
+    var all_products = JSON.parse(localStorage.getItem("all_products_in_sold_co_id"));
+    var product_information = "";
+    var product_information_found_locally = 0;
+    for(i ; i < all_products.length; i++){
+        if(Product_Code == all_products[i].Product_Code){
+            product_information = all_products[i];
+            product_information_found_locally = 1;
+            break;
+        }
+    }
+    if(product_information_found_locally == 0){
+        await getProductsWithProductNo("", "", Product_Code).done(async function (response) {
+            if(response != false){
+                product_information = response;
+            }
+        });
+    }
+    var product_options_data = [];
+    splitted_product_name = product_information.Name.split(" ");
+    var z = 0;
+    for(z ; z < splitted_product_name.length; z++){
+        i = 0;
+        for(i ; i < all_products.length; i++){
+            if(all_products[i].Name.toUpperCase().includes(splitted_product_name[z].toUpperCase())){
+                if(!(product_options_data.includes(all_products[i]))){
+                    if(
+                        !isNaN(all_products[i].Sell_Price*1)
+                    ){
+                        if(
+                            (all_products[i].Sell_Price*1) > 0 && (all_products[i].Stock_Quantity*1) > 0
+                        ){
+                            product_options_data.push(all_products[i]);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    i = 0;
+    var max_length = product_options_data.length;
+    if(product_options_data.length > 10){
+        max_length = 10;
+    }
+    for(i ; i < max_length; i++){
+        render_html_for_options(product_options_data[i]);   
+    }
+    check_selection();
+}
+
+function render_html_for_options(data){
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    var product = urlParams.get('productid');
+    if(product == data.Product_Code){
+        $(`
+            .list-options-available
+        `).append(`
+            <div class="form-check" id="${data.Product_Code}-form">
+                <input class="form-check-input" type="radio" name="product-to-be-added" id="${data.Product_Code}" value="${data.Product_Code}" onchange="check_selection()" checked>
+                <img class="product-selection-images" src="${data.Picture_1}">
+                <label class="card-text product-selection-names">
+                    ${data.Name}
+                </label>
+            </div>
+        `);
+    }else{
+        $(`
+            .list-options-available
+        `).append(`
+            <div class="form-check" id="${data.Product_Code}-form">
+                <input class="form-check-input" type="radio" name="product-to-be-added" id="${data.Product_Code}" value="${data.Product_Code}" onchange="check_selection()">
+                <img class="product-selection-images" src="${data.Picture_1}">
+                <label class="card-text product-selection-names">
+                    ${data.Name}
+                </label>
+            </div>
+        `);
+    }
+}
+
+function check_selection(){
+    $(`.form-check`).removeClass('selected-option');
+    getProductsWithProductNo("", "", $('input[name="product-to-be-added"]:checked').val()).done(function (response) {
+        if(response != false){
+            $(`#${response.Product_Code}-form`).addClass('selected-option');
+            $(`.requested-price-by-user`).val(response.Sell_Price);
+            $(`.requested-available-stock-by-user`).val(response.Stock_Quantity);
+        }
     });
 }
