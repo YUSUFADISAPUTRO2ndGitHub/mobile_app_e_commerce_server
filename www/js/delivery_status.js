@@ -8,6 +8,9 @@ $(document).ready(function(){
     console.log(orderNumber);
     get_shipping_information(orderNumber).done(function (response) {
         var tracking_number = "";
+        if(response.Delivery_Order_Number == undefined){
+            response.Delivery_Order_Number = "Nomor pesanan pengiriman Anda akan dibuat setelah pesanan Anda diproses"
+        }
         if(response.Shipping_Number != undefined || response.Shipping_Number != null){
             tracking_number = JSON.parse(response.Shipping_Number);
             $(".details-area-order-number").empty();
