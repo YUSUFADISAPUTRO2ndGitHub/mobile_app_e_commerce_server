@@ -15,6 +15,9 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     </head>
 <style>
+    body{
+        background-color: white;
+    }
     /* width */
     ::-webkit-scrollbar {
         width: 5px;
@@ -117,12 +120,10 @@
 
     .card-title{
         font-size: 12px;
-        max-width: 400px;
-        height: 40px;
+        width: 100% !important;
+        height: 36px !important;
         min-width:0;
-        white-space: nowrap;
-        overflow: hidden !important;
-        text-overflow: ellipsis;
+        overflow: hidden;
     }
     .card-img-top{
         border-radius: 0 !important;
@@ -149,12 +150,6 @@
         width: 20px;
         border-radius: 0% !important;
     }
-    .background_image{
-        background-image: url('../www/img/background.png'); 
-        background-repeat: no-repeat;
-        background-attachment: fixed;  
-        background-size: cover;
-    }
     .slides{
         max-height: auto;
     }
@@ -162,13 +157,75 @@
         display: flex;
         flex-direction: row;
         padding: 1%;
+        background-color: #217384;
+        border-radius: 10px;
+        margin: 1%;
     }
     .option-button{
+        background-color: white;
         border-radius: 10px;
         max-width: 20%;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         padding: 2%;
         color: #217384;
+    }
+    .product-card-area{
+        /* display: flex;
+        flex-direction: row; */
+        max-width: 100%;
+    }
+    .new-product-card{
+        margin: 1%;
+        float: left;
+        padding: 2%;
+        background-color: white;
+        max-width: 48%;
+        min-width: 48%;
+        border-radius: 10px;
+        border: none;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    .product-card-title{
+        white-space: nowrap; 
+        width: 100%; 
+        overflow: hidden;
+        text-overflow: ellipsis; 
+    }
+    .product-card-image{
+        max-width: 100%;
+        min-width: 100%;
+        min-height: 400px;
+        max-height: 400px;
+    }
+    .product-card-add-to-cart{
+        text-align: center;
+        background-color: turquoise;
+        color: white;
+        border-radius: 0 0 10px 10px;
+    }
+    .product-card-price{
+        display: flex;
+        flex-direction: row;
+        white-space: nowrap; 
+        width: 100%; 
+        overflow: hidden;
+        text-overflow: ellipsis; 
+    }
+    .fake-price{
+        text-decoration: line-through;
+        color: darkred;
+        white-space: nowrap; 
+        width: 100%; 
+        overflow: hidden;
+        text-overflow: ellipsis; 
+    }
+    .the-price{
+        margin-left: 2%;
+        color: #217384;
+        white-space: nowrap; 
+        width: 100%; 
+        overflow: hidden;
+        text-overflow: ellipsis; 
     }
 </style>
 <body class="background_image">
@@ -198,139 +255,206 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-    <table class="main-structure">
-        <tr>
-          <td class="middle-structure" >
-            <table>
-                <tr>
-                    <th class="centering">
-                        <!-- subtable -->
-                        <table>
-                            <tr>
-                                <th>
-                                    <div class="category-icon-background">
-                                        <img src="../www/img/Additional_icons/arrow.png" id="arrow-up-price" class="category-icon" onclick="sortUpPrice()">
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="category-icon-background">
-                                        <img src="../www/img/Additional_icons/price-tags.png" class="category-icon" >
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="category-icon-background">
-                                        <img src="../www/img/Additional_icons/arrow.png" id="arrow-down-price" class="category-icon flipped" onclick="sortDownPrice()">
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="category-icon-background">
-                                        <img src="../www/img/Additional_icons/arrow.png" id="arrow-up-alphabet" class="category-icon" onclick="sortUpAlphabet()">
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="category-icon-background">
-                                        <img src="../www/img/Additional_icons/blocks.png" class="category-icon" >
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="category-icon-background">
-                                        <img src="../www/img/Additional_icons/arrow.png" id="arrow-down-alphabet" class="category-icon flipped" onclick="sortDownAlphabet()">
-                                    </div>
-                                </th>
-                            </tr>
-                        </table>
-                        <!-- subtable -->
-                    </th>
-                </tr>
-            </table>
-          </td>
-        </tr>
-        <tr>
-            <td class="bottom-structure" >
-                <div class="options-area">
-                    <div class="option-button" onclick="sort_by_price(this)">Harga</div>
-                </div>
-                <table id="product-highlights">
-                    <!-- <div id="product-highlights-small-quantity"></div> -->
-                </table>
-            </td>
-        </tr>
-    </table>
+    <div class="options-area">
+        <div class="option-button" onclick="sort_by_price(this)">Harga</div>
+    </div>
+    <div class="product-card-area">
+        
+    </div>
+
     <script>
         var sort_price_counter_click = 0;
         function sort_by_price(x){
+            $(".product-card-area").empty();
             var queryString = window.location.search;
             var urlParams = new URLSearchParams(queryString);
             var search = urlParams.get('input');
             $("#product-highlights").empty();
-            if(search.toUpperCase().includes('new'.toUpperCase())){
-                var all_new_products = JSON.parse(localStorage.getItem("all_new_products_in_sold_co_id"));
-                if(all_new_products.length > 0){
-                    loadingMessage(1);
-                    if(all_new_products.length == 1){
-                        generatehomeleftOnly(all_new_products.length, all_new_products[0], all_new_products.length);
-                    }else{
-                        // condition works for more than 1 product
-                        if(sort_price_counter_click == 0){ // sort from cheap to expensive
-                            all_new_products = all_new_products.sort((a,b) => (a.Sell_Price*1 > b.Sell_Price*1) ? 1 : ((b.Sell_Price*1 > a.Sell_Price*1) ? -1 : 0));
-                            $(x).css("background-color", "green");
-                            $(x).css("color", "white");
-                        }else if(sort_price_counter_click == 1){
-                            all_new_products = all_new_products.sort((a,b) => (a.Sell_Price*1 < b.Sell_Price*1) ? 1 : ((b.Sell_Price*1 < a.Sell_Price*1) ? -1 : 0));
-                            $(x).css("background-color", "darkred");
-                            $(x).css("color", "white");
-                        }else{
-                            $(x).css("background-color", "white");
-                            $(x).css("color", "#217384");
-                            sort_price_counter_click = 0;
-                        }
-                        sort_price_counter_click++;
-                        var product_row = 0;
-                        for(product_row; product_row < all_new_products.length; product_row++){
-                            generatehomeOneByOne(product_row, all_new_products[product_row], all_new_products.length);
-                        }
-                    }
-                }else{
-                    searchUp("", "", "");
-                }
-            }else{
-                getAllProductsWithoutPaginationWithFilter("", "", "", "", search).done(function (response) {
-                    if(response[0] != false){
-                        if(response.length == 0){
-                            loadingMessage(1);
-                            searchUpBasedOnCategory(keywords);
-                        }else if(response.length == 1){
-                            loadingMessage(response.length);
-                            generatehomeleftOnly(response.length, response[0], response.length);
+            var all_products = JSON.parse(localStorage.getItem("all_products_in_sold_co_id"));
+            if(search != undefined){
+                if(search.toUpperCase().includes('new'.toUpperCase())){
+                    var all_new_products = JSON.parse(localStorage.getItem("all_new_products_in_sold_co_id"));
+                    if(all_new_products.length > 0){
+                        loadingMessage(1);
+                        if(all_new_products.length == 1){
+                            generatehomeleftOnly(all_new_products.length, all_new_products[0], all_new_products.length);
                         }else{
                             // condition works for more than 1 product
                             if(sort_price_counter_click == 0){ // sort from cheap to expensive
-                                response = response.sort((a,b) => (a.Sell_Price*1 > b.Sell_Price*1) ? 1 : ((b.Sell_Price*1 > a.Sell_Price*1) ? -1 : 0));
+                                all_new_products = all_new_products.sort((a,b) => (a.Sell_Price*1 > b.Sell_Price*1) ? 1 : ((b.Sell_Price*1 > a.Sell_Price*1) ? -1 : 0));
                                 $(x).css("background-color", "green");
                                 $(x).css("color", "white");
                             }else if(sort_price_counter_click == 1){
-                                response = response.sort((a,b) => (a.Sell_Price*1 < b.Sell_Price*1) ? 1 : ((b.Sell_Price*1 < a.Sell_Price*1) ? -1 : 0));
+                                all_new_products = all_new_products.sort((a,b) => (a.Sell_Price*1 < b.Sell_Price*1) ? 1 : ((b.Sell_Price*1 < a.Sell_Price*1) ? -1 : 0));
                                 $(x).css("background-color", "darkred");
                                 $(x).css("color", "white");
                             }else{
                                 $(x).css("background-color", "white");
                                 $(x).css("color", "#217384");
-                                sort_price_counter_click = 0;
+                                sort_price_counter_click = -1;
                             }
                             sort_price_counter_click++;
-                            loadingMessage(response.length);
                             var product_row = 0;
-                            for(product_row; product_row < response.length; product_row++){
-                                generatehomeOneByOne(product_row, response[product_row], response.length);
+                            for(product_row; product_row < all_new_products.length; product_row++){
+                                generatehomeOneByOne(product_row, all_new_products[product_row], all_new_products.length);
                             }
                         }
                     }else{
-                        Swal.fire("Item not found", "Mungkin saya bisa menunjukkan hasil pencarian yang berbeda", "warning");
-                        setTimeout(() => {
-                            searchUp(keywords.substring(1, 2), "", "");
-                        }, 3000);
+                        searchUp("", "", "");
                     }
-                });
+                }else{
+                    if(all_products.length > 0){
+                        loadingMessage(1);
+                        var product_row = 0;
+                        var selected_products_based_on_keywords = [];
+                        // condition works for more than 1 product
+                        if(sort_price_counter_click == 0){ // sort from cheap to expensive
+                            all_products = all_products.sort((a,b) => (a.Sell_Price*1 > b.Sell_Price*1) ? 1 : ((b.Sell_Price*1 > a.Sell_Price*1) ? -1 : 0));
+                            $(x).css("background-color", "green");
+                            $(x).css("color", "white");
+                        }else if(sort_price_counter_click == 1){
+                            all_products = all_products.sort((a,b) => (a.Sell_Price*1 < b.Sell_Price*1) ? 1 : ((b.Sell_Price*1 < a.Sell_Price*1) ? -1 : 0));
+                            $(x).css("background-color", "darkred");
+                            $(x).css("color", "white");
+                        }else{
+                            $(x).css("background-color", "white");
+                            $(x).css("color", "#217384");
+                            sort_price_counter_click = -1;
+                        }
+                        sort_price_counter_click++;
+
+
+                        for(product_row; product_row < all_products.length; product_row++){
+                            if(all_products[product_row].Name != null){
+                                if(all_products[product_row].Name.toUpperCase().includes(search.toUpperCase())){
+                                    selected_products_based_on_keywords.push(all_products[product_row]);
+                                }
+                            }
+                        }
+                        selected_products_based_on_keywords = selected_products_based_on_keywords.concat(all_products);
+                        product_row = 0;
+                        for(product_row; product_row < selected_products_based_on_keywords.length; product_row++){
+                            generatehomeOneByOne(product_row, selected_products_based_on_keywords[product_row], selected_products_based_on_keywords.length);
+                        }
+                    }else{
+                        getAllProductsWithoutPaginationWithFilter("", "", "", "", search).done(function (response) {
+                            if(response[0] != false){
+                                if(response.length == 0){
+                                    loadingMessage(1);
+                                    searchUpBasedOnCategory(search);
+                                }else if(response.length == 1){
+                                    loadingMessage(response.length);
+                                    generatehomeleftOnly(response.length, response[0], response.length);
+                                }else{
+                                    // condition works for more than 1 product
+                                    if(sort_price_counter_click == 0){ // sort from cheap to expensive
+                                        response = response.sort((a,b) => (a.Sell_Price*1 > b.Sell_Price*1) ? 1 : ((b.Sell_Price*1 > a.Sell_Price*1) ? -1 : 0));
+                                        $(x).css("background-color", "green");
+                                        $(x).css("color", "white");
+                                    }else if(sort_price_counter_click == 1){
+                                        response = response.sort((a,b) => (a.Sell_Price*1 < b.Sell_Price*1) ? 1 : ((b.Sell_Price*1 < a.Sell_Price*1) ? -1 : 0));
+                                        $(x).css("background-color", "darkred");
+                                        $(x).css("color", "white");
+                                    }else{
+                                        $(x).css("background-color", "white");
+                                        $(x).css("color", "#217384");
+                                        sort_price_counter_click = -1;
+                                    }
+                                    sort_price_counter_click++;
+                                    loadingMessage(response.length);
+                                    var product_row = 0;
+                                    for(product_row; product_row < response.length; product_row++){
+                                        generatehomeOneByOne(product_row, response[product_row], response.length);
+                                    }
+                                }
+                            }else{
+                                Swal.fire("Item not found", "Mungkin saya bisa menunjukkan hasil pencarian yang berbeda", "warning");
+                                setTimeout(() => {
+                                    searchUp(search.substring(1, 2), "", "");
+                                }, 3000);
+                            }
+                        });
+                    }
+                }
+            }else{
+                if(all_products.length > 0){
+                    loadingMessage(1);
+                    var product_row = 0;
+                    var selected_products_based_on_keywords = [];
+                    // condition works for more than 1 product
+                    if(sort_price_counter_click == 0){ // sort from cheap to expensive
+                        all_products = all_products.sort((a,b) => (a.Sell_Price*1 > b.Sell_Price*1) ? 1 : ((b.Sell_Price*1 > a.Sell_Price*1) ? -1 : 0));
+                        $(x).css("background-color", "green");
+                        $(x).css("color", "white");
+                    }else if(sort_price_counter_click == 1){
+                        all_products = all_products.sort((a,b) => (a.Sell_Price*1 < b.Sell_Price*1) ? 1 : ((b.Sell_Price*1 < a.Sell_Price*1) ? -1 : 0));
+                        $(x).css("background-color", "darkred");
+                        $(x).css("color", "white");
+                    }else{
+                        $(x).css("background-color", "white");
+                        $(x).css("color", "#217384");
+                        sort_price_counter_click = -1;
+                    }
+                    sort_price_counter_click++;
+
+
+                    for(product_row; product_row < all_products.length; product_row++){
+                        if(all_products[product_row].Name != null){
+                            if(search != undefined){
+                                if(all_products[product_row].Name.toUpperCase().includes(search.toUpperCase())){
+                                    selected_products_based_on_keywords.push(all_products[product_row]);
+                                }
+                            }else{
+                                selected_products_based_on_keywords.push(all_products[product_row]);
+                            }
+                        }
+                    }
+                    if(selected_products_based_on_keywords.length <= 3){
+                        selected_products_based_on_keywords = selected_products_based_on_keywords.concat(all_products);
+                    }
+                    product_row = 0;
+                    for(product_row; product_row < selected_products_based_on_keywords.length; product_row++){
+                        generatehomeOneByOne(product_row, selected_products_based_on_keywords[product_row], selected_products_based_on_keywords.length);
+                    }
+                }else{
+                    getAllProductsWithoutPaginationWithFilter("", "", "", "", search).done(function (response) {
+                        if(response[0] != false){
+                            if(response.length == 0){
+                                loadingMessage(1);
+                                searchUpBasedOnCategory(search);
+                            }else if(response.length == 1){
+                                loadingMessage(response.length);
+                                generatehomeleftOnly(response.length, response[0], response.length);
+                            }else{
+                                // condition works for more than 1 product
+                                if(sort_price_counter_click == 0){ // sort from cheap to expensive
+                                    response = response.sort((a,b) => (a.Sell_Price*1 > b.Sell_Price*1) ? 1 : ((b.Sell_Price*1 > a.Sell_Price*1) ? -1 : 0));
+                                    $(x).css("background-color", "green");
+                                    $(x).css("color", "white");
+                                }else if(sort_price_counter_click == 1){
+                                    response = response.sort((a,b) => (a.Sell_Price*1 < b.Sell_Price*1) ? 1 : ((b.Sell_Price*1 < a.Sell_Price*1) ? -1 : 0));
+                                    $(x).css("background-color", "darkred");
+                                    $(x).css("color", "white");
+                                }else{
+                                    $(x).css("background-color", "white");
+                                    $(x).css("color", "#217384");
+                                    sort_price_counter_click = -1;
+                                }
+                                sort_price_counter_click++;
+                                loadingMessage(response.length);
+                                var product_row = 0;
+                                for(product_row; product_row < response.length; product_row++){
+                                    generatehomeOneByOne(product_row, response[product_row], response.length);
+                                }
+                            }
+                        }else{
+                            Swal.fire("Item not found", "Mungkin saya bisa menunjukkan hasil pencarian yang berbeda", "warning");
+                            setTimeout(() => {
+                                searchUp(search.substring(1, 2), "", "");
+                            }, 3000);
+                        }
+                    });
+                }
             }
         }
     </script>

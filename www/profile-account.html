@@ -132,6 +132,14 @@
             color: #217384 ;
             border: none;
         }
+        .swal2-title, .swal2-timer-progress-bar{
+            display: none !important;
+        }
+        .swal2-loader{
+            border-width: 0 !important;
+            background-color: #217384;
+            border-style: none !important;
+        }
         .swal2-backdrop-show{
             background-color: white !important;
         }
@@ -178,8 +186,11 @@
                             <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
                         </div>
                     </div>
-                    <span>Your Referral Code:</span>
-                    <h5 class="profile-customer-code card-title">Your Code</h5>
+                    <br>
+                    <div class="card profile-card">
+                        <span>Your Referral Code:</span>
+                        <div class="profile-customer-code card-title">Your Code</div>
+                    </div>
                 </div>
             </div>
         </div>
