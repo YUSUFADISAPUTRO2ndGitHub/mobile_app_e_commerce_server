@@ -8,11 +8,12 @@ $(document).ready(function(){
     console.log(orderNumber);
     get_shipping_information(orderNumber).done(function (response) {
         var tracking_number = "";
-        if(response.Delivery_Order_Number == undefined){
-            response.Delivery_Order_Number = "Nomor pesanan pengiriman Anda akan dibuat setelah pesanan Anda diproses";
-        }else if(response.Delivery_Order_Number != undefined){
-            if(response.Delivery_Order_Number.toUpperCase() == "undefined".toUpperCase()){
-                response.Delivery_Order_Number = "Nomor pesanan pengiriman Anda akan dibuat setelah pesanan Anda diproses";
+        tracking_number = response.Delivery_Order_Number;
+        if(tracking_number == undefined){
+            tracking_number = "Nomor pesanan pengiriman Anda akan dibuat setelah pesanan Anda diproses";
+        }else if(tracking_number != undefined){
+            if(tracking_number.toUpperCase() == "undefined".toUpperCase()){
+                tracking_number = "Nomor pesanan pengiriman Anda akan dibuat setelah pesanan Anda diproses";
             }
         }
         if(response.Shipping_Number != undefined || response.Shipping_Number != null){
@@ -33,7 +34,7 @@ $(document).ready(function(){
             <div>
                 Your Order Number: ${orderNumber}
                 <br>
-                Your Delivery Number: ${response.Delivery_Order_Number}
+                Your Delivery Number: ${tracking_number}
                 <br><br>
                 Total Amount (Jumlah total): ${commafy(status.Total_Price)}
             </div>

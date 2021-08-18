@@ -44,7 +44,7 @@ function generateRowsDelivery(i, datas){
                         <label>PAYMENT STATUS</label>
                         <div class="card-text product-in-card-name">${payment}</div>
                         <label>TOTAL AMOUNT</label>
-                        <div class="card-text product-in-card-name">${datas.Total_Price}</div>
+                        <div class="card-text product-in-card-name">${commafy(datas.Total_Price)}</div>
                         <div class="card-text product-in-card-name">
                             <div class="cancel-body-table">Order telah di proses</div>
                         </div>
@@ -67,7 +67,7 @@ function generateRowsDelivery(i, datas){
                         <label>PAYMENT STATUS</label>
                         <div class="card-text product-in-card-name">${payment}</div>
                         <label>TOTAL AMOUNT</label>
-                        <div class="card-text product-in-card-name">${datas.Total_Price}</div>
+                        <div class="card-text product-in-card-name">${commafy(datas.Total_Price)}</div>
                         <div class="card-text product-in-card-name">
                             <div class="cancel-body-table" onclick="cancelOrderRequest('${datas.Order_Number}')">Cancel</div>
                         </div>
@@ -90,7 +90,7 @@ function generateRowsDelivery(i, datas){
                         <label>PAYMENT STATUS</label>
                         <div class="card-text product-in-card-name">${payment}</div>
                         <label>TOTAL AMOUNT</label>
-                        <div class="card-text product-in-card-name">${datas.Total_Price}</div>
+                        <div class="card-text product-in-card-name">${commafy(datas.Total_Price)}</div>
                         <div class="card-text product-in-card-name">
                             <div class="cancel-body-table">Order Telah di Cancelled</div>
                         </div>
@@ -102,6 +102,17 @@ function generateRowsDelivery(i, datas){
     if(payment == "not paid"){
         $(`#${datas.Order_Number}`).css("background-color", "darkred");
     }
+}
+
+function commafy( num ) {
+    var str = num.toString().split('.');
+    if (str[0].length >= 5) {
+        str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+    }
+    if (str[1] && str[1].length >= 5) {
+        str[1] = str[1].replace(/(\d{3})/g, '$1 ');
+    }
+    return str.join('.');
 }
 
 function orderDetailRequest(orderNumber){
