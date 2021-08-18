@@ -189,18 +189,54 @@ function getProducts(){
     // const queryString = window.location.search;
     // const urlParams = new URLSearchParams(queryString);
     // const product = urlParams.get('productid');
-    getProductsWithProductNo("", "", product).done(function (response) {
-        getAllProductsWithoutPaginationWithFilter("", "", "", "", response.Name).done(function (response) {
-            console.log(response);
-            if(response.length == 0){
+    var all_products = JSON.parse(localStorage.getItem("all_products_in_sold_co_id"));
+    if(all_products.length > 0){
+        loadingMessage(1);
+        var product_row = 1;
+        if(all_products.length == 1){
+            generateListOneByOne(product_row, all_products[product_row-1], undefined);
+        }else{
+            getProductsWithProductNo("", "", product).done(function (response) {
+                var product_row = 0;
+                var keywords_splitted = response.Name.split(" ");
+                z = 0;
+                var selected_products_based_on_keywords = [];
+                for(z; z < keywords_splitted.length; z++){
+                    product_row = 0;
+                    for(product_row; product_row < all_products.length; product_row++){
+                        if(all_products[product_row].Name != null){
+                            if(
+                                all_products[product_row].Name.toUpperCase().includes(keywords_splitted[z].toUpperCase())
+                            ){
+                                if(
+                                    !(selected_products_based_on_keywords.includes(all_products[product_row]))
+                                ){
+                                    selected_products_based_on_keywords.push(all_products[product_row]);
+                                }
+                            }
+                        }
+                    }
+                }
+                product_row = 1;
+                for(product_row; product_row <= selected_products_based_on_keywords.length; product_row = product_row +2){
+                    generateListOneByOne(product_row, selected_products_based_on_keywords[product_row-1], selected_products_based_on_keywords[product_row]);
+                }
+            });
+        }
+    }else{
+        getProductsWithProductNo("", "", product).done(function (response) {
+            getAllProductsWithoutPaginationWithFilter("", "", "", "", response.Name).done(function (response) {
                 console.log(response);
-            }
-            var product_row = 1;
-            for(product_row; product_row <= response.length; product_row = product_row +2){
-                generateListOneByOne(product_row, response[product_row-1], response[product_row]);
-            }
+                if(response.length == 0){
+                    console.log(response);
+                }
+                var product_row = 1;
+                for(product_row; product_row <= response.length; product_row = product_row +2){
+                    generateListOneByOne(product_row, response[product_row-1], response[product_row]);
+                }
+            });
         });
-    });
+    }
 }
 
 function generateListOneByOne(product_row, data1, data2){
