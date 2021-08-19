@@ -12,11 +12,11 @@ $(document).ready(function(){
 });
 
 function generateBigCategoryList(bigcatlist, data){
-    console.log(data);
+    var category_splitted = data.Category.split(" ").join("_");
     $("#big-category-list").append(`
-        <tr onclick="generateSmallCatList(this)" class="${data.Category}" id="big-category-list-tr${data.Category}">
+        <tr onclick="generateSmallCatList(this)" class="${category_splitted}" id="big-category-list-tr${category_splitted}">
             <td id="big-category-list-td${bigcatlist}">
-                <div class="big-category-list" id="${data.Category}">
+                <div class="big-category-list" id="${category_splitted}">
                     ${data.Category}
                 <div>
             </td>
@@ -56,6 +56,7 @@ function generateSmallCatList(x){
     clearData(x);
     changeCssforActive($(x).attr("class"));
     var categoryId = x.id.replace("big-category-list-tr", "");
+    categoryId = categoryId.split("_").join(" ");
     $('.product-highlights').css('display','block')
     $('.product-highlights').attr('src',`./product_highlight.html?category=${categoryId}`)
     
