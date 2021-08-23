@@ -4,8 +4,9 @@ $(document).ready(function(){
     urlParams = new URLSearchParams(queryString);
     product = urlParams.get('productid');
     productName = urlParams.get('productName');
+    $(`.iframe-user-comments`).attr("src", "./user_comments.html?Product_Code=" + product);
     $(".rating-stars-iframe").attr("src", "./rating-stars/index.html?product_code=" + product);
-    console.log(productName);
+    
     fillingInInformations(product);
     // navigation within product details
     $(".product-price").click(function(){
@@ -142,7 +143,7 @@ function listPaymentMethods(){
 }
 
 function checkQuantityBuyLimit(x){
-    console.log($(x).val());
+    
     // alert($(x).val());
     // var queryString = window.location.search;
     // var urlParams = new URLSearchParams(queryString);
@@ -162,7 +163,7 @@ function checkQuantityBuyLimit(x){
 function generateUserSavedAddress(){
     // sub-saved-address
     getCustomersWithCustomerNo(localStorage.getItem("token")).done(function (response) {
-        console.log(response);
+        
         if(response != false){
             $("#sub-saved-address").empty();
             if(response.Address_1 != "NULL"){
@@ -226,9 +227,9 @@ function getProducts(){
     }else{
         getProductsWithProductNo("", "", product).done(function (response) {
             getAllProductsWithoutPaginationWithFilter("", "", "", "", response.Name).done(function (response) {
-                console.log(response);
+                
                 if(response.length == 0){
-                    console.log(response);
+                    
                 }
                 var product_row = 1;
                 for(product_row; product_row <= response.length; product_row = product_row +2){
@@ -255,9 +256,9 @@ function generateListOneByOne(product_row, data1, data2){
 }
 
 function fillingInInformations(productNo){
-    console.log("fillingInInformations");
+    
     getProductsWithProductNo("", "", productNo).done(function (response) {
-        console.log(response);
+        
         if(!response){
             alert("Unfortunately this product is not available");
         }else{ // main-available-stock
@@ -290,7 +291,7 @@ function fillingInInformations(productNo){
 
             $("#main-product-images").empty();
             getProductsWithProductNo("", "", productNo).done(function (response) {
-                console.log(response.Picture_2);
+                
                 $("#main-product-images").append("<div id=\"" + 1 + "\" class=\"carousel-item active\">");
                 $("#1").append("<img src=\"" + response.Picture_1 + "\" class=\"d-block w-100\">");
                 if(response.Picture_2 != undefined && response.Picture_2.toUpperCase() != "NULL" && response.Picture_2.length > 0){
@@ -308,7 +309,7 @@ function fillingInInformations(productNo){
             });
 
             // alert(response.type);
-            console.log(response);
+            
             if(response.GroupBuy_Purchase != "true"){
                 $("#discount-code").css("display", "none");
                 $(".choose-group-code").css("display", "none");
@@ -335,15 +336,14 @@ function fillingInInformations(productNo){
                 });
                 //checkTotalQuantityGroupBuySoFarGrossFigure
                 getGroupBuyQuantitySoFarGross(productCode).done(function (response) {
-                    console.log(response);
                     if(response.Total_Quantity != null){
-                        console.log(response);
+                        
                         $("#group-purchase-quantity-ordered").val(response.Total_Quantity)
                         $("#group-purchase-quantity-sofar").html(response.Total_Quantity);
-                        console.log("here");
+                        
                         $(".progress-bar").css("width", ((response.Total_Quantity * 100) / $("#group-purchase-quantity-target").html()) + "%");
-                        console.log("group-purchase-quantity-target " + $("#group-purchase-quantity-target").html());
-                        console.log("response.quantitySoFar >= $(\"#group-purchase-quantity-target\").html() " + response.Total_Quantity >= $("#group-purchase-quantity-target").html());
+                        
+                        
                         if(response.Total_Quantity >= $("#group-purchase-quantity-target").html()){
                             //alert(datas.quantitySoFar >= $("#group-purchase-quantity-target").html());
                             $("#discount-code").css("display", "none");
@@ -351,19 +351,19 @@ function fillingInInformations(productNo){
                             $(".group-price").css("display", "none");
                             $("#main-period").css("display", "none");
                             $(".main-group-buy").css("display", "none");
-                            console.log("checkTotalQuantityGroupBuySoFarGrossFigure " + response.Total_Quantity);
+                            
                             if(parseInt($("#group-purchase-quantity-target").html()) == response.Total_Quantity){
-                                console.log("checkTotalQuantityGroupBuySoFarGrossFigure " + response.Total_Quantity);
-                                closeGroupBuyStatusOnProduct(product_code).done(function (response) { 
+                                closeGroupBuyStatusOnProduct(productCode).done(function (response) { 
+                                    // alert(JSON.stringify(response));
                                     if(response){
                                         $("#discount-code").css("display", "none");
                                         $(".choose-group-code").css("display", "none");
                                         $(".group-price").css("display", "none");
                                         $("#main-period").css("display", "none");
                                         $(".main-group-buy").css("display", "none");
-                                        window.location.href = "./home.html";
+                                        // window.location.href = "./home.html";
                                         // $.get("http://147.139.168.202:8080/deleteAllTransactionsWithConditionAndSetItemForNonSale.jsp?productCode=" + productCode, function(data, status){
-                                        //     console.log("this product has been removed from group buy sale"); 
+                                        //     
                                         //     window.location.href = "./home.html";
                                         // });
                                     }
@@ -384,9 +384,9 @@ function getProductRating(){
     const urlParams = new URLSearchParams(queryString);
     const productid = urlParams.get('productid');
     $.get("http://147.139.168.202:8080/viewRatingScore.jsp?productNo=" + productid, function(data, status){
-        console.log(data);
+        
         datas = JSON.parse(data);
-        // console.log("datas " + data);
+        // 
         var currentRating = 1*datas.currentRating;
         var numberOfUserRating = 1*datas.numberOfUserRating;
         var actualRating = (currentRating/numberOfUserRating);
@@ -554,7 +554,7 @@ async function confirmedPurchaseGroupBuy(){
                         modal.style.display = "none";
                         // $.get(`http://147.139.168.202:8080/groupCodeInsert.jsp?customerId=${localStorage.getItem("token")}&groupCode=${$("#product-id").val()}&quantity=${$(".quantity-express-buy").val()}`, async function(data, status){
                         //     datas = JSON.parse(data);
-                        //     console.log("datas " + datas);
+                        //     
                         //     var modal = document.getElementById("modal-group-purchase");
                         //     modal.style.display = "none";
                         // });
@@ -632,14 +632,14 @@ function addToCartDirectly(product){
                             // saving to storage
                             var productToBeAddedStringify = JSON.stringify(array);
                             localStorage.setItem("itemsInCart", productToBeAddedStringify);
-                            console.log(localStorage.getItem("itemsInCart"));
+                            
                 
                             // add total item in cart
                             localStorage.setItem("totalItemInCart", array.length);
                         });
                     }else{
                         var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
-                        console.log(cartToJson);
+                        
                         var i = 0;
                         var indicator = 0;
                         for(i; i < cartToJson.length; i ++){
@@ -650,7 +650,7 @@ function addToCartDirectly(product){
                                 // saving to storage
                                 var productToBeAddedStringify = JSON.stringify(cartToJson);
                                 localStorage.setItem("itemsInCart", productToBeAddedStringify);
-                                console.log("bug " + localStorage.getItem("itemsInCart"));
+                                
                                 break;
                             }
                         }
@@ -664,7 +664,7 @@ function addToCartDirectly(product){
                             // saving to storage
                             var productToBeAddedStringify = JSON.stringify(cartToJson);
                             localStorage.setItem("itemsInCart", productToBeAddedStringify);
-                            console.log(localStorage.getItem("itemsInCart"));
+                            
                         }
                         // add total item in cart
                         localStorage.setItem("totalItemInCart", cartToJson.length);
@@ -716,7 +716,7 @@ function highlightSectionTerms(){
 
 async function generateGroupBuy(x){
     var token = localStorage.getItem("token");
-    console.log("token " + token);
+    
     $(".generate-group-buy-button").css("transform", "rotateY(360deg)");
     if(token == ""){
         Swal.fire({
@@ -798,7 +798,7 @@ function addToCartDirectlyFromProductDetails(){
                                 // saving to storage
                                 var productToBeAddedStringify = JSON.stringify(array);
                                 localStorage.setItem("itemsInCart", productToBeAddedStringify);
-                                console.log(localStorage.getItem("itemsInCart"));
+                                
                         
                                 // add total item in cart
                                 localStorage.setItem("totalItemInCart", array.length);
@@ -863,7 +863,7 @@ function addToCartDirectlyFromProductDetails(){
         }else{
             Swal.fire("Stock untuk barang ini sudah habis", "Maaf untuk ketidaknyamanannya", "warning");
         }
-        console.log(localStorage.getItem("itemsInCart"));
+        
         var modal1 = document.getElementById("modal-group-purchase");
         var modal2 = document.getElementById("modal-add-to-cart");
         modal1.style.display = "none";
@@ -935,7 +935,6 @@ function render_html_for_options(data){
         `).append(`
             <div class="form-check" id="${data.Product_Code}-form">
                 <input class="form-check-input" type="radio" name="product-to-be-added" id="${data.Product_Code}" value="${data.Product_Code}" onchange="check_selection()" checked>
-                <img class="product-selection-images" src="${data.Picture_1}">
                 <label class="card-text product-selection-names">
                     ${data.Name}
                 </label>
@@ -947,7 +946,6 @@ function render_html_for_options(data){
         `).append(`
             <div class="form-check" id="${data.Product_Code}-form">
                 <input class="form-check-input" type="radio" name="product-to-be-added" id="${data.Product_Code}" value="${data.Product_Code}" onchange="check_selection()">
-                <img class="product-selection-images" src="${data.Picture_1}">
                 <label class="card-text product-selection-names">
                     ${data.Name}
                 </label>
@@ -960,6 +958,7 @@ function check_selection(){
     $(`.form-check`).removeClass('selected-option');
     getProductsWithProductNo("", "", $('input[name="product-to-be-added"]:checked').val()).done(function (response) {
         if(response != false){
+            $(`.product-selection-images`).attr(`src`,`${response.Picture_1}`);
             $(`#${response.Product_Code}-form`).addClass('selected-option');
             $(`.requested-price-by-user`).val(response.Sell_Price);
             $(`.requested-available-stock-by-user`).val(response.Stock_Quantity);

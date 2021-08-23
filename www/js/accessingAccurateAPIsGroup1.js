@@ -455,14 +455,13 @@ function getGroupBuyQuantitySoFarGross(product_code){
 
 function closeGroupBuyStatusOnProduct(product_code){
     var settings = {
-        "url": "http://sales.sold.co.id/check-group-buy-quantity-so-far-gross?Product_Code=" + product_code,
+        "url": "http://sales.sold.co.id/close-group-buy-status?Product_Code=" + product_code,
         "method": "POST",
         "timeout": 0,
     };
     
     return $.ajax(settings);
 }
-
 function getAllCategories(access_token, session_id){
     var settings = {
         "url": `http://products.sold.co.id/get-product-details?Get_ALL_Category=true`,
