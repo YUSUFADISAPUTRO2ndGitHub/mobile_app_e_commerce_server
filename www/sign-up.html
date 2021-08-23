@@ -105,6 +105,11 @@
         border-radius: 10px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
+    .otp-button{
+        margin: 2%;
+        width: 45%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
 </style>
 <body>
     <div class="card sign-up-title">
@@ -121,6 +126,11 @@
             <div class="form-group">
                 <label>Alamat Email</label>
                 <input type="email" id="signup-email" class="form-control" placeholder="Email">
+                <br>
+                <input type="text" id="signup-otp" class="form-control" placeholder="Masukan OTP">
+                <br>
+                <button type="button" class="btn btn-primary otp-button" onclick="send_otp_to_email()">GET OTP</button>
+                <button type="button" class="btn btn-primary otp-button" onclick="verify_otp()">VERIFY OTP</button>
             </div>
             <div class="form-group">
                 <label>Password</label>
@@ -272,6 +282,32 @@
         $( document ).ready(function() {
             render_province();
         });
+        function verify_otp(){
+            if($(`#signup-otp`).val() != undefined){
+                if($(`#signup-otp`).val().length > 0 && $(`#signup-email`).val().length > 0){
+                    verifyOTP($(`#signup-email`).val(), $(`#signup-otp`).val()).done(function (response) {
+                        Swal.fire("", "OTP verified", "success");
+                    });
+                }else{
+                    Swal.fire("", "OTP not verified", "warning");
+                }
+            }else{
+                Swal.fire("", "OTP not verified", "warning");
+            }
+        }
+        function send_otp_to_email(){
+            if($(`#signup-email`).val() != undefined){
+                if($(`#signup-email`).val().length > 0){
+                    getOTP($(`#signup-email`).val()).done(function (response) {
+                        Swal.fire("", "OTP sent", "success");
+                    });
+                }else{
+                    Swal.fire("", "OTP not sent", "warning");
+                }
+            }else{
+                Swal.fire("", "OTP not sent", "warning");
+            }
+        }
         // window.onbeforeunload = function() { return "Your work will be lost."; };
         function render_province(){
             loadingMessageWithInterval(1);

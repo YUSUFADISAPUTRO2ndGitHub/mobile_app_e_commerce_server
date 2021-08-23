@@ -500,6 +500,15 @@ function getOTP(Email){
     
     return $.ajax(settings);
 }
+function verifyOTP(Email, OTP){
+    var settings = {
+        "url": "http://customers.sold.co.id/verify-email-address?otp=" + OTP,
+        "method": "POST",
+        "timeout": 10000,
+    };
+    
+    return $.ajax(settings);
+}
 function encryptPassword(Password){
     var settings = {
         "url": "http://customers.sold.co.id/password-generator?Password=" + Password,
