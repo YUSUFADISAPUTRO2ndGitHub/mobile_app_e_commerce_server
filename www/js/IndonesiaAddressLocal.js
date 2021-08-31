@@ -19,7 +19,7 @@ function citySelectedLocal(x){
 }
 
 // function getProvincesLocal(){
-//     $.get("http://147.139.168.202:8080/IndonesiaAddress.jsp?type=province", function(data, status){
+//     $.get("https://147.139.168.202:8080/IndonesiaAddress.jsp?type=province", function(data, status){
 //         datas = JSON.parse(data);
 //         var i =0;
 //         $("#option-province-local").append("<option>-- select your province here --</option>");
@@ -27,7 +27,7 @@ function citySelectedLocal(x){
 //             $("#option-province-local").append("<option>" + datas[i].province + "</option>");
 //         }
 
-//         $.get("http://147.139.168.202:8080/profile.jsp?token=" + localStorage.getItem("token"), function(data, status){
+//         $.get("https://147.139.168.202:8080/profile.jsp?token=" + localStorage.getItem("token"), function(data, status){
 //             datas = JSON.parse(data);
 //             var mainAddress = (datas.address).split(";");
 //             $("#option-province-local").val(mainAddress[0]);
@@ -38,7 +38,7 @@ function citySelectedLocal(x){
 
 function getCityLocal(province){
     $("#option-city-local").empty();
-    // $.get("http://147.139.168.202:8080/IndonesiaAddress.jsp?type=city&control=" + province, function(data, status){
+    // $.get("https://147.139.168.202:8080/IndonesiaAddress.jsp?type=city&control=" + province, function(data, status){
     //     datas = JSON.parse(data);
     //     var i =0;
     //     $("#option-city-local").append("<option>-- select your city here --</option>");
@@ -46,14 +46,14 @@ function getCityLocal(province){
     //         $("#option-city-local").append("<option>" + datas[i].city + "</option>");
     //     }
         
-    //     $.get("http://147.139.168.202:8080/profile.jsp?token=" + localStorage.getItem("token"), function(data, status){
+    //     $.get("https://147.139.168.202:8080/profile.jsp?token=" + localStorage.getItem("token"), function(data, status){
     //         datas = JSON.parse(data);
     //         var mainAddress = (datas.address).split(";");
     //         $("#option-city-local").val(mainAddress[1]);
     //         getDistrictLocal(mainAddress[1]);
     //     });
     // });
-    $.get("http://147.139.168.202:8080/profile.jsp?token=" + localStorage.getItem("token"), function(data, status){
+    $.get("https://147.139.168.202:8080/profile.jsp?token=" + localStorage.getItem("token"), function(data, status){
         datas = JSON.parse(data);
         var mainAddress = (datas.address).split(";");
         $("#option-city-local").val(mainAddress[1]);
@@ -63,7 +63,7 @@ function getCityLocal(province){
 
 function getDistrictLocal(city){
     // $("#option-district-local").empty();
-    // $.get("http://147.139.168.202:8080/IndonesiaAddress.jsp?type=district&control=" + city, function(data, status){
+    // $.get("https://147.139.168.202:8080/IndonesiaAddress.jsp?type=district&control=" + city, function(data, status){
     //     datas = JSON.parse(data);
     //     var i =0;
     //     $("#option-district-local").append("<option>-- select your district here --</option>");
@@ -71,7 +71,7 @@ function getDistrictLocal(city){
     //         $("#option-district-local").append("<option>" + datas[i].district + "</option>");
     //     }
 
-    //     $.get("http://147.139.168.202:8080/profile.jsp?token=" + localStorage.getItem("token"), function(data, status){
+    //     $.get("https://147.139.168.202:8080/profile.jsp?token=" + localStorage.getItem("token"), function(data, status){
     //         datas = JSON.parse(data);
     //         var mainAddress = (datas.address).split(";");
     //         $("#option-district-local").val(mainAddress[2]);
@@ -79,21 +79,21 @@ function getDistrictLocal(city){
     // });
 }
 
-function getZipCodeLocal(){
+// function getZipCodeLocal(){
 
-        $.get("http://147.139.168.202:8080/profile.jsp?token=" + localStorage.getItem("token"), function(data, status){
-            datas = JSON.parse(data);
-            var mainAddress = (datas.address).split(";");
-            $("#profile-code-local").val(mainAddress[2]);
-        });
-}
+//         $.get("https://147.139.168.202:8080/profile.jsp?token=" + localStorage.getItem("token"), function(data, status){
+//             datas = JSON.parse(data);
+//             var mainAddress = (datas.address).split(";");
+//             $("#profile-code-local").val(mainAddress[2]);
+//         });
+// }
 
-function getStreetLocal(){
+// function getStreetLocal(){
 
-        $.get("http://147.139.168.202:8080/profile.jsp?token=" + localStorage.getItem("token"), function(data, status){
-            datas = JSON.parse(data);
-            var mainAddress = (datas.address).split(";");
-            // console.log("getStreetLocal " + mainAddress);
-            $("#profile-street-local").val(mainAddress[3]);
-        });
-}
+//         $.get("https://147.139.168.202:8080/profile.jsp?token=" + localStorage.getItem("token"), function(data, status){
+//             datas = JSON.parse(data);
+//             var mainAddress = (datas.address).split(";");
+//             // console.log("getStreetLocal " + mainAddress);
+//             $("#profile-street-local").val(mainAddress[3]);
+//         });
+// }

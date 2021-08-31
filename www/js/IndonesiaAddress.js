@@ -17,9 +17,9 @@ $(document).ready(function(){
 //     $(".district-selection").css("display", "block");
 //     getDistrict($(x).children("option:selected").val())
 // }
-// // http://147.139.168.202:8080/IndonesiaAddress.jsp?type=province
+// // https://147.139.168.202:8080/IndonesiaAddress.jsp?type=province
 // function getProvinces(){
-//     $.get("http://147.139.168.202:8080/IndonesiaAddress.jsp?type=province", function(data, status){
+//     $.get("https://147.139.168.202:8080/IndonesiaAddress.jsp?type=province", function(data, status){
 //         datas = JSON.parse(data);
 //         // alert(datas.jsonArray[0].pcode);
 //         var i =0;
@@ -31,7 +31,7 @@ $(document).ready(function(){
 // }
 
 // function getCity(province){
-//     $.get("http://147.139.168.202:8080/IndonesiaAddress.jsp?type=city&control=" + province, function(data, status){
+//     $.get("https://147.139.168.202:8080/IndonesiaAddress.jsp?type=city&control=" + province, function(data, status){
 //         datas = JSON.parse(data);
 //         console.log(data);
 //         var i =0;
@@ -43,7 +43,7 @@ $(document).ready(function(){
 // }
 
 // function getDistrict(city){
-//     $.get("http://147.139.168.202:8080/IndonesiaAddress.jsp?type=district&control=" + city, function(data, status){
+//     $.get("https://147.139.168.202:8080/IndonesiaAddress.jsp?type=district&control=" + city, function(data, status){
 //         datas = JSON.parse(data);
 //         console.log(data);
 //         var i =0;

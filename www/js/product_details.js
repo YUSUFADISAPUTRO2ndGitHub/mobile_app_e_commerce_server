@@ -362,7 +362,7 @@ function fillingInInformations(productNo){
                                         $("#main-period").css("display", "none");
                                         $(".main-group-buy").css("display", "none");
                                         // window.location.href = "./home.html";
-                                        // $.get("http://147.139.168.202:8080/deleteAllTransactionsWithConditionAndSetItemForNonSale.jsp?productCode=" + productCode, function(data, status){
+                                        // $.get("https://147.139.168.202:8080/deleteAllTransactionsWithConditionAndSetItemForNonSale.jsp?productCode=" + productCode, function(data, status){
                                         //     
                                         //     window.location.href = "./home.html";
                                         // });
@@ -379,72 +379,72 @@ function fillingInInformations(productNo){
 let productCode = "";
 let groupPrice = "";
 
-function getProductRating(){
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const productid = urlParams.get('productid');
-    $.get("http://147.139.168.202:8080/viewRatingScore.jsp?productNo=" + productid, function(data, status){
+// function getProductRating(){
+//     const queryString = window.location.search;
+//     const urlParams = new URLSearchParams(queryString);
+//     const productid = urlParams.get('productid');
+//     $.get("https://147.139.168.202:8080/viewRatingScore.jsp?productNo=" + productid, function(data, status){
         
-        datas = JSON.parse(data);
-        // 
-        var currentRating = 1*datas.currentRating;
-        var numberOfUserRating = 1*datas.numberOfUserRating;
-        var actualRating = (currentRating/numberOfUserRating);
-        // alert(actualRating <= 20 || actualRating > 20 || actualRating < 40);
-        // alert(actualRating);
-        if(numberOfUserRating == 0){
-        }else {
-            if(actualRating <= 20 || (actualRating > 20 && actualRating < 40)){
-                // alert(actualRating);
-                $("#20").css("display", "block");
-                $("#40").css("display", "none");
-                $("#60").css("display", "none");
-                $("#80").css("display", "none");
-                $("#100").css("display", "none");
-            }else if(actualRating >= 40 && actualRating < 60){
-                $("#20").css("display", "block");
-                $("#40").css("display", "block");
-                $("#60").css("display", "none");
-                $("#80").css("display", "none");
-                $("#100").css("display", "none");
-            }else if(actualRating >= 60 && actualRating < 80){
-                $("#20").css("display", "block");
-                $("#40").css("display", "block");
-                $("#60").css("display", "block");
-                $("#80").css("display", "none");
-                $("#100").css("display", "none");
-            }else if(actualRating >= 80 && actualRating < 100){
-                $("#20").css("display", "block");
-                $("#40").css("display", "block");
-                $("#60").css("display", "block");
-                $("#80").css("display", "block");
-                $("#100").css("display", "none");
-            }else if(actualRating >= 100){
-                $("#20").css("display", "block");
-                $("#40").css("display", "block");
-                $("#60").css("display", "block");
-                $("#80").css("display", "block");
-                $("#100").css("display", "block");
-            }
-        }
-    });
-}
+//         datas = JSON.parse(data);
+//         // 
+//         var currentRating = 1*datas.currentRating;
+//         var numberOfUserRating = 1*datas.numberOfUserRating;
+//         var actualRating = (currentRating/numberOfUserRating);
+//         // alert(actualRating <= 20 || actualRating > 20 || actualRating < 40);
+//         // alert(actualRating);
+//         if(numberOfUserRating == 0){
+//         }else {
+//             if(actualRating <= 20 || (actualRating > 20 && actualRating < 40)){
+//                 // alert(actualRating);
+//                 $("#20").css("display", "block");
+//                 $("#40").css("display", "none");
+//                 $("#60").css("display", "none");
+//                 $("#80").css("display", "none");
+//                 $("#100").css("display", "none");
+//             }else if(actualRating >= 40 && actualRating < 60){
+//                 $("#20").css("display", "block");
+//                 $("#40").css("display", "block");
+//                 $("#60").css("display", "none");
+//                 $("#80").css("display", "none");
+//                 $("#100").css("display", "none");
+//             }else if(actualRating >= 60 && actualRating < 80){
+//                 $("#20").css("display", "block");
+//                 $("#40").css("display", "block");
+//                 $("#60").css("display", "block");
+//                 $("#80").css("display", "none");
+//                 $("#100").css("display", "none");
+//             }else if(actualRating >= 80 && actualRating < 100){
+//                 $("#20").css("display", "block");
+//                 $("#40").css("display", "block");
+//                 $("#60").css("display", "block");
+//                 $("#80").css("display", "block");
+//                 $("#100").css("display", "none");
+//             }else if(actualRating >= 100){
+//                 $("#20").css("display", "block");
+//                 $("#40").css("display", "block");
+//                 $("#60").css("display", "block");
+//                 $("#80").css("display", "block");
+//                 $("#100").css("display", "block");
+//             }
+//         }
+//     });
+// }
 
-function submitRatingReview(x){
-    // $(x).css("display", "none");
-    // $(".rating-bar").css("display", "none");
-    // alert("here");
-    $("#love").attr("src", "./www/img/Additional_icons/liked.png");
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const productid = urlParams.get('productid');
-    $.get("http://147.139.168.202:8080/ratingScore.jsp?productNo=" + productid + "&ratingScore=100" /*+ $("#rating-slide-bar").val()*/, function(data, status){
-        datas = JSON.parse(data);
-        if(datas.goodsId != ""){
-            swal.fire("Terima Kasih", "atas LIKE/LOVE Anda", "info");
-        }
-    });
-}
+// function submitRatingReview(x){
+//     // $(x).css("display", "none");
+//     // $(".rating-bar").css("display", "none");
+//     // alert("here");
+//     $("#love").attr("src", "./www/img/Additional_icons/liked.png");
+//     const queryString = window.location.search;
+//     const urlParams = new URLSearchParams(queryString);
+//     const productid = urlParams.get('productid');
+//     $.get("https://147.139.168.202:8080/ratingScore.jsp?productNo=" + productid + "&ratingScore=100" /*+ $("#rating-slide-bar").val()*/, function(data, status){
+//         datas = JSON.parse(data);
+//         if(datas.goodsId != ""){
+//             swal.fire("Terima Kasih", "atas LIKE/LOVE Anda", "info");
+//         }
+//     });
+// }
 
 function reassureCustomerOfTheirRequest(){
     if($("#option-city").val().toUpperCase() != "DKI JAKARTA"
@@ -552,7 +552,7 @@ async function confirmedPurchaseGroupBuy(){
                         requestToFinish();
                         var modal = document.getElementById("modal-group-purchase");
                         modal.style.display = "none";
-                        // $.get(`http://147.139.168.202:8080/groupCodeInsert.jsp?customerId=${localStorage.getItem("token")}&groupCode=${$("#product-id").val()}&quantity=${$(".quantity-express-buy").val()}`, async function(data, status){
+                        // $.get(`https://147.139.168.202:8080/groupCodeInsert.jsp?customerId=${localStorage.getItem("token")}&groupCode=${$("#product-id").val()}&quantity=${$(".quantity-express-buy").val()}`, async function(data, status){
                         //     datas = JSON.parse(data);
                         //     
                         //     var modal = document.getElementById("modal-group-purchase");

@@ -115,7 +115,7 @@ function additionalAddresses(response){
 }
 
 // function getProvincesOtherLocal(){
-//     $.get("http://147.139.168.202:8080/IndonesiaAddress.jsp?type=province", function(data, status){
+//     $.get("https://147.139.168.202:8080/IndonesiaAddress.jsp?type=province", function(data, status){
 //         datas = JSON.parse(data);
 //         console.log("datas profile "+ data);
 //         var i =0;
@@ -124,7 +124,7 @@ function additionalAddresses(response){
 //             $("#option-province-local-other").append("<option>" + datas[i].province + "</option>");
 //         }
 
-//         $.get("http://147.139.168.202:8080/profile.jsp?token=" + localStorage.getItem("token"), function(data, status){
+//         $.get("https://147.139.168.202:8080/profile.jsp?token=" + localStorage.getItem("token"), function(data, status){
 //             datas = JSON.parse(data);
 //             var mainAddress = (datas.other_address).split(";");
 //             $("#option-province-local-other").val(mainAddress[0]);

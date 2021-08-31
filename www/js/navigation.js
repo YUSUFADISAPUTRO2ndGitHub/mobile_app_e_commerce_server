@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    // $.get("http://147.139.168.202:8080/setTableStatus.jsp", function(data, status){
+    // $.get("https://147.139.168.202:8080/setTableStatus.jsp", function(data, status){
     //     datas = JSON.parse(data);
     //     console.log(datas);
     // });
@@ -127,7 +127,7 @@ function get_live_chat(){
     if(localStorage.getItem("token") != ""){
         getCustomersWithCustomerNo(localStorage.getItem("token")).done(function (response) {
             console.log(response);
-            // $(".content_iframe").attr("src","http://147.139.168.202:3045/?user_name=" + (response.First_Name + " " + response.Last_Name));
+            // $(".content_iframe").attr("src","https://147.139.168.202:3045/?user_name=" + (response.First_Name + " " + response.Last_Name));
             $(".content_iframe").attr("src","https://tawk.to/chat/60f103efd6e7610a49ab8521/1famneoj8");
             $(".content_iframe_floating").css("display", "none");
             // $("#customer-service-help-line-icon").css("display", "none");

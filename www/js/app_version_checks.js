@@ -1,6 +1,6 @@
 $(document).ready(function(){
     // var version = '1.0.8';
-    // var settings = "http://147.139.168.202:8888/check-app-latest-version?version=" + version;
+    // var settings = "https://147.139.168.202:8888/check-app-latest-version?version=" + version;
     // // alert(settings);
     // $.get(settings, function(data, status){
     //     // alert(data);

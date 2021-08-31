@@ -110,7 +110,7 @@
     }
     function setproductrating(productNo, product_rating){
         var settings = {
-            "url": `http://products.sold.co.id/set-product-rating?Product_Code=${productNo}&&product_rating=${product_rating}`,
+            "url": `https://products.sold.co.id/set-product-rating?Product_Code=${productNo}&&product_rating=${product_rating}`,
             "method": "POST",
             "timeout": 0,
         };
@@ -119,7 +119,7 @@
     }
     function getProductsWithProductNo(productNo){
         var settings = {
-            "url": `http://products.sold.co.id/get-product-details?product_code=${productNo}`,
+            "url": `https://products.sold.co.id/get-product-details?product_code=${productNo}`,
             "method": "POST",
             "timeout": 0,
         };
