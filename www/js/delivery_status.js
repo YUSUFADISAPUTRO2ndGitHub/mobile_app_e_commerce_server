@@ -90,12 +90,17 @@ function populateOrdersTable(datas){
     });
 }
 
+function replace_vtintl_to_sold_co_id(original_url){
+    var original_url = original_url.split("http://image.vtintl.id/").join("https://image.sold.co.id/");
+    return original_url;
+}
+
 function generateOrdersRow(i, datas){
     getProductsWithProductNo("", "", datas.Product_Code).done(function (response) {
         $(".order-details-new").append(`
             <div class="product-in-card">
                 <div class="product-in-card-body">
-                    <img class="product-image-in-cart" src="${response.Picture_1}">
+                    <img class="product-image-in-cart" src="${replace_vtintl_to_sold_co_id(response.Picture_1)}">
                     <div class="product-details">
                         <div class="card-text product-in-card-name">${datas.Product_Name}</div>
                         <br>

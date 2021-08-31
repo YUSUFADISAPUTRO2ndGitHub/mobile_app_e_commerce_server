@@ -92,6 +92,11 @@
                 return $.ajax(settings);
             }
 
+            function replace_vtintl_to_sold_co_id(original_url){
+                var original_url = original_url.split("http://image.vtintl.id/").join("https://image.sold.co.id/");
+                return original_url;
+            }
+
             function get_all_small_categories(){
                 var all_small_categories = [];
                 get_all_big_categories().done(function (response) {
@@ -111,13 +116,13 @@
                                                         <div class="card card-section-piece-category-group">
                                                             <div class="card card-small-category">
                                                                 <div class="card card-small-category-content" onclick="change_iframe_attr('${small_cat[x-1].Subcategory}')">
-                                                                    <img src="${small_cat[x-1].Picture_1}" class="card-img-small-cat">
+                                                                    <img src="${replace_vtintl_to_sold_co_id(small_cat[x-1].Picture_1)}" class="card-img-small-cat">
                                                                     <p class="card-title small-cat-title">${small_cat[x-1].Subcategory}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="card card-small-category">
                                                                 <div class="card card-small-category-content" onclick="change_iframe_attr('${small_cat[x].Subcategory}')">
-                                                                    <img src="${small_cat[x].Picture_1}" class="card-img-small-cat">
+                                                                    <img src="${replace_vtintl_to_sold_co_id(small_cat[x].Picture_1)}" class="card-img-small-cat">
                                                                     <p class="card-title small-cat-title">${small_cat[x].Subcategory}</p>
                                                                 </div>
                                                             </div>

@@ -50,42 +50,10 @@ async function load_cart_to_get_total_price(){
     $("#total_all_price").html(commafy(total_all_price));
 }
 
-// function loadcart(productNo, quantity){
-//     getProductsWithProductNo("", "", productNo).done(function (response) {
-//         console.log(response);
-//         if(response == false){
-//             console.log("product no found ======= removed");
-//             var i = 0;
-//             var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
-//             for(i; i < cartToJson.length; i ++){
-//                 if(cartToJson[i].productNo == productNo){
-//                     console.log("product no found ======= removed");
-//                     cartToJson.splice(i, 1);
-//                     localStorage.setItem("itemsInCart", JSON.stringify(cartToJson));
-//                 }
-//             }
-//         }else{
-//             $("#cart-list").append("<tr class=\"table-primary\" id=\"productName" + productNo + "\">"); // change id (productName) to actual product id or name
-//             // checklist
-//             $("#productName" + productNo).append("<td class=\"product-checklist\" scope=\"row\" id=\"" + productNo + "first" + "\">");
-//             $("#" + productNo + "first").append("<div class=\"form-check\" id=\"" + productNo + "containerCheck" + "\">");
-//             $("#" + productNo + "containerCheck").append("<input class=\"form-check-input\" id=\"checklist" + productNo + "\" type=\"checkbox\" value=\"productNo\" onchange=\"selectedCart(this,\'" + productNo + "\')\">");
-//             // product image
-//             $("#productName" + productNo).append("<td class=\"product-names\" id=\"" + productNo + "second" + "\">");
-//             $("#" + productNo + "second").append("<img src=\"" + response.Picture_1 + "\" style=\"width: 50px; height: 50px; margin-right: 10px;\">" + response.Name + "<br>");
-//             $("#" + productNo + "second").append("<button type=\"button\" id=\"erase" + productNo + "\" class=\"btn btn-info\" onclick=\"eraseItem(\'" + productNo + "\')\">erase</button>");
-//             // quantity
-//             $("#productName" + productNo).append("<td class=\"product-quantity\" id=\"" + productNo + "third" + "\">");
-//             $("#" + productNo + "third").append("<i onclick=\"reduceQuantity(\'" + productNo + "\')\" class=\"glyphicon glyphicon-chevron-left\" id=\"productNo" + productNo + "decrease" +"\"></i>");
-//             $("#" + productNo + "third").append("<input id=\"quantity" + productNo + "\" class=\"fake\" value=\"" + quantity + "\" onclick=zoomIn(this) onchange=\"quantityUpdatedDirectly(this, \'" + productNo + "\')\"></input>");
-//             $("#" + productNo + "third").append("<i onclick=\"addQuantity(\'" + productNo + "\')\" class=\"glyphicon glyphicon-chevron-right\" id=\"productNo" + productNo + "increase" +"\"></i>");
-//             $("#" + productNo + "third").append("<div class=\"card-text stock-quantity" + productNo + "\">stock:" + response.Stock_Quantity + "</div>");
-//             // price
-//             $("#productName" + productNo).append("<td class=\"product-price\" id=\"" + productNo + "fourth" + "\">");
-//             $("#" + productNo + "fourth").append("<input class=\"fake-1\" id=\"" + productNo + "\" value=\"" + commafy(Math.round(((quantity * response.Sell_Price)*1)* 100)/ 100) + "\" disabled></input>");
-//         }
-//     });
-// }
+function replace_vtintl_to_sold_co_id(original_url){
+    var original_url = original_url.split("http://image.vtintl.id/").join("https://image.sold.co.id/");
+    return original_url;
+}
 
 var total_all_price = 0;
 function loadcart(productNo, quantity){
@@ -106,7 +74,7 @@ function loadcart(productNo, quantity){
             $(`.cart-list`).append(`
             <div class="product-in-card" id="product-in-card-${productNo}">
                 <div class="product-in-card-body">
-                    <img class="product-image-in-cart" src="${response.Picture_1}">
+                    <img class="product-image-in-cart" src="${replace_vtintl_to_sold_co_id(response.Picture_1)}">
                     <div class="product-details">
                         <div class="product-in-card-body">
                             <div class="form-check form-switch">

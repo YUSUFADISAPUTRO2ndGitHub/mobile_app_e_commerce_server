@@ -96,7 +96,7 @@ $( document ).ready(function() {
                     $('.container-ph').append(`
                         <div class="card-ph" onclick="display_product_detail('${val.Product_Code}')">
                             <div class="img-ph">
-                                <img src="${val.Picture_1}" alt="error" class="img-logo">
+                                <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="error" class="img-logo">
                             </div>
                             <div class="img-desc card-text">
                                 <p class="limited-text-short">${val.Name}</p>
@@ -109,6 +109,11 @@ $( document ).ready(function() {
         })
     })
 });
+
+function replace_vtintl_to_sold_co_id(original_url){
+    var original_url = original_url.split("http://image.vtintl.id/").join("https://image.sold.co.id/");
+    return original_url;
+}
 
 const display_product_detail=(product_code)=>{
     parent.redirect_parent_to_product_detail(product_code);

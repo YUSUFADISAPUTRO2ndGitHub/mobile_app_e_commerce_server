@@ -244,15 +244,20 @@ function generateListOneByOne(product_row, data1, data2){
     $(".other-product-area").append("<ul class=\"list-group list-group-horizontal\" id=\"list-group-" + product_row + "\"></ul>");
     $("#list-group-" + product_row).append("<li onclick=\"redirectProductDetails(this, '" + data1.Product_Code + "', '" + data1.Name + "')\" class=\"list-group-item\" id=\"list-group-item-" + product_row + "\">");
     $("#list-group-item-" + product_row).append("<div class=\"product-card product-card-suggestion\" id=\"product-card-" + product_row + "\">");
-    $("#product-card-" + product_row).append("<img class=\"product-card-images\" src=\"" + data1.Picture_1 + "\">");
+    $("#product-card-" + product_row).append("<img class=\"product-card-images\" src=\"" + replace_vtintl_to_sold_co_id(data1.Picture_1) + "\">");
     $("#product-card-" + product_row).append("<div class=\"product-card-name\">" + data1.Name + "</div>");
     
     if(data2 != undefined){
         $("#list-group-" + product_row).append("<li onclick=\"redirectProductDetails(this, '" + data2.Product_Code + "', '" + data2.Name + "')\" class=\"list-group-item\" id=\"list-group-item-" + (product_row + 1) + "\">");
         $("#list-group-item-" + (product_row + 1)).append("<div class=\"product-card product-card-suggestion\" id=\"product-card-" + (product_row + 1) + "\">");
-        $("#product-card-" + (product_row + 1)).append("<img class=\"product-card-images\" src=\"" + data2.Picture_1 + "\">");
+        $("#product-card-" + (product_row + 1)).append("<img class=\"product-card-images\" src=\"" + replace_vtintl_to_sold_co_id(data2.Picture_1) + "\">");
         $("#product-card-" + (product_row + 1)).append("<div class=\"product-card-name\">" + data2.Name + "</div>");
     }
+}
+
+function replace_vtintl_to_sold_co_id(original_url){
+    var original_url = original_url.split("http://image.vtintl.id/").join("https://image.sold.co.id/");
+    return original_url;
 }
 
 function fillingInInformations(productNo){
@@ -293,17 +298,17 @@ function fillingInInformations(productNo){
             getProductsWithProductNo("", "", productNo).done(function (response) {
                 
                 $("#main-product-images").append("<div id=\"" + 1 + "\" class=\"carousel-item active\">");
-                $("#1").append("<img src=\"" + response.Picture_1 + "\" class=\"d-block w-100\">");
+                $("#1").append("<img src=\"" + replace_vtintl_to_sold_co_id(response.Picture_1) + "\" class=\"d-block w-100\">");
                 if(response.Picture_2 != undefined && response.Picture_2.toUpperCase() != "NULL" && response.Picture_2.length > 0){
                     if(response.Picture_2.toUpperCase() != "null".toUpperCase()){
                         $("#main-product-images").append("<div id=\"" + 2 + "\" class=\"carousel-item\">");
-                        $("#2").append("<img src=\"" + response.Picture_2 + "\" class=\"d-block w-100\">");
+                        $("#2").append("<img src=\"" + replace_vtintl_to_sold_co_id(response.Picture_2) + "\" class=\"d-block w-100\">");
                     }
                 }
                 if(response.Picture_3 != undefined && response.Picture_3.toUpperCase() != "NULL" && response.Picture_3.length > 0){
                     if(response.Picture_3.toUpperCase() != "null".toUpperCase()){
                         $("#main-product-images").append("<div id=\"" + 3 + "\" class=\"carousel-item\">");
-                        $("#3").append("<img src=\"" + response.Picture_3 + "\" class=\"d-block w-100\">");
+                        $("#3").append("<img src=\"" + replace_vtintl_to_sold_co_id(response.Picture_3) + "\" class=\"d-block w-100\">");
                     }
                 }
             });
@@ -958,7 +963,7 @@ function check_selection(){
     $(`.form-check`).removeClass('selected-option');
     getProductsWithProductNo("", "", $('input[name="product-to-be-added"]:checked').val()).done(function (response) {
         if(response != false){
-            $(`.product-selection-images`).attr(`src`,`${response.Picture_1}`);
+            $(`.product-selection-images`).attr(`src`,`${replace_vtintl_to_sold_co_id(response.Picture_1)}`);
             $(`#${response.Product_Code}-form`).addClass('selected-option');
             $(`.requested-price-by-user`).val(response.Sell_Price);
             $(`.requested-available-stock-by-user`).val(response.Stock_Quantity);

@@ -155,6 +155,11 @@ function searchUpBasedOnCategory(subcategory){
     });
 }
 
+function replace_vtintl_to_sold_co_id(original_url){
+    var original_url = original_url.split("http://image.vtintl.id/").join("https://image.sold.co.id/");
+    return original_url;
+}
+
 function generatehomeOneByOne(product_row, data, dataLength){
     if(isNaN(data.Sell_Price*1)){
         data.Sell_Price = 0;
@@ -162,7 +167,7 @@ function generatehomeOneByOne(product_row, data, dataLength){
     $(`.product-card-area`).append(`
         <div class="new-product-card">
             <a href="./product_details.html?productid=${data.Product_Code}">
-                <img class="product-card-image" src="${data.Picture_1}">
+                <img class="product-card-image" src="${replace_vtintl_to_sold_co_id(data.Picture_1)}">
             </a>
             <div class="product-card-title">${data.Name}</div>
             <div class="product-card-price"><span class="fake-price">Rp. ${commafy(Math.round((data.Sell_Price*1.2)* 100)/ 100)}</span><span class="the-price">Rp. ${commafy(Math.round((data.Sell_Price*1)* 100)/ 100)}</span></div>
@@ -181,7 +186,7 @@ function generatehomeleftOnly(product_row, leftdata, dataLength){
     $("#product-highlights" + product_row).append("<th class=\"th-home-search\" id=\"left"+ product_row +"\">");
     $("#left" + product_row).append("<div class=\"notification product-card product-card-home-and-search\" id=\"product-card-left"+ product_row +"\">");
     $("#product-card-left" + product_row).append("<div class=\"card\" id=\"card-left"+ product_row +"\" style=\"width: 100%;\">");
-    $("#card-left" + product_row).append("<img onclick=\"redirectProductDetails(this, \'" + leftdata.Product_Code + "\', \'" + leftdata.Name + "\')\" class=\"card-img-top product-card-images-home-and-search\" src=\"" + leftdata.Picture_1 + "\">");
+    $("#card-left" + product_row).append("<img onclick=\"redirectProductDetails(this, \'" + leftdata.Product_Code + "\', \'" + leftdata.Name + "\')\" class=\"card-img-top product-card-images-home-and-search\" src=\"" + replace_vtintl_to_sold_co_id(leftdata.Picture_1) + "\">");
     $("#card-left" + product_row).append("<div class=\"card-body small-padding\" id=\"card-body-left"+ product_row +"\">");
     $("#card-body-left" + product_row).append("<div class=\"card-title\">" + leftdata.Name );
     $("#card-body-left" + product_row).append("<div class=\"card-text\" id=\"card-text-left"+ product_row +"\">");
