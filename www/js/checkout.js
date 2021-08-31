@@ -420,9 +420,9 @@ async function sendRequestFinal(paymentSelection){
     //     name: "Estimated Shipping fee|" + Courier + "|" + Courier_Code,
     //     productCode: Courier_Code,
     //     quantity: 1,
-    //     pricePerItem: $("#estimated-price-courier-option").html(),
+    //     pricePerItem: removeComma($("#estimated-price-courier-option").html()),
     //     notes: "estimated shipping fee for this purchase",
-    //     totalPrice: $("#estimated-price-courier-option").html(),
+    //     totalPrice: removeComma($("#estimated-price-courier-option").html()),
     //     GroupCode: ""
     // };
     // requestArrayForItemsToCheckout.push(object);
@@ -445,9 +445,9 @@ async function sendRequestFinal(paymentSelection){
                     //     name: "Estimated Shipping fee|" + Courier + "|" + Courier_Code,
                     //     productCode: Courier_Code,
                     //     quantity: 1,
-                    //     pricePerItem: $("#estimated-price-courier-option").html(),
+                    //     pricePerItem: removeComma($("#estimated-price-courier-option").html()),
                     //     notes: "estimated shipping fee for this purchase",
-                    //     totalPrice: $("#estimated-price-courier-option").html(),
+                    //     totalPrice: removeComma($("#estimated-price-courier-option").html()),
                     //     GroupCode: ""
                     // };
                     // alert("here1");
@@ -483,9 +483,9 @@ async function sendRequestFinal(paymentSelection){
                     //     name: "Estimated Shipping fee|" + Courier + "|" + Courier_Code,
                     //     productCode: Courier_Code,
                     //     quantity: 1,
-                    //     pricePerItem: $("#estimated-price-courier-option").html(),
+                    //     pricePerItem: removeComma($("#estimated-price-courier-option").html()),
                     //     notes: "estimated shipping fee for this purchase",
-                    //     totalPrice: $("#estimated-price-courier-option").html(),
+                    //     totalPrice: removeComma($("#estimated-price-courier-option").html()),
                     //     GroupCode: ""
                     // };
                     // alert(i);
@@ -608,9 +608,9 @@ function add_delivery_fee(productArr){
         name: $('#shipping-fee-courier-option').find(":selected").text() + " " + $('#shipping-insurance-courier-option').find(":selected").text() + " " + $('#shipping-packaging-courier-option').find(":selected").text(),
         productCode: Courier_Code,
         quantity: 1,
-        pricePerItem: $("#estimated-price-courier-option").html(),
+        pricePerItem: removeComma($("#estimated-price-courier-option").html()),
         notes: $('#shipping-fee-courier-option').find(":selected").text() + " " + $('#shipping-insurance-courier-option').find(":selected").text() + " " + $('#shipping-packaging-courier-option').find(":selected").text(),
-        totalPrice: $("#estimated-price-courier-option").html(),
+        totalPrice: removeComma($("#estimated-price-courier-option").html()),
         GroupCode: ""
     };
     productArr.push(object);
@@ -769,7 +769,7 @@ async function reorderJSON(customerDetails, productArr){
                     Shipping_Address: customerDetails.address,
                     Shipping_Contact_Number: response.Contact_Number_1,
                     Payment_Method: customerDetails.paymentMethod,
-                    Shipping_Fee: $("#estimated-price-courier-option").html(),
+                    Shipping_Fee: removeComma($("#estimated-price-courier-option").html()),
                     Primary_Recipient_Name: response.First_Name + " " + response.Last_Name
                 });
             }
